@@ -1,0 +1,24 @@
+.van-tabs--line .van-tabs__wrap {
+    height: 150px;
+}
+
+.explosive .van-tabs__wrap--scrollable .van-tab {
+    flex-basis: 30% !important;
+}
+
+.pintuan .van-tabs__wrap--scrollable .van-tab {
+    flex-basis: 68% !important;
+}
+
+.jingping .van-grid-item__content {
+    background-color: #fc7e7f;
+}
+
+.jingping .van-grid-item__content::after {
+    z-index: 1;
+    border-width: 0 0px 0px 0;
+}
+
+.jingping .van-grid {
+    padding: 0 10px;
+}
