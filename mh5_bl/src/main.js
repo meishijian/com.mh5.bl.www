@@ -13,7 +13,7 @@ Vue.use(Vant);
 
 import axios from 'axios';
 // 配置axios请求的地址
-axios.defaults.baseURL = "http://192.168.186.1:9494/api/v1/";
+axios.defaults.baseURL = "http://192.168.86.129:9494/api/v1/";
 Vue.prototype.$http = axios;
 
 // 引入mock

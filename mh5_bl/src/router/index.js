@@ -9,10 +9,25 @@ const routes = [{
     component: Home
   },
   {
-    path: "/about",
+    path: "/class",
     component: () =>
-      import("../views/About.vue")
-  }
+      import("../views/Class.vue")
+  },
+  {
+    path: "/me",
+    component: () =>
+      import("../views/Me.vue")
+  },
+  {
+    path: "/goodslist",
+    component: () =>
+      import("../views/GoodsList.vue")
+  },
+  {
+    path: "/search",
+    component: () =>
+      import("../views/Search.vue")
+  },
 ];
 
 const router = new VueRouter({
