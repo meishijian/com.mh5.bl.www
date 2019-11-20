@@ -68,3 +68,13 @@
     color: #7864a6;
     vertical-align: middle;
 }
+
+.dahang .van-tabbar--fixed {
+    position: inherit;
+    bottom: 0;
+    left: 0;
+}
+
+.dahang .dahang_tabbar .van-tabbar-item--active {
+    color: #9a8b85;
+}

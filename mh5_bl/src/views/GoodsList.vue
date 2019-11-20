@@ -4,7 +4,7 @@
     <van-nav-bar left-arrow @click-left="onClickLeft">
       <!-- 左边搜索栏 -->
       <div slot="title" class="goods_div">
-        <van-search class="search" placeholder="搜索你想要的商品" disabled="false" @click="goods_tiao"/>
+        <van-search class="search" placeholder="搜索你想要的商品" disabled="false" @click="goods_tiao" />
       </div>
       <!-- 右边 -->
       <div slot="right">
@@ -27,7 +27,12 @@
 
     <!-- 商品  两种状态-->
     <van-grid :column-num="1" v-if="icon_pd">
-      <van-grid-item v-for="(item, index) in commodityData" :key="index" class="one_girs">
+      <van-grid-item
+        v-for="(item, index) in commodityData"
+        :key="index"
+        class="one_girs"
+        @click="list_detail(item.id)"
+      >
         <van-row gutter="24">
           <van-col span="8">
             <img class="one_img" :src="item.image" alt />
@@ -42,7 +47,12 @@
     </van-grid>
 
     <van-grid :column-num="2" v-else>
-      <van-grid-item v-for="(item, index) in commodityData" :key="index" class="two_gird">
+      <van-grid-item
+        v-for="(item, index) in commodityData"
+        :key="index"
+        class="two_gird"
+        @click="list_detail(item.id)"
+      >
         <img class="two_img" :src="item.image" alt />
         <p class="two_name">
           <span class="two_service">「{{item.service}}」</span>
@@ -75,11 +85,14 @@ export default {
     };
   },
   methods: {
+    // 左边箭头返回
     onClickLeft() {
       this.$router.push("/class");
     },
-    goods_tiao(){
-      this.$router.push("/search")
+
+    // 搜索跳转
+    goods_tiao() {
+      this.$router.push("/search");
     },
 
     // 商品
@@ -135,6 +148,12 @@ export default {
           // console.log(res);
           this.commodityData = res.data.data;
         });
+    },
+
+    //点击每一件商品的id 都存起来
+    list_detail(id) {
+      localStorage.setItem("list_id", id);
+      this.$router.push("/goodsDetail");
     }
   },
 

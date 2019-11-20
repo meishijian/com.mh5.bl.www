@@ -28,6 +28,11 @@ const routes = [{
     component: () =>
       import("../views/Search.vue")
   },
+  {
+    path: "/goodsDetail",
+    component: () =>
+      import("../views/GoodsDetail.vue")
+  },
 ];
 
 const router = new VueRouter({

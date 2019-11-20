@@ -41,8 +41,8 @@
       </span>
     </van-cell>
     <!-- 今日爆款 滑动切块 -->
-    <van-tabs swipeable  class="explosive" color="transparent">
-      <van-tab v-for="(item, index) in moneyData" :key="index" >
+    <van-tabs swipeable class="explosive" color="transparent">
+      <van-tab v-for="(item, index) in moneyData" :key="index">
         <div slot="title">
           <img :src="item.image" alt class="tabsimg" />
           <p class="tabs-p">{{item.p}}</p>
@@ -101,7 +101,7 @@
     </div>
     <!-- 好货排行榜 -->
     <p class="haohuo">好货排行榜</p>
-    <van-tabs class="haohuo-tabs" swipeable color="transparent" >
+    <van-tabs class="haohuo-tabs" swipeable color="transparent">
       <van-tab v-for="(item, index) in qualityData" :key="index">
         <div slot="title">
           <img class="haohuo_img" :src="item.sort_image" alt />
@@ -111,7 +111,7 @@
     </van-tabs>
 
     <!-- 品牌排行榜 -->
-    <van-tabs class="bra-tabs" swipeable color="transparent" >
+    <van-tabs class="bra-tabs" swipeable color="transparent">
       <van-tab v-for="(item, index) in brandData" :key="index">
         <div slot="title" class="brand">
           <img class="bra_img" :src="item.bra_image" alt />
@@ -130,7 +130,7 @@
     />
     <!-- 切换滑动 -->
     <!-- 宫格 -->
-    <van-tabs class="huodong" swipeable color="transparent" >
+    <van-tabs class="huodong" swipeable color="transparent">
       <van-tab v-for="(item, index) in activityData" :key="index">
         <div slot="title">
           <img class="huodong_img" :src="item.img" alt />
@@ -470,7 +470,7 @@ export default {
     fenl() {
       this.$router.push("/class");
     },
-        // 点击跳转个人中心页面
+    // 点击跳转个人中心页面
     me() {
       this.$router.push("/me");
     },
@@ -517,20 +517,22 @@ export default {
     },
     // 滚动
     onLoad() {
-      this.$http.get("/guess").then(res => {
-        // console.log(res);
-        // this.likeData = res.data.data;
-        // console.log(this.qualityData);
-        this.likeData.push(...res.data.data);
-      });
+      setTimeout(() => {
+        this.$http.get("/guess").then(res => {
+          // console.log(res);
+          // this.likeData = res.data.data;
+          // console.log(this.qualityData);
+          this.likeData.push(...res.data.data);
+        });
 
-      // 加载状态结束
-      this.loading = false;
+        // 加载状态结束
+        this.loading = false;
 
-      // 数据全部加载完成
-      if (this.likeData.length >= 30) {
-        this.finished = true;
-      }
+        // 数据全部加载完成
+        if (this.likeData.length >= 40) {
+          this.finished = true;
+        }
+      }, 1000);
     }
   },
   created() {

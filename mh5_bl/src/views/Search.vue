@@ -3,7 +3,7 @@
     <van-nav-bar title="标题">
       <!-- 左边搜索栏 -->
       <div slot="left">
-        <van-search placeholder="搜索热门商品" @search="onSearch" class="searchs"></van-search>
+        <van-search placeholder="搜索热门商品" @search="onSearch" class="searchs" v-model="value"></van-search>
       </div>
       <div slot="right">
         <span class="quxiao" @click="searchs_qu">取消</span>
@@ -31,11 +31,16 @@
 export default {
   data() {
     return {
-      shangpingData: []
+      shangpingData: [],
+      value: ""
     };
   },
   methods: {
-    onSearch() {},
+    // 搜索
+    onSearch() {
+      // 把商品名称存起来
+      localStorage.setItem("goods_name", this.value);
+    },
     // 取消
     searchs_qu() {
       this.$router.push("/goodslist");
@@ -88,5 +93,6 @@ export default {
   line-height: 26px;
   margin-top: 7px;
   margin-right: 3px;
+  border-radius: 8px;
 }
 </style>

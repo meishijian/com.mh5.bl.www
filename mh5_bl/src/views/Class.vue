@@ -12,6 +12,16 @@
         <van-icon v-else name="cross" color="red" size="26px" @click="icon=!icon" />
       </div>
     </van-nav-bar>
+    <!-- 隐藏显示 导航 -->
+    <div class="dahang">
+      <van-tabbar class="dahang_tabbar" v-if="icon==false">
+        <van-tabbar-item icon="home-o" to="/">首页</van-tabbar-item>
+        <van-tabbar-item icon="search" to="/search">搜索</van-tabbar-item>
+        <van-tabbar-item icon="bars" to="/class">分类</van-tabbar-item>
+        <van-tabbar-item icon="shopping-cart-o" to="/">购物车</van-tabbar-item>
+        <van-tabbar-item icon="manager-o" to="/me">我的i百联</van-tabbar-item>
+      </van-tabbar>
+    </div>
     <van-row>
       <van-col span="6">
         <!-- 商品分类 -->
@@ -90,7 +100,7 @@ export default {
 
       this.$router.push("/goodslist");
       // 把商品id存起来
-      loca, lStorage.setItem("id", id);
+      localStorage.setItem("id", id);
     },
     goods_tiao() {
       this.$router.push("/search");
@@ -124,6 +134,17 @@ export default {
   }
   .children_li {
     width: 80%;
+  }
+  .dahang {
+    width: 100%;
+    // height: 80px;
+    // border: 1px solid olive;
+  }
+
+  .dahang_tabbar {
+    background-color: pink;
+    height: 60px;
+    // color: red
   }
 }
 </style>
