@@ -7,7 +7,7 @@ const db = require('../db');
 // 导入 三、md5加密包
 const md5 = require('md5');
 // 导入 jsonwebtoken
-const jwt = require('jsonwebtoken');
+const jsonwebtoken = require('jsonwebtoken');
 // 导入 全体配置文件
 const config = require('../config');
 
@@ -112,7 +112,7 @@ router.post("/login", (req, res) => {
 
         }
         // <3>、如果一致 生成令牌 那需要 jsonwebtoken
-        const token = jwt.sign({
+        const token = jsonwebtoken.sign({
             id: result[0].id
         }, config.jwt.key, { expiresIn: config.jwt.expire });
 

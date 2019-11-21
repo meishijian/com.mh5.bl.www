@@ -9,9 +9,9 @@ module.exports = {
     // 令牌
     jwt: {
         // 令牌秘钥
-        key: 'fjdgjglkh+h-dshdfjhvBKvbjJVHBvhjbJJVgdfg+sdag-dsg+asgfdsufwlfhndslmbvcxQJHKJHJBFbhjBHJkjLnB',
+        key: 'asdfdgfdhfgjhghkjhgkjheGHJKLKJhbnFBfbnkjBJkhjvbnBnlHNjkhjBvbjjhvBNbnBNkjvhjBNLjkvbnklkhCJHBKKvhbJHGCgvjghCGCVCJhkghgVJBHGJchvhJHGJJHcvhjhGJ',
         // 过期时间
-        expire: '12h'
+        expire: '4h'
     },
     // 数据库
     db: {
