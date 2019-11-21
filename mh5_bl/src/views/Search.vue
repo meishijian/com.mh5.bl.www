@@ -43,7 +43,7 @@ export default {
     },
     // 取消
     searchs_qu() {
-      this.$router.push("/goodslist");
+      window.history.back(-1);
     },
     // 搜索的 商品
     shangping() {

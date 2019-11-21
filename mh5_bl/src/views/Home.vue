@@ -8,11 +8,24 @@
       </div>
       <!-- 搜索框 -->
       <div slot="title">
-        <van-search v-model="value" placeholder="搜索" shape="round" @search="onSearch"></van-search>
+        <van-search
+          v-model="value"
+          placeholder="搜索"
+          shape="round"
+          @search="onSearch"
+          disabled="false"
+          @click="goods_tiao"
+        ></van-search>
       </div>
       <!-- 右边 -->
       <div slot="right">
-        <van-icon class="shopping" name="shopping-cart-o" color="#838383" size="25px" />
+        <van-icon
+          class="shopping"
+          name="shopping-cart-o"
+          color="#838383"
+          size="25px"
+          @click="gouwuche"
+        />
         <van-icon @click="me" name="manager-o" color="#838383" size="25px" />
       </div>
     </van-nav-bar>
@@ -143,10 +156,10 @@
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
       <!-- 宫格 -->
       <van-grid :column-num="2">
-        <van-grid-item v-for="(item, index) in likeData" :key="index">
+        <van-grid-item v-for="(item, index) in likeData" :key="index" @click="like_shop(item.id)">
           <img class="like_img" :src="item.image" alt />
           <!-- <van-tag plain class="like_biao">看相似</van-tag> -->
-          <p class="like_p">{{item.goods_name}}</p>
+          <p class="like_p">{{item.goods_name.slice(0,20)}}</p>
           <p class="like_jia">￥{{item.price}}</p>
         </van-grid-item>
       </van-grid>
@@ -380,51 +393,47 @@ export default {
         {
           id: 2,
           image:
-            "https://img13.iblimg.com/goods-132/2000/2017/02/SP_2000_20000265151001_01_10009.jpg",
-          p: "囤货小当家",
-          span: "会囤货会生活"
+            "https://img20.iblimg.com/mp-175/mp/goods/37098407_220x220.jpg",
+          p: "水润护肤",
+          span: "为您推荐"
         },
         {
           id: 3,
-          image:
-            "https://img13.iblimg.com/goods-132/2000/2017/02/SP_2000_20000265151001_01_10009.jpg",
-          p: "囤货小当家",
-          span: "会囤货会生活"
+          image: "https://Img.iblimg.com/photo-32/2000/988168636_220x220.jpg",
+          p: "薯动全城",
+          span: "为您推荐"
         },
         {
           id: 4,
           image:
-            "https://img13.iblimg.com/goods-132/2000/2017/02/SP_2000_20000265151001_01_10009.jpg",
-          p: "囤货小当家",
-          span: "会囤货会生活"
+            "https://img16.iblimg.com/mp-175/mp/goods/1465456123_220x220.jpg",
+          p: "缤纷彩妆",
+          span: "缤纷彩妆"
         },
         {
           id: 5,
-          image:
-            "https://img13.iblimg.com/goods-132/2000/2017/02/SP_2000_20000265151001_01_10009.jpg",
-          p: "囤货小当家",
-          span: "会囤货会生活"
+          image: "https://Img33.iblimg.com/photo-3/3030/1048889630_220x220.jpg",
+          p: "美味下午茶",
+          span: "不负午后时光"
         },
         {
           id: 6,
-          image:
-            "https://img13.iblimg.com/goods-132/2000/2017/02/SP_2000_20000265151001_01_10009.jpg",
-          p: "囤货小当家",
-          span: "会囤货会生活"
+          image: "https://Img.iblimg.com/photo-42//1739704413_220x220.jpg",
+          p: "姨妈小驻",
+          span: "呵护那几天"
         },
         {
           id: 7,
           image:
-            "https://img13.iblimg.com/goods-132/2000/2017/02/SP_2000_20000265151001_01_10009.jpg",
-          p: "囤货小当家",
-          span: "会囤货会生活"
+            "https://Img34.iblimg.com/goods-26/2000/2016/11/SP_2000_20000849831001_01_10009.jpg",
+          p: "速冻美味",
+          span: "为你推荐"
         },
         {
           id: 8,
-          image:
-            "https://img13.iblimg.com/goods-132/2000/2017/02/SP_2000_20000265151001_01_10009.jpg",
-          p: "囤货小当家",
-          span: "会囤货会生活"
+          image: "https://Img.iblimg.com/photo-42//872861721_220x220.jpg",
+          p: "衣物洗护",
+          span: "为你推荐"
         }
       ],
       // 好货排行榜
@@ -466,6 +475,14 @@ export default {
   },
   methods: {
     onSearch() {},
+    // 跳转购物车页面
+    gouwuche() {
+      this.$router.push("/shopping");
+    },
+    // 搜索跳转
+    goods_tiao() {
+      this.$router.push("/search");
+    },
     // 点击分类跳转页面
     fenl() {
       this.$router.push("/class");
@@ -514,6 +531,13 @@ export default {
       //   // console.log(this.qualityData);
       //   this.likeData.push(...res.data.data);
       // });
+    },
+    // 猜你喜欢 每个暑假都得跳转页面
+    like_shop(id) {
+      // 先把每个商品的id存放起来  跳进同一个组件
+      localStorage.setItem("list_id", id);
+      // 跳转路由
+      this.$router.push("/goodsDetail");
     },
     // 滚动
     onLoad() {

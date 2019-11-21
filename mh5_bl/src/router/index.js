@@ -33,7 +33,13 @@ const routes = [{
     component: () =>
       import("../views/GoodsDetail.vue")
   },
+  {
+    path: "/shopping",
+    component: () =>
+      import("../views/Shopping.vue")
+  },
 ];
+// Shopping.vue
 
 const router = new VueRouter({
   mode: "history",

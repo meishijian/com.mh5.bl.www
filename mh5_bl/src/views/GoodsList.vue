@@ -39,7 +39,7 @@
           </van-col>
           <van-col span="15">
             <p class="one_name">{{item.goods_name}}</p>
-            <p class="one_service">「{{item.service}}」</p>
+            <p class="one_service">{{item.service}}</p>
             <p class="one_price">￥{{item.price}}</p>
           </van-col>
         </van-row>
@@ -87,7 +87,7 @@ export default {
   methods: {
     // 左边箭头返回
     onClickLeft() {
-      this.$router.push("/class");
+      window.history.back(-1);
     },
 
     // 搜索跳转

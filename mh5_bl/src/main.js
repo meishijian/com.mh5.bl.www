@@ -21,6 +21,8 @@ import "./mock"
 // 引入css
 import "./assets/css/css.css"
 
+
+
 new Vue({
   router,
   store,

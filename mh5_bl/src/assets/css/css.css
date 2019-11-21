@@ -78,3 +78,16 @@
 .dahang .dahang_tabbar .van-tabbar-item--active {
     color: #9a8b85;
 }
+
+.detail .van-tabs--line .van-tabs__wrap {
+    height: 50px;
+}
+
+.detail .grid .van-grid-item {
+    flex-basis: 33% !important;
+}
+
+.shop .van-nav-bar .van-icon {
+    color: #666666;
+    /* vertical-align: middle; */
+}
