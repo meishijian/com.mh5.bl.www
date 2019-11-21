@@ -6,7 +6,7 @@ const jsonwebtoken = require("jsonwebtoken");
 const config = require("../config");
 // 导入 二、db数据库文件
 const db = require('../db');
-
+const fileBaseUrl = "http://192.168.86.129:9494/api/v1/public/image/";
 // 商品
 router.get("/goods_list", (req, res) => {
     // 分类id
@@ -45,6 +45,9 @@ router.get("/goods_list", (req, res) => {
         let mysql = `SELECT id,goods_name,price,image,service FROM bl_goods ${where}`
         // console.log(mysql);
         db.query(mysql, (error, result) => {
+            // result.forEach(element => {
+            //     element.image = fileBaseUrl + element.image
+            // });
             res.json({
                 "code": 200,
                 "total": data[0].total,
@@ -138,6 +141,12 @@ router.post("/goods_sort", (req, res) => {
     // console.log(mysql);
 
     db.query(mysql, (error, result) => {
+        // console.log(result);
+        // result.forEach(element => {
+        //     element.image = fileBaseUrl + element.image
+        // });
+        // console.log(result);
+
         res.json({
             "code": 200,
             "data": result
@@ -151,7 +160,7 @@ router.post("/goods_sort", (req, res) => {
 router.get('/goods_detail', (req, res) => {
     let id = req.query.id;
     // console.log(id);
-    let mysql = "SELECT a.id,a.goods_name,a.price,a.image,a.service,a.pic_details,b.bra_name,b.bra_image FROM bl_brand b,bl_goods a WHERE a.brand_id = b.id AND  a.id = ?"
+    let mysql = "SELECT a.id,a.goods_name,a.price,a.image,a.service,a.pic_details,b.id bra_id, b.bra_name,b.bra_image FROM bl_brand b,bl_goods a WHERE a.brand_id = b.id AND  a.id = ?"
     db.query(mysql, id, (error, result) => {
         if (error) return res.json({
             "code": 400,
@@ -203,7 +212,7 @@ router.get("/goods_hot_shop", (req, res) => {
     let mysql = "SELECT count(*) c FROM bl_goods WHERE brand_id = ?";
     db.query(mysql, brand_id, (error, result) => {
         let num = [];
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < 3; i++) {
             num.push(Math.floor(Math.random() * result[0].c))
         }
         // 查询 
@@ -260,11 +269,25 @@ router.post("/orders", (req, res) => {
             // console.log(token);
 
             // 如果解析失败 就会错误， 解析成功 就会把之前放的数据 解析出来 用户ID
-            let decoded = jsonwebtoken.verify(token, md);
+            let decoded = jsonwebtoken.verify(token, config.jwt.key);
             // console.log(decoded);
-            // 获取页面上的数据
+            // 获取页面上的数据 收货地址 id
             let address_id = req.body.address_id;
+            // 数据 
+            /** 
+"cart":[
+{
+"goods_id":5,
+"buy_count":10
+},
+{
+"goods_id":6,
+"buy_count":30
+}
+]
+*/
             let cart = req.body.cart;
+
             // 为了安全 判断收货人的ID 是否正确
             //    以 ^：以数字开头
             //    以 $：以数字结尾 
@@ -278,19 +301,21 @@ router.post("/orders", (req, res) => {
             }
 
             // 查询 数据库 的 商品数量 是否足够
-            // 先把 商品 id拿到
+            // 先把 商品 id拿到  查询 相关的商品
             let goodsIds = [];
             cart.forEach(item => {
                 goodsIds.push(item.goods_id);
             });
             // 但是现在数据 是数组 需要的是 字符串
             goodsIds = goodsIds.join(",");
+
             // 查询 这几个商品中的 数据 比如 库存量
             let mysql = `SELECT id,stock,
                                 price,
                                 goods_name,
                                 image goods_image
                                 FROM bl_goods WHERE id in (${goodsIds})`
+
             db.query(mysql, (error, result) => {
                 // console.log(result);
                 // 把查询到的 数据 存储起来 方便 使用
@@ -303,7 +328,6 @@ router.post("/orders", (req, res) => {
                     let goods = cart.find(v => {
                         return v.goods_id === result[i].id
                     })
-
                     // console.log(goods);
                     // 判断 购买得数量 大于 数据库得数量 那么 返回数据库数量不足
                     if (goods.buy_count > result[i].stock) {
@@ -328,6 +352,12 @@ router.post("/orders", (req, res) => {
                             FROM bl_address WHERE id=?`;
 
                 db.query(mysql, address_id, (error, result) => {
+                    // console.log(result);
+                    if (error) return res.json({ "code": 400, "error": error });
+                    // 查询到 空数据时
+                    if (result.length == 0) {
+                        return res.json({ "code": 400, "error": "收货地址 ID 不正确" })
+                    }
                     // 定义 订单号  由 当前时间 + 随机数 7
                     let sn = new Date().getTime().toString() + parseInt(Math.random() * 10000000);
                     // 如果到了这里代表 可以提交订单了
@@ -340,7 +370,7 @@ router.post("/orders", (req, res) => {
                         total_price: totalePrice // 商品的总价格
                     }
                     // 把订单信息 放入到 订单表中
-                    let mysql = "INSERT INTO shop_orders SET ?"
+                    let mysql = "INSERT INTO bl_orders SET ?"
                     db.query(mysql, orderData, (error, result) => {
                         if (error) return res.json({
                             "code": 400,
@@ -366,7 +396,7 @@ router.post("/orders", (req, res) => {
                                 goods_image: goodsInfo.goods_image, // 现在需要 商品的图片路径 那么获取 数据库的信息
                             }
 
-                            let mysql = "INSERT INTO shop_order_goods SET ?";
+                            let mysql = "INSERT INTO bl_order_goods SET ?";
                             db.query(mysql, orderGoodsData, (error, result) => {
                                 if (error) return res.json({
                                     "code": 400,
@@ -397,7 +427,6 @@ router.post("/orders", (req, res) => {
                                     "error": error
                                 })
                             })
-
                         }
                         res.json({
                             "code": 200
@@ -414,6 +443,30 @@ router.post("/orders", (req, res) => {
         }
     }
 })
+
+// 商品 点击每一个商品就入每一个商品详情页
+router.get('/goods_details', (req, res) => {
+    let id = req.query.id;
+    // console.log(id);
+    let mysql = "SELECT a.id,a.goods_name,a.price,a.image,a.service,a.pic_details,a.goods_pic,b.id bra_id, b.bra_name,b.bra_image FROM bl_brand b,bl_goods a WHERE a.brand_id = b.id AND  a.id = ?"
+    db.query(mysql, id, (error, result) => {
+        if (error) return res.json({
+            "code": 400,
+            "error": error
+        })
+        let pic = result[0].goods_pic.split(",");
+        pic.forEach((element, index) => {
+            pic[index] = fileBaseUrl + element
+        });
+        result[0].goods_pic = pic;
+        // console.log(result[0].goods_pic);
+        res.json({
+            "code": 200,
+            "data": result[0]
+        })
+    })
+})
+
 
 // 导出路由
 module.exports = router;

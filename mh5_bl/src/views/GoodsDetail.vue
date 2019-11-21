@@ -23,8 +23,8 @@
       </div>
 
       <van-swipe class="goods-swipe" :autoplay="3000">
-        <van-swipe-item>
-          <img class="swipe_img" :src="goodsDetail.image" />
+        <van-swipe-item v-for="(item, index) in goodsDetail.goods_pic" :key="index">
+          <img class="swipe_img" :src="item" />
         </van-swipe-item>
       </van-swipe>
 
@@ -165,12 +165,14 @@ export default {
       // 从浏览器拿出存放的id
       let list_id = localStorage.getItem("list_id");
       this.$http
-        .get("/goods_detail", {
+        .get("/goods_details", {
           params: { id: list_id }
         })
         .then(res => {
           this.goodsDetail = res.data.data;
-          // console.log(res);
+          // console.log(res);\
+          console.log(this.goodsDetail );
+          
         });
     },
     // 热门商品

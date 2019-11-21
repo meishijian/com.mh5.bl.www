@@ -38,7 +38,7 @@
             <img class="one_img" :src="item.image" alt />
           </van-col>
           <van-col span="15">
-            <p class="one_name">{{item.goods_name}}</p>
+            <p class="one_name">{{item.goods_name.slice(0,16)}}</p>
             <p class="one_service">{{item.service}}</p>
             <p class="one_price">￥{{item.price}}</p>
           </van-col>

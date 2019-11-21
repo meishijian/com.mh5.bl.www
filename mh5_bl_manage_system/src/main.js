@@ -2,6 +2,16 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+
+Vue.use(ElementUI);
+
+import axios from 'axios';
+// 配置axios请求的地址
+axios.defaults.baseURL = "http://127.0.0.1:9494/api/v1/";
+Vue.prototype.$http = axios;
+
 
 Vue.config.productionTip = false;
 
