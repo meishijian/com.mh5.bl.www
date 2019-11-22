@@ -91,3 +91,9 @@
     color: #666666;
     /* vertical-align: middle; */
 }
+
+.shop .van-button--danger {
+    color: #fff;
+    background-color: #ff6f6f;
+    border: 1px solid #ff6f6f;
+}
