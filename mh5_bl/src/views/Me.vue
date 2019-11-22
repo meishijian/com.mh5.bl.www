@@ -274,7 +274,7 @@
       <van-tabbar-item icon="wap-home-o" to="/">首页</van-tabbar-item>
       <van-tabbar-item icon="coupon-o" to="/class">分类</van-tabbar-item>
       <van-tabbar-item icon="shopping-cart-o" to="/shopping">
-        <span class="paid_p_span">{{infoData}}</span>购物车
+        <span class="paid_p_span">{{JSON.parse(infoData).length}}</span>购物车
       </van-tabbar-item>
       <van-tabbar-item icon="manager-o" to="/me">我的</van-tabbar-item>
     </van-tabbar>

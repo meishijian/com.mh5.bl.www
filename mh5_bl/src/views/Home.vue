@@ -25,7 +25,9 @@
           color="#838383"
           size="25px"
           @click="gouwuche"
-        />
+        >
+          <span class="paid_p_span">{{JSON.parse(infoData).length}}</span>
+        </van-icon>
         <van-icon @click="me" name="manager-o" color="#838383" size="25px" />
       </div>
     </van-nav-bar>
@@ -169,6 +171,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   data() {
     return {
@@ -566,6 +570,10 @@ export default {
     this.qualityList();
     this.brandList();
     this.likeList();
+  },
+  computed: {
+    // 隱射
+    ...mapState(["infoData"])
   }
 };
 </script>
@@ -827,6 +835,20 @@ export default {
     height: 125px;
   }
   h3 {
+    text-align: center;
+  }
+  .paid_p_span {
+    position: absolute;
+    top: -5px;
+    right: -6px;
+    display: inline-block;
+    background-color: #ff6f6f;
+    border-radius: 50%;
+    width: 14px;
+    height: 15px;
+    line-height: 15px;
+    color: #fff;
+    font-size: 12px;
     text-align: center;
   }
 }

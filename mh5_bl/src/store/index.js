@@ -5,12 +5,13 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    infoData: JSON.parse(localStorage.getItem("goods_id")).length || 0
+    infoData: localStorage.getItem("goods_id") || 0
   },
   mutations: {
 
     getInfoData(state, data) {
       state.infoData = data
+      
     }
   },
   actions: {

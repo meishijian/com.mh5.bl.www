@@ -4,6 +4,8 @@
     <van-nav-bar left-arrow title="购物车" @click-left="onClickLeft" class="left_shop">
       <!-- 右边 -->
       <div slot="right">
+        <span class="rigth_span" v-if="submit_dele" @click="submit_dele = !submit_dele">编辑全部</span>
+        <span class="rigth_span" v-else @click="submit_dele = !submit_dele">完成</span>
         <van-icon v-if="!icon" name="ellipsis" color="#666666" size="25px" @click="icon=!icon" />
         <van-icon v-else name="cross" color="#666666" size="25px" @click="icon=!icon" />
       </div>
@@ -51,8 +53,18 @@
         :disabled="counts == 0"
         :button-text="submitBarText"
         @submit="onSubmit"
+        v-if="submit_dele"
       >
         <van-checkbox v-model="allClick">全选</van-checkbox>
+        <span slot="tip">
+          你的收货地址不支持同城送,
+          <span>修改地址</span>
+        </span>
+      </van-submit-bar>
+
+      <!-- 删除 -->
+      <van-submit-bar @submit="onDelete" button-text="删除" v-else>
+        <van-checkbox v-model="allClick" class="allClick_all">全选</van-checkbox>
         <span slot="tip">
           你的收货地址不支持同城送,
           <span>修改地址</span>
@@ -67,13 +79,13 @@ export default {
     return {
       // 商品数据数组
       goodsData: [],
-
       // 把goods_id,cart 从浏览器取出来  转换成数组形式
       goods_id: JSON.parse(localStorage.getItem("goods_id")) || [],
       cart: JSON.parse(localStorage.getItem("cart")) || [],
-
       // 定义icon 本身为显示 true
       icon: false,
+      // 点击 编辑 是否删除
+      submit_dele: true,
       // 总算 是否选中
       counts: 0
     };
@@ -102,6 +114,26 @@ export default {
     // 点击结算跳转订单页面
     onSubmit() {
       this.$router.push("/order");
+    },
+    // 删除
+    onDelete() {
+      // 订单成功
+      let goods_id = JSON.parse(localStorage.getItem("goods_id"));
+      // console.log(goods_id);
+      this.goodsData.forEach((element, i) => {
+        // 删除
+        if (this.cart[element.id].ischk == true) {
+          // console.log(11);
+          this.cart[element.id] = null;
+          // goods_id.splice(
+          //   goods_id.findIndex(obj => element.id == obj),
+          //   1
+          // );
+        }
+      });
+      localStorage.setItem("cart", JSON.stringify(this.cart));
+      localStorage.setItem("goods_id", JSON.stringify(goods_id));
+      this.goodsList();
     }
   },
   // 刷新页面 全选选中不变  用watch监听
@@ -192,6 +224,11 @@ export default {
 
 <style lang="less">
 .shop {
+  .allClick_all {
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+  }
   .dahang_tabbar {
     background-color: pink;
     height: 60px;
@@ -234,12 +271,9 @@ export default {
     font-size: 13px;
     text-align: center;
   }
-  .vancard {
+  .rigth_span {
+    margin-right: 13px;
   }
-
-  // .shop_submit {
-  //   background-color: #ff6f6f;
-  // }
 }
 </style>
 
