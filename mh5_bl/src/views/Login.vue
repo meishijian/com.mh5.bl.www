@@ -87,6 +87,7 @@ export default {
             this.errorMobile = "";
             this.errorPassword = "密码错误!";
           }
+          localStorage.removeItem("token");
           // this.$dialog.alert({
           //   message: res.data.error
           // });

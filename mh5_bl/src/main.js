@@ -21,6 +21,17 @@ import "./mock"
 // 引入css
 import "./assets/css/css.css"
 
+//配置发送请求前的拦截器 可以设置token信息 
+axios.interceptors.request.use(config => {
+  let token = localStorage.getItem("token");
+  // console.log(token);
+
+  if (token !== null) {
+    config.headers.Authorization = "Bearer " + token;
+  }
+  // console.log(config);
+  return config;
+});
 
 
 new Vue({

@@ -6,17 +6,24 @@
     <div class="pink">
       <img class="pink_img" src="https://mh5.bl.com/static/img/set.4cf7c7f.png" alt />
       <img class="pink_imgs" src="https://mh5.bl.com/static/img/shareLogo.png" alt />
-      <span class="login">登录/</span>
-      <span class="zhuce">注册</span>
+      <span class="login" @click="login">登录/</span>
+      <span class="zhuce" @click="regist">注册</span>
     </div>
     <!-- 图片 -->
-    <img class="tup" src="https://img23.iblimg.com/market-3/images/activity/285948628.jpg" alt />
+    <!-- <img class="tup" src="https://img23.iblimg.com/market-3/images/activity/285948628.jpg" alt /> -->
     <!-- 收藏福利人人惠 -->
     <van-grid>
       <van-grid-item icon="photo-o" text="文字"></van-grid-item>
       <van-grid-item icon="photo-o" text="文字"></van-grid-item>
       <van-grid-item icon="photo-o" text="文字"></van-grid-item>
     </van-grid>
+
+    <van-tabbar :route="true">
+      <van-tabbar-item icon="wap-home-o" to="/">首页</van-tabbar-item>
+      <van-tabbar-item icon="coupon-o" to="/class">分类</van-tabbar-item>
+      <van-tabbar-item icon="shopping-cart-o" to="/shopping">购物车</van-tabbar-item>
+      <van-tabbar-item icon="manager-o" to="/me">我的</van-tabbar-item>
+    </van-tabbar>
   </div>
 </template>
 
@@ -29,6 +36,18 @@ export default {
     //   返回箭头
     onClickLeft() {
       this.$router.push("/");
+    },
+    // 跳转登录接口
+    login() {
+      if (!localStorage.getItem("token")) {
+        this.$router.push("/login");
+      }
+    },
+    // 注册登录接口
+    regist() {
+      if (!localStorage.getItem("token")) {
+        this.$router.push("/regist");
+      }
     }
   }
 };
@@ -38,7 +57,7 @@ export default {
   .pink {
     width: 375px;
     height: 130px;
-    background-color: pink;
+    background-color: #e23b43;
   }
   .pink_img {
     position: relative;
