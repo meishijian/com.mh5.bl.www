@@ -1,7 +1,7 @@
 <template>
-  <div class="login">
+  <div class="regist">
     <van-nav-bar left-arrow @click-left="onClickLeft" />
-    <h1 class="h2">请登录你的账户</h1>
+    <h1 class="h2">请注册您的账户</h1>
     <van-cell-group>
       <div>
         <p class="login_p_phone">
@@ -11,7 +11,7 @@
           v-model="mobile"
           clearable
           label="+86"
-          placeholder="请输入手机号"
+          placeholder="请输入注册的手机号"
           class="mobile"
           :error-message="errorMobile"
         />
@@ -24,7 +24,7 @@
           v-model="password"
           type="password"
           label="密码"
-          placeholder="请输入密码"
+          placeholder="请输入注册的密码"
           class="password"
           :error-message="errorPassword"
         />
@@ -34,7 +34,7 @@
       <van-icon name="arrow" class="arrow" />
     </van-button>
 
-    <P class="login_p_thress" @click="login_regist">未注册，请注册</P>
+    <P class="login_p_thress" @click="login_regist">您已有账户，请前往登录界面</P>
   </div>
 </template>
 <script>
@@ -64,63 +64,59 @@ export default {
       }
       this.errorMobile = "";
       this.errorPassword = "";
-      // 定义一个  new URLSearchParams 对象
-      let formData = new URLSearchParams();
-      formData.append("mobile", this.mobile);
-      formData.append("password", this.password);
-      this.$http.post("/login", formData).then(res => {
-        // console.log(res);
-        // 判断错误
-        if (res.data.code !== 200) {
-          // console.log(res.data.error);
-          if (res.data.error == "用户名不存在!") {
-            this.errorMobile = "用户名不存在!";
+
+      this.$http
+        .post("/regist", {
+          mobile: this.mobile,
+          password: this.password
+        })
+        .then(res => {
+          console.log(res);
+          // 判断错误
+          if (res.data.code !== 200) {
+            if (res.data.error == "手机号已存在!") {
+              this.errorMobile = "手机号已存在!";
+            }
+            if (res.data.error == "手机号码格式不正确!") {
+              this.errorMobile = "手机号码格式不正确!";
+            }
+            if (res.data.error == "密码必须是6~18位的数字、字母、下划线!") {
+              this.errorMobile = "";
+              this.errorPassword = "密码必须是6~18位的数字、字母、下划线!";
+            }
+            if (res.data.error == "密码错误!") {
+              this.errorMobile = "";
+              this.errorPassword = "密码错误!";
+            }
+            // this.$dialog.alert({
+            //   message: res.data.error
+            // });
+            return;
           }
-          if (res.data.error == "手机号码格式不正确!") {
-            this.errorMobile = "手机号码格式不正确!";
-          }
-          if (res.data.error == "密码必须是6~18位的数字、字母、下划线!") {
-            this.errorMobile = "";
-            this.errorPassword = "密码必须是6~18位的数字、字母、下划线!";
-          }
-          if (res.data.error == "密码错误!") {
-            this.errorMobile = "";
-            this.errorPassword = "密码错误!";
-          }
-          // this.$dialog.alert({
-          //   message: res.data.error
-          // });
-          return;
-        }
-        this.errorMobile = "";
-        this.errorPassword = "";
-        // 创建token
-        localStorage.setItem("token", res.data.token);
-        // 提示
-        const toast = this.$toast.loading({
-          duration: 0, // 持续展示 toast
-          forbidClick: true,
-          message: `登录成功 3 秒`
+          // 提示
+          const toast = this.$toast.loading({
+            duration: 0, // 持续展示 toast
+            forbidClick: true,
+            message: `${res.data.message} 3 秒`
+          });
+          let second = 3;
+          const timer = setInterval(() => {
+            second--;
+            if (second) {
+              toast.message = `${res.data.message} ${second} 秒`;
+            } else {
+              clearInterval(timer);
+              // 手动清除 Toast
+              this.$toast.clear();
+              // 返回登录界面
+              this.$router.push("/login");
+            }
+          }, 1000);
         });
-        let second = 3;
-        const timer = setInterval(() => {
-          second--;
-          if (second) {
-            toast.message = `登录成功 ${second} 秒`;
-          } else {
-            clearInterval(timer);
-            // 手动清除 Toast
-            this.$toast.clear();
-            // 返回登录界面
-            this.$router.push("/");
-            // window.history.back(-1);
-          }
-        }, 1000);
-      });
     },
     // 注册页面
     login_regist() {
-      this.$router.push("/regist");
+      this.$router.push("/login");
     }
   }
 };
@@ -128,7 +124,7 @@ export default {
 
 
 <style lang="less">
-.login {
+.regist {
   .h2 {
     margin-top: 10%;
     margin-left: 16%;
@@ -185,9 +181,9 @@ export default {
     }
   }
   .login_p_thress {
-    position: relative;
-    top: -13px;
-    left: 52%;
+    position: absolute;
+    /* top: -13px; */
+    left: 43%;
     display: inline-block;
     color: skyblue;
   }

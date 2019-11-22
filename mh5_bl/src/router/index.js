@@ -17,12 +17,15 @@ const routes = [
   {
     path: "/me",
     component: () =>
-      import("../views/Me.vue")
+      import("../views/Me.vue"),
   },
   {
     path: "/goodslist",
     component: () =>
-      import("../views/GoodsList.vue")
+      import("../views/GoodsList.vue"),
+    meta: {
+      judge: true
+    }
   },
   {
     path: "/search",
@@ -43,13 +46,22 @@ const routes = [
   {
     path: "/goodsSearch",
     component: () =>
-      import("../views/goodsSearch.vue")
+      import("../views/goodsSearch.vue"),
+    meta: {
+      judge: true
+    }
   },
   // 登录 界面
   {
     path: "/login",
     component: () =>
       import("../views/Login.vue")
+  },
+  // 注册 界面
+  {
+    path: "/regist",
+    component: () =>
+      import("../views/Regist.vue")
   },
 ];
 // Shopping.vue
@@ -59,5 +71,19 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 });
+
+router.beforeEach((to, from, next) => {
+
+  if (to.meta !== undefined && to.meta.judge !== undefined && to.meta.judge) {
+    let token = localStorage.getItem("token");
+    if (token == null) {
+      next("/login")
+    } else {
+      next()
+    }
+  } else {
+    next();
+  }
+})
 
 export default router;

@@ -6,6 +6,9 @@ const jsonwebtoken = require("jsonwebtoken");
 const config = require("../config");
 // 导入 二、db数据库文件
 const db = require('../db');
+
+// 获取
+
 // 添加地址
 router.post("/received_address", (req, res) => {
     // 获取令牌
