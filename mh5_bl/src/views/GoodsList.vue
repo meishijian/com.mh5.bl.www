@@ -27,20 +27,18 @@
 
     <!-- 商品  两种状态-->
     <van-grid :column-num="1" v-if="icon_pd">
-      <van-grid-item
-        v-for="(item, index) in commodityData"
-        :key="index"
-        class="one_girs"
-        @click="list_detail(item.id)"
-      >
+      <van-grid-item v-for="(item, index) in commodityData" :key="index" class="one_girs">
         <van-row gutter="24">
-          <van-col span="8">
+          <van-col span="8" @click="list_detail(item.id)">
             <img class="one_img" :src="item.image" alt />
           </van-col>
           <van-col span="15">
-            <p class="one_name">{{item.goods_name.slice(0,16)}}</p>
-            <p class="one_service">{{item.service}}</p>
-            <p class="one_price">￥{{item.price}}</p>
+            <p class="one_name" @click="list_detail(item.id)">{{item.goods_name.slice(0,16)}}</p>
+            <p class="one_service" @click="list_detail(item.id)">{{item.service}}</p>
+            <p class="one_price" @click="list_detail(item.id)">￥{{item.price}}</p>
+            <i class="guowu" @click="addShop(item.id)">
+              <van-icon name="shopping-cart-o" color="#ff9f9f" size="20px" class="guowu_img" />
+            </i>
           </van-col>
         </van-row>
       </van-grid-item>
@@ -154,6 +152,60 @@ export default {
     list_detail(id) {
       localStorage.setItem("list_id", id);
       this.$router.push("/goodsDetail");
+    },
+    addShop(id) {
+      console.log(id);
+      // 把id从浏览器取出来
+      let goods_id = localStorage.getItem("goods_id");
+      // 判断 添加数据的第一条是不是为Null
+      if (goods_id == null) {
+        // 定义一个空数组
+        (goods_id = []),
+          // 把需要的Id 数据放进去
+          goods_id.push(id);
+      } else {
+        // 如果有数据的话 就转换成数组形式
+        goods_id = JSON.parse(goods_id);
+        // 再把需要的id  push进去
+        goods_id.push(id);
+        // 防止重复
+        goods_id = Array.from(new Set(goods_id));
+      }
+      // 最后把数据放进浏览器  字符串形式
+      localStorage.setItem("goods_id", JSON.stringify(goods_id));
+
+      // 把cart 从浏览器取出
+      let cart = localStorage.getItem("cart");
+      // 添加数据 要判断第一条是不是null
+      if (cart === null) {
+        // 定义一个空数组
+        cart = [];
+        // 把需要的id数据放进去
+        cart[id] = {
+          // 默认勾选
+          ischk: false,
+          // 总数量
+          count: 1
+        };
+      } else {
+        // 有数据的时候 转换成数组形式
+        cart = JSON.parse(cart);
+        // 没有数据就添加默认数据
+        if (cart[id] === null || cart[id] == undefined) {
+          // 数据添加
+          cart[id] = {
+            // 默认勾选
+            ischk: false,
+            // 总数量
+            count: 1
+          };
+        } else {
+          // 数量加加
+          cart[id].count++;
+        }
+      }
+      // 最后把 cart 添加到浏览器 字符串形式
+      localStorage.setItem("cart", JSON.stringify(cart));
     }
   },
 
@@ -221,6 +273,19 @@ export default {
   }
   .active {
     color: red;
+  }
+  .guowu {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #e7e7e7;
+    border-radius: 17px;
+    display: inline-block;
+    margin-top: -35px;
+    margin-left: 181px;
+  }
+  .guowu_img {
+    margin-left: 4px;
+    margin-top: 5px;
   }
 }
 </style>
