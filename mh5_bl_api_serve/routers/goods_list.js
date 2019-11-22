@@ -468,5 +468,31 @@ router.get('/goods_details', (req, res) => {
 })
 
 
+// 购物车获取商品
+router.get("/cart_goods", (req, res) => {
+    let goods_id = req.query.goods_id;
+    // console.log(goods_id.join(","));
+    // console.log(goods_id);
+
+    if (!goods_id) {
+        return res.json({
+            "code": 400,
+            "error": "参数不能为空"
+        })
+    }
+    let mysql = `SELECT id,goods_name,price,image,service FROM bl_goods WHERE id in (${goods_id})`;
+    db.query(mysql, (error, result) => {
+        if (error) return res.json({
+            "code": 400,
+            "error": error
+        });
+        res.json({
+            "code": 200,
+            "data": result
+        })
+    })
+
+})
+
 // 导出路由
 module.exports = router;

@@ -30,9 +30,15 @@ app.use('/api/v1', require("./routers/goods_list"));
 app.use('/api/v1', require("./routers/address"));
 // 引入 用户 路由并注册到 app 上
 app.use('/api/v1', require("./routers/user"));
+
+
+// 后台管理系统
+app.use('/api/v1', require("./routers/backstage/login"));
+
+
+
 // 启动服务器
 // 这些需要一致 把这些放在配置文件中 在这里使用 需要改的时候 就在配置文件中修改 就OK了
-
 app.listen(9494, () => {
     console.log("http://127.0.0.1:9494");
 })

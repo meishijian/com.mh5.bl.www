@@ -12,7 +12,7 @@ import axios from 'axios';
 axios.defaults.baseURL = "http://127.0.0.1:9494/api/v1/";
 Vue.prototype.$http = axios;
 
-
+import "./assets/css/index.css"
 Vue.config.productionTip = false;
 
 new Vue({
