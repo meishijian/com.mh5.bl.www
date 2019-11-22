@@ -4,8 +4,7 @@ import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
 
-const routes = [
-  {
+const routes = [{
     path: "/",
     component: Home
   },
@@ -36,6 +35,21 @@ const routes = [
     path: "/goodsDetail",
     component: () =>
       import("../views/GoodsDetail.vue")
+  },
+  {
+    path: "/order",
+    component: () =>
+      import("../views/Order.vue")
+  },
+  {
+    path: "/address",
+    component: () =>
+      import("../views/Address.vue")
+  },
+  {
+    path: "/shopAddress",
+    component: () =>
+      import("../views/ShopAddress.vue")
   },
   {
     path: "/shopping",

@@ -18,7 +18,7 @@
         <van-tabbar-item icon="home-o" to="/">首页</van-tabbar-item>
         <van-tabbar-item icon="search" to="/search">搜索</van-tabbar-item>
         <van-tabbar-item icon="bars" to="/class">分类</van-tabbar-item>
-        <van-tabbar-item icon="shopping-cart-o" to="/">购物车</van-tabbar-item>
+        <van-tabbar-item icon="shopping-cart-o" to="/shopping">购物车</van-tabbar-item>
         <van-tabbar-item icon="manager-o" to="/me">我的i百联</van-tabbar-item>
       </van-tabbar>
     </div>

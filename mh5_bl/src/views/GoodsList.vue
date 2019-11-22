@@ -154,7 +154,10 @@ export default {
       this.$router.push("/goodsDetail");
     },
     addShop(id) {
-      console.log(id);
+      // 成功提示
+      // this.$toast("提示文案");
+      this.$toast.success("添加商品成功");
+      // console.log(id);
       // 把id从浏览器取出来
       let goods_id = localStorage.getItem("goods_id");
       // 判断 添加数据的第一条是不是为Null

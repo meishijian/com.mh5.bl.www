@@ -97,3 +97,41 @@
     background-color: #ff6f6f;
     border: 1px solid #ff6f6f;
 }
+
+.order .van-nav-bar .van-icon {
+    color: #666666;
+    /* vertical-align: middle; */
+}
+
+.me .van-nav-bar .van-icon {
+    color: #666666;
+    /* vertical-align: middle; */
+}
+
+.goods .van-nav-bar .van-icon {
+    color: #666666;
+    /* vertical-align: middle; */
+}
+
+.detail .van-nav-bar .van-icon {
+    color: #666666;
+    /* vertical-align: middle; */
+}
+
+
+.address .van-nav-bar .van-icon {
+    color: #666666;
+    /* vertical-align: middle; */
+}
+
+.address .van-button--danger {
+    color: #fff;
+    background-color: #ff6f6f;
+    border: 1px solid #ff6f6f;
+}
+
+.order .van-button--danger {
+    color: #fff;
+    background-color: #ff6f6f;
+    border: 1px solid #ff6f6f;
+}

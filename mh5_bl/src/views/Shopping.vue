@@ -19,46 +19,46 @@
         <van-tabbar-item icon="contact" to="/me">我的i百联</van-tabbar-item>
       </van-tabbar>
     </div>
-    <!-- <img class="dahang_img" src="../assets/img/001.jpg" alt /> -->
-    <!-- <div class="wenzi">
-      <p class="g_p">荔枝现在还没有心仪的宝贝(✿◡‿◡)</p>
-      <p class="g_pp">主人快点给我挑点宝贝吧!</p>
+
+    <div class="wenzi" v-if="goodsData==null">
+      <img class="dahang_img" src="../assets/img/002.jpg" alt />
+
       <p class="g_botton" @click="wenzi_home">去逛逛</p>
-    </div>-->
-
-    <div style="
-    padding-bottom: 80px;
-">
-      <!-- 商品卡片 -->
-      <van-card
-        :price="item.price"
-        :title="item.goods_name"
-        :thumb="item.image"
-        v-for="(item, index) in goodsData"
-        :key="index"
-      >
-        <!-- 步进器 -->
-        <div slot="footer">
-          <van-checkbox v-model="cart[item.id].ischk"></van-checkbox>
-          <van-stepper min="1" max="200" v-model="cart[item.id].count"></van-stepper>
-          <p>小计:{{item.price*cart[item.id].count}}</p>
-        </div>
-      </van-card>
     </div>
+    <div v-else>
+      <div style="padding-bottom: 80px;">
+        <!-- 商品卡片 -->
+        <van-card
+          class="vancard"
+          :price="item.price"
+          :title="item.goods_name"
+          :thumb="item.image"
+          v-for="(item, index) in goodsData"
+          :key="index"
+        >
+          <!-- 步进器 -->
+          <div slot="footer">
+            <van-checkbox v-model="cart[item.id].ischk"></van-checkbox>
+            <van-stepper min="1" max="200" v-model="cart[item.id].count"></van-stepper>
+            <p>小计:{{item.price*cart[item.id].count}}</p>
+          </div>
+        </van-card>
+      </div>
 
-    <!-- 提交订单栏 -->
-    <van-submit-bar
-      :price="totalPrice"
-      :disabled="counts == 0"
-      :button-text="submitBarText"
-      @submit="onSubmit"
-    >
-      <van-checkbox v-model="allClick">全选</van-checkbox>
-      <span slot="tip">
-        你的收货地址不支持同城送,
-        <span>修改地址</span>
-      </span>
-    </van-submit-bar>
+      <!-- 提交订单栏 -->
+      <van-submit-bar
+        :price="totalPrice"
+        :disabled="counts == 0"
+        :button-text="submitBarText"
+        @submit="onSubmit"
+      >
+        <van-checkbox v-model="allClick">全选</van-checkbox>
+        <span slot="tip">
+          你的收货地址不支持同城送,
+          <span>修改地址</span>
+        </span>
+      </van-submit-bar>
+    </div>
   </div>
 </template>
 <script>
@@ -99,8 +99,10 @@ export default {
           this.goodsData = res.data.data;
         });
     },
-
-    onSubmit() {}
+    // 点击结算跳转订单页面
+    onSubmit() {
+      this.$router.push("/order");
+    }
   },
   // 刷新页面 全选选中不变  用watch监听
   watch: {
@@ -120,6 +122,11 @@ export default {
     // 总价
     totalPrice: function() {
       var sum = 0;
+      // console.log(this.goodsData);
+      if (this.goodsData == undefined) {
+        return sum;
+      }
+
       // 每一件商品的价钱加起来  所以要循环
       this.goodsData.forEach(item => {
         // 判断 全选按钮 是否被勾选
@@ -191,24 +198,33 @@ export default {
     // color: red
   }
   .dahang_img {
-    width: 100px;
-    height: 100px;
+    width: 290px;
+    margin-top: -18px;
+    height: 269px;
+    position: relative;
+    top: 93px;
+    left: 29px;
   }
   .g_botton {
-    width: 140px;
-    height: 30px;
+    width: 116px;
+    height: 35px;
     color: aliceblue;
-    background-color: pink;
-    border-radius: 10px;
+    background-color: #fc98a2;
+    border-radius: 16px;
     text-align: center;
-    line-height: 30px;
-    margin-left: 30px;
+    line-height: 35px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    bottom: -58%;
+    left: 60%;
   }
   .wenzi {
-    width: 224px;
-    height: 200px;
-    border: 1px solid pink;
-    margin: 154px auto;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    // border: 1px solid pink;
+    // margin: 154px auto;
   }
   .g_pp {
     font-size: 14px;
@@ -218,6 +234,9 @@ export default {
     font-size: 13px;
     text-align: center;
   }
+  .vancard {
+  }
+
   // .shop_submit {
   //   background-color: #ff6f6f;
   // }

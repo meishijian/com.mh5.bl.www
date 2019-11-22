@@ -1,8 +1,7 @@
 <template>
   <div class="detail">
     <div style="
-    padding-bottom: 50px;
-">
+    padding-bottom: 50px;">
       <van-nav-bar left-arrow @click-left="onClickLeft">
         <!-- 右边 -->
         <div slot="right">
@@ -17,7 +16,7 @@
           <van-tabbar-item icon="home-o" to="/">首页</van-tabbar-item>
           <van-tabbar-item icon="search" to="/search">搜索</van-tabbar-item>
           <van-tabbar-item icon="bars" to="/class">分类</van-tabbar-item>
-          <van-tabbar-item icon="shopping-cart-o" to="/">购物车</van-tabbar-item>
+          <van-tabbar-item icon="shopping-cart-o" to="/shopping">购物车</van-tabbar-item>
           <van-tabbar-item icon="manager-o" to="/me">我的i百联</van-tabbar-item>
         </van-tabbar>
       </div>
@@ -171,8 +170,7 @@ export default {
         .then(res => {
           this.goodsDetail = res.data.data;
           // console.log(res);\
-          console.log(this.goodsDetail );
-          
+          console.log(this.goodsDetail);
         });
     },
     // 热门商品
