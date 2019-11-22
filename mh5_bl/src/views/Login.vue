@@ -41,8 +41,8 @@
 export default {
   data() {
     return {
-      mobile: "",
-      password: "",
+      mobile: "17553041262",
+      password: "123456",
       errorMobile: "",
       errorPassword: ""
     };
@@ -192,5 +192,6 @@ export default {
     display: inline-block;
     color: skyblue;
   }
+ 
 }
 </style>

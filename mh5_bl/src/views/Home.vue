@@ -159,11 +159,12 @@
         <van-grid-item v-for="(item, index) in likeData" :key="index" @click="like_shop(item.id)">
           <img class="like_img" :src="item.image" alt />
           <!-- <van-tag plain class="like_biao">看相似</van-tag> -->
-          <p class="like_p">{{item.goods_name.slice(0,20)}}</p>
+          <p class="like_p">{{item.goods_name }}</p>
           <p class="like_jia">￥{{item.price}}</p>
         </van-grid-item>
       </van-grid>
     </van-list>
+    <vueToTop class="totop_i" type="5" right="30" bottom="70" size="22" top="1000"></vueToTop>
   </div>
 </template>
 
@@ -571,6 +572,12 @@ export default {
 
 <style lang="less">
 .home {
+  .totop_i {
+    color: #fff;
+    border-radius: 50%;
+    background-color: #adadad;
+    border: 10px solid #adadad;
+  }
   .fenl {
     width: 67px;
     height: 33px;
@@ -801,6 +808,10 @@ export default {
   }
   .like_p {
     font-size: 11px;
+    overflow: hidden; /*超出部分隐藏*/
+    text-overflow: ellipsis; /* 超出部分显示省略号 */
+    white-space: nowrap; /*规定段落中的文本不进行换行 */
+    width: 150px; /*需要配合宽度来使用*/
   }
   .like_jia {
     font-size: 12px;

@@ -1,11 +1,20 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import Vue from 'vue'
+import Vuex from 'vuex'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {}
-});
+  state: {
+    infoData: JSON.parse(localStorage.getItem("goods_id")).length || 0
+  },
+  mutations: {
+
+    getInfoData(state, data) {
+      state.infoData = data
+    }
+  },
+  actions: {
+  },
+  modules: {
+  }
+})

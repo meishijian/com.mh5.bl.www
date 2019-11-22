@@ -15,7 +15,6 @@ const config = require('../config');
 router.post("/regist", (req, res) => {
     let mobile = req.body.mobile;
     let password = req.body.password;
-
     // 设置 body-parser
     // 然后判断 用户名 也是手机号
     let mobileRe = /^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/;
@@ -51,7 +50,9 @@ router.post("/regist", (req, res) => {
         let data = {
             mobile,
             password: md5(password + config.md5),
-            regtime: new Date().getTime().toString().substring(0, 10)
+            regtime: new Date().getTime().toString().substring(0, 10),
+            face: "70.jpg",
+            nickname: mobile
         }
 
         db.query(mysql, data, (error, result) => {

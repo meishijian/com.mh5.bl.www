@@ -4,7 +4,8 @@ import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
 
-const routes = [{
+const routes = [
+  {
     path: "/",
     component: Home
   },
@@ -39,7 +40,10 @@ const routes = [{
   {
     path: "/order",
     component: () =>
-      import("../views/Order.vue")
+      import("../views/Order.vue"),
+    meta: {
+      judge: true
+    }
   },
   {
     path: "/address",
@@ -77,6 +81,33 @@ const routes = [{
     component: () =>
       import("../views/Regist.vue")
   },
+  // 我的 界面
+  {
+    path: "/myInfo",
+    component: () =>
+      import("../views/MyInfo.vue"),
+    meta: {
+      judge: true
+    }
+  },
+  // 付款 界面
+  {
+    path: "/payment",
+    component: () =>
+      import("../views/Payment.vue"),
+    meta: {
+      judge: true
+    }
+  },
+  // 订单 详细 界面
+  {
+    path: "/myorder",
+    component: () =>
+      import("../views/Myorder.vue"),
+    meta: {
+      judge: true
+    }
+  }
 ];
 // Shopping.vue
 

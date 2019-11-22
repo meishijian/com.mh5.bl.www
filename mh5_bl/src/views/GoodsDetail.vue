@@ -101,8 +101,8 @@
     </div>
 
     <van-goods-action class="goods_action">
-      <van-goods-action-icon icon="chat-o" @click="sorry">客服</van-goods-action-icon>
-      <van-goods-action-icon icon="cart-o" @click="onClickCart">购物车</van-goods-action-icon>
+      <van-goods-action-icon icon="chat-o">客服</van-goods-action-icon>
+      <van-goods-action-icon icon="cart-o" @click="shoping_click">购物车</van-goods-action-icon>
       <van-goods-action-button type="warning" @click="sorry">加入购物车</van-goods-action-button>
       <van-goods-action-button type="danger" @click="sorry">立即购买</van-goods-action-button>
     </van-goods-action>
@@ -169,8 +169,8 @@ export default {
         })
         .then(res => {
           this.goodsDetail = res.data.data;
-          // console.log(res);\
-          console.log(this.goodsDetail);
+          // console.log(res);
+          // console.log(this.goodsDetail);
         });
     },
     // 热门商品
@@ -199,6 +199,10 @@ export default {
     // 选择地址 取消
     onCancel() {
       this.show = false;
+    },
+    // 跳转到 购物车
+    shoping_click() {
+      this.$router.push("/shopping");
     }
   },
   created() {

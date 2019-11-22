@@ -135,3 +135,7 @@
     background-color: #ff6f6f;
     border: 1px solid #ff6f6f;
 }
+
+.detail .van-tabs__line {
+    background-color: #fff;
+}

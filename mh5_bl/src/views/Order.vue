@@ -23,9 +23,27 @@
 
       <!-- ---------------------------- -->
       <!-- 联系人卡片 -->
-      <van-contact-card @click="order"></van-contact-card>
+      <van-contact-card
+        @click="order"
+        :type="cardType"
+        :name="currentContact.name"
+        :tel="currentContact.tel"
+      ></van-contact-card>
       <!-- 支付方式 -->
-      <van-nav-bar left-text="支付方式" right-text="在线支付>" @click-right="onClickRight" />
+      <van-cell title="支付方式" is-link @click="show= !show"></van-cell>
+      <van-action-sheet v-model="show" cancel-text="取消">
+        <van-radio-group v-model="radio">
+          <van-cell-group>
+            <van-cell title="在线支付" clickable @click="radio = '1'">
+              <van-radio slot="right-icon" name="1" />
+            </van-cell>
+            <van-cell title="货到付款" clickable @click="radio = '2'">
+              <van-radio slot="right-icon" name="2" />
+            </van-cell>
+          </van-cell-group>
+        </van-radio-group>
+      </van-action-sheet>
+
       <!-- 商品信息 -->
       <van-grid>
         <!-- 商品卡片 -->
@@ -52,16 +70,21 @@
       </van-grid>
 
       <!-- 配送方式 -->
-      <van-nav-bar left-text="支付方式" right-text="在线支付>" @click-right="onClickRight" />
-      <!-- 配送时间 -->
-      <van-nav-bar left-text="支付方式" right-text="在线支付>" @click-right="onClickRight" />
+      <van-nav-bar class="submit" left-text="配送方式">
+        <van-radio-group v-model="radios" slot="right">
+          <van-radio name="1" class="wu">物流配送</van-radio>
+          <van-radio name="2" class="men">门店自提</van-radio>
+        </van-radio-group>
+      </van-nav-bar>
     </div>
     <!-- 付钱 -->
-    <van-submit-bar :price="3050" button-text="提交订单" @submit="onSubmit" />
+    <van-submit-bar class="submit" :price="totalPrices" button-text="提交订单" @submit="onSubmit" />
   </div>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+
 export default {
   data() {
     return {
@@ -69,22 +92,33 @@ export default {
       cart: JSON.parse(localStorage.getItem("cart")),
       // 放商品数据
       goodsData: [],
-
       chosenContactId: null,
       editingContact: {},
       showList: false,
       showEdit: false,
       isEdit: false,
       icon: false,
-      show: false
+      show: false,
+      radio: "1",
+      radios: "1",
+      list: [
+        {
+          name: "s",
+          tel: "s",
+          id: 0
+        }
+      ]
+      // show: false,
     };
   },
   methods: {
+    ...mapMutations(["getInfoData"]),
     //   返回上一级
     onClickLeft() {
       window.history.back(-1);
     },
     order() {
+      this.showList = true;
       this.$router.push("/address");
     },
     // 显示需要买的数据
@@ -113,27 +147,96 @@ export default {
           this.goodsData = res.data.data;
         });
     },
+    // 提交订单
+    onSubmit() {
+      // console.log(this.totalPrices);
+      // console.log(this.goodsData);
+      localStorage.setItem("totalPrices", this.totalPrices / 100);
 
-    onClickRight() {},
-
+      let carts = [];
+      // cart 参数
+      this.goodsData.forEach((element, i) => {
+        carts.push({
+          goods_id: element.id,
+          buy_count: this.cart[element.id].count
+        });
+      });
+      // console.log(carts);
+      this.$http
+        .post("/orders", {
+          address_id: this.chosenContactId,
+          cart: carts
+        })
+        .then(res => {
+          // console.log(res);
+          // 订单成功
+          let goods_id = JSON.parse(localStorage.getItem("goods_id"));
+          // console.log(goods_id);
+          this.goodsData.forEach((element, i) => {
+            // 删除
+            if (this.cart[element.id].ischk == true) {
+              // console.log(11);
+              this.cart[element.id] = null;
+            }
+            goods_id.splice(
+              goods_id.findIndex(obj => element.id == obj),
+              1
+            );
+          });
+          this.$router.push({
+            path: "/payment",
+            query: {
+              orderId: res.data.data.orderId
+            }
+          });
+          localStorage.setItem("cart", JSON.stringify(this.cart));
+          localStorage.setItem("goods_id", JSON.stringify(goods_id));
+          /**---------------购物车的数量-------------------------*/
+          // console.log(id);
+          // 购物车的数量 也就是 添加了多少 商品的长度
+          this.getInfoData(goods_id.length);
+        });
+    },
     // 选中联系人
     onSelect() {
       this.showList = false;
     },
-    onSubmit() {}
+    // 获取收货 地址 信息
+    getList() {
+      this.$http.get("address_single").then(res => {
+        // console.log(res);
+        this.list[0].name = res.data.data[0].shr_name;
+        this.list[0].tel = res.data.data[0].mobile;
+        this.list[0].id = res.data.data[0].id;
+        this.chosenContactId = res.data.data[0].id;
+        // console.log(this.list);
+      });
+    }
   },
   computed: {
     cardType() {
       return this.chosenContactId !== null ? "edit" : "add";
     },
-
     currentContact() {
       const id = this.chosenContactId;
       return id !== null ? this.list.filter(item => item.id === id)[0] : {};
+    },
+    // 总价钱
+    totalPrices() {
+      // 先循环数组
+      // 定义一个变量存放总价钱
+      let sum = 0;
+      this.goodsData.forEach(item => {
+        // console.log(item);
+        // 总价钱
+        sum += item.price * this.cart[item.id].count;
+      });
+      return sum * 100;
     }
   },
   created() {
     this.order_shop();
+    this.getList();
   }
 };
 </script>
@@ -218,6 +321,17 @@ export default {
     padding: 0 16px;
     /* color: #1989fa; */
     vertical-align: middle;
+  }
+  .men {
+    position: relative;
+    top: -11px;
+  }
+  .wu {
+    position: relative;
+    top: 9px;
+    /* display: inline-block; */
+    margin-left: -144px;
+    /* margin-top: 4px; */
   }
 }
 </style>

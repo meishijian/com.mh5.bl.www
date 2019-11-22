@@ -33,7 +33,7 @@
             <img class="one_img" :src="item.image" alt />
           </van-col>
           <van-col span="15">
-            <p class="one_name" @click="list_detail(item.id)">{{item.goods_name.slice(0,16)}}</p>
+            <p class="one_name" @click="list_detail(item.id)">{{item.goods_name }}</p>
             <p class="one_service" @click="list_detail(item.id)">{{item.service}}</p>
             <p class="one_price" @click="list_detail(item.id)">￥{{item.price}}</p>
             <i class="guowu" @click="addShop(item.id)">
@@ -60,9 +60,19 @@
         <p class="two_price">￥{{item.price}}</p>
       </van-grid-item>
     </van-grid>
+
+    <!-- 固定 跳转到 购物车 -->
+    <img
+      class="pic_img"
+      @click="shoping_click"
+      src="https://mh5.bl.com/h5/static/img/showcart.74cb7b7.png"
+      alt
+    />
+    <vueToTop class="totop_i" type="5" right="30" bottom="70" size="22" top="1000"></vueToTop>
   </div>
 </template>
 <script>
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -83,6 +93,7 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(["getInfoData"]),
     // 左边箭头返回
     onClickLeft() {
       window.history.back(-1);
@@ -154,7 +165,7 @@ export default {
       this.$router.push("/goodsDetail");
     },
     addShop(id) {
-      console.log(id);
+      // console.log(id);
       // 把id从浏览器取出来
       let goods_id = localStorage.getItem("goods_id");
       // 判断 添加数据的第一条是不是为Null
@@ -206,6 +217,14 @@ export default {
       }
       // 最后把 cart 添加到浏览器 字符串形式
       localStorage.setItem("cart", JSON.stringify(cart));
+      /**---------------购物车的数量-------------------------*/
+      // console.log(id);
+      // 购物车的数量 也就是 添加了多少 商品的长度
+      this.getInfoData(goods_id.length);
+    },
+    // 跳转到 购物车
+    shoping_click() {
+      this.$router.push("/shopping");
     }
   },
 
@@ -217,6 +236,12 @@ export default {
 </script>
 <style lang="less">
 .goods {
+  .totop_i {
+    color: #fff;
+    border-radius: 50%;
+    background-color: #adadad;
+    border: 10px solid #adadad;
+  }
   .search {
     width: 290px;
     position: relative;
@@ -250,6 +275,10 @@ export default {
     font-size: 12px;
     // margin-top: -81px;
     line-height: 19px;
+    overflow: hidden; /*超出部分隐藏*/
+    text-overflow: ellipsis; /* 超出部分显示省略号 */
+    white-space: nowrap; /*规定段落中的文本不进行换行 */
+    width: 150px; /*需要配合宽度来使用*/
   }
   .one_service {
     color: #ff4a4e;
@@ -286,6 +315,14 @@ export default {
   .guowu_img {
     margin-left: 4px;
     margin-top: 5px;
+  }
+  .pic_img {
+    position: fixed;
+    bottom: 14%;
+    left: 13px;
+    width: 40px;
+    border: 1px solid #cfcfcf;
+    border-radius: 6px;
   }
 }
 </style>
