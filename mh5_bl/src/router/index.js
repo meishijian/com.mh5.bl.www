@@ -4,7 +4,8 @@ import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
 
-const routes = [{
+const routes = [
+  {
     path: "/",
     component: Home
   },
@@ -37,6 +38,18 @@ const routes = [{
     path: "/shopping",
     component: () =>
       import("../views/Shopping.vue")
+  },
+  // 搜索 进去 商品列表页面
+  {
+    path: "/goodsSearch",
+    component: () =>
+      import("../views/goodsSearch.vue")
+  },
+  // 登录 界面
+  {
+    path: "/login",
+    component: () =>
+      import("../views/Login.vue")
   },
 ];
 // Shopping.vue

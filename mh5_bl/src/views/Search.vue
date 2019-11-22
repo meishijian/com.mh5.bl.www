@@ -40,6 +40,7 @@ export default {
     onSearch() {
       // 把商品名称存起来
       localStorage.setItem("goods_name", this.value);
+      this.$router.push("/goodsSearch");
     },
     // 取消
     searchs_qu() {
