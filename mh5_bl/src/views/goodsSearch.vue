@@ -45,19 +45,18 @@
     </van-grid>
 
     <van-grid :column-num="2" v-else>
-      <van-grid-item
-        v-for="(item, index) in commodityData"
-        :key="index"
-        class="two_gird"
-        @click="list_detail(item.id)"
-      >
-        <img class="two_img" :src="item.image" alt />
-        <p class="two_name">
+      <van-grid-item v-for="(item, index) in commodityData" :key="index" class="two_gird">
+        <img class="two_img" :src="item.image" alt @click="list_detail(item.id)" />
+        <p class="two_name" @click="list_detail(item.id)">
           <span class="two_service">「{{item.service}}」</span>
           {{item.goods_name}}
         </p>
-
-        <p class="two_price">￥{{item.price}}</p>
+        <!-- position: relative; -->
+        <!-- left: 64px; -->
+        <p class="two_price" @click="list_detail(item.id)">￥{{item.price}}</p>
+        <i class="guowu_else" @click="addShop(item.id)">
+          <van-icon name="shopping-cart-o" color="#ff9f9f" size="20px" class="guowu_img" />
+        </i>
       </van-grid-item>
     </van-grid>
 
@@ -259,6 +258,10 @@ export default {
   .two_name {
     font-size: 12px;
     line-height: 19px;
+    overflow: hidden; /*超出部分隐藏*/
+    text-overflow: ellipsis; /* 超出部分显示省略号 */
+    white-space: nowrap; /*规定段落中的文本不进行换行 */
+    width: 150px; /*需要配合宽度来使用*/
   }
   .two_service {
     color: #ff4a4e;
@@ -267,7 +270,7 @@ export default {
   .two_price {
     color: #ff4a4e;
     font-size: 12px;
-    margin-left: -127px;
+    margin-left: -100px;
     margin-top: -2px;
   }
 
@@ -311,6 +314,14 @@ export default {
     display: inline-block;
     margin-top: -35px;
     margin-left: 181px;
+  }
+  .guowu_else {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #e7e7e7;
+    border-radius: 17px;
+    position: relative;
+    left: 64px;
   }
   .guowu_img {
     margin-left: 4px;

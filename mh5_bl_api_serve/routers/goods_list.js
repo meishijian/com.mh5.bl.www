@@ -394,7 +394,7 @@ router.post("/orders", (req, res) => {
                             "code": 400,
                             "error": error
                         })
-                        console.log(result);
+                        // console.log(result);
 
                         // 订单信息 添加完成后  添加订单商品 表信息
                         // 订单商品表 信息添加

@@ -55,7 +55,13 @@
             <van-cell class="order_sn">
               <div slot="title" style="width: 216px;">订单时间：{{item[0].addtime | dateFormat}}</div>
               <div slot="default" class="default">
-                <van-count-down class="down" millisecond :time="time" format="HH:mm:ss:SSS"></van-count-down>
+                <van-count-down
+                  @finish="time_finish(item[0].order_id)"
+                  class="down"
+                  millisecond
+                  :time="time"
+                  format="HH:mm:ss:SSS"
+                ></van-count-down>
               </div>
             </van-cell>
           </van-cell-group>
@@ -162,7 +168,7 @@ export default {
       // 标签页
       active: this.$route.params.numId - 0,
       tabsData: [],
-      time: 30 * 60 * 60 * 1000
+      time: 60 * 1000
     };
   },
   methods: {
@@ -249,6 +255,20 @@ export default {
         }
       });
       localStorage.setItem("totalPrices", item.total_price);
+    },
+    // 时间到了 取消订单
+    time_finish(order_id) {
+      this.$http
+        .get("/order_cancel", {
+          params: {
+            order_id: order_id
+          }
+        })
+        .then(res => {
+          // console.log(res);
+          this.$toast(res.data.message);
+          this.getTabsData();
+        });
     }
   },
 
