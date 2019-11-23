@@ -26,7 +26,7 @@
           size="25px"
           @click="gouwuche"
         >
-          <span class="paid_p_span">{{JSON.parse(infoData).length}}</span>
+          <span class="paid_p_span" v-if="JSON.parse(infoData).length == 0">{{JSON.parse(infoData).length}}</span>
         </van-icon>
         <van-icon @click="me" name="manager-o" color="#838383" size="25px" />
       </div>

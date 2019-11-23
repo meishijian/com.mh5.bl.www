@@ -118,22 +118,39 @@ export default {
     // 删除
     onDelete() {
       // 订单成功
-      let goods_id = JSON.parse(localStorage.getItem("goods_id"));
-      // console.log(goods_id);
-      this.goodsData.forEach((element, i) => {
-        // 删除
-        if (this.cart[element.id].ischk == true) {
-          // console.log(11);
-          this.cart[element.id] = null;
-          // goods_id.splice(
-          //   goods_id.findIndex(obj => element.id == obj),
-          //   1
-          // );
+      // let goods_id = JSON.parse(localStorage.getItem("goods_id"));
+
+      for (let i = 0; i < this.cart.length; i++) {
+        if (this.cart[i] == null) continue;
+        if (this.cart[i].ischk == true) {
+          this.goods_id.splice(
+            this.goods_id.findIndex(obj => i == obj),
+            1
+          );
         }
-      });
+      }
+      // console.log(goods_id);
+
+      for (let i = 0; i < this.goodsData.length; i++) {
+        // 删除
+        if (this.cart[this.goodsData[i].id].ischk == true) {
+          this.cart[this.goodsData[i].id] = null;
+          this.goodsList();
+        }
+      }
+      // this.goodsData.forEach((element, i) => {
+      //   // 删除
+      //   if (this.cart[element.id].ischk == true) {
+      //     // console.log(11);
+      //     this.cart[element.id] = null;
+      //     // goods_id.splice(
+      //     //   goods_id.findIndex(obj => element.id == obj),
+      //     //   1
+      //     // );
+      //   }
+      // });
       localStorage.setItem("cart", JSON.stringify(this.cart));
-      localStorage.setItem("goods_id", JSON.stringify(goods_id));
-      this.goodsList();
+      localStorage.setItem("goods_id", JSON.stringify(this.goods_id));
     }
   },
   // 刷新页面 全选选中不变  用watch监听

@@ -22,10 +22,7 @@ const routes = [
   {
     path: "/goodslist",
     component: () =>
-      import("../views/GoodsList.vue"),
-    meta: {
-      judge: true
-    }
+      import("../views/GoodsList.vue")
   },
   {
     path: "/search",
@@ -101,13 +98,21 @@ const routes = [
   },
   // 订单 详细 界面
   {
-    path: "/myorder",
+    path: "/myorder/:numId",
     component: () =>
       import("../views/Myorder.vue"),
     meta: {
       judge: true
     }
-  }
+  },
+  {
+    path: "/orderSorry",
+    component: () =>
+      import("../views/OrderSorry.vue"),
+    meta: {
+      judge: true
+    }
+  },
 ];
 // Shopping.vue
 

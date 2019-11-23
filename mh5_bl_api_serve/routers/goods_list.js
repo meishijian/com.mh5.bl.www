@@ -596,7 +596,7 @@ router.put("/modify_order", (req, res) => {
 
             let orderId = req.body.orderId;
             // console.log(orderId);
-            
+
             if (!orderId) {
                 return res.json({
                     "code": 400,
@@ -615,6 +615,290 @@ router.put("/modify_order", (req, res) => {
                     "code": 200
                 })
             })
+        } catch (err) {
+            return res.json({
+                "code": 400,
+                "error": "令牌无效!"
+            })
+        }
+    }
+})
+
+// 订单 列表
+router.get("/order_list", (req, res) => {
+    // 获取令牌
+    let token = req.headers.authorization;
+    // console.log(token);
+
+    // 判断有没有令牌  没有令牌的话 返回 令牌不存在
+    if (token === undefined) {
+        return res.json({
+            "code": 400,
+            "error": "令牌不存在!"
+        })
+    } else {
+        // 如果令牌存在  那么就解析令牌 解析令牌的时候自己会判断 不会写的话，去npm里查询 jsonwebtoken  因为现在解析的是 令牌
+        // invalid token - synchronous
+        try {
+            // 先截取 token 字符串 因为添加 token 的时候 我们 自己 多加了 7个字符
+            token = token.substring(7);
+            // console.log(token);
+
+            // 如果解析失败 就会错误， 解析成功 就会把之前放的数据 解析出来 用户ID
+            let decoded = jsonwebtoken.verify(token, config.jwt.key);
+            // console.log(decoded.id);
+            // 订单状态  0 全部 ，  1待付款 ，  2待收货 ，  3待评价
+            //  下单的状态：  0：未支付    1：已支付，待发货      2：已发货，待收货    3：已收货  未评价   4：已评价  5 ：退款    6：取消  7：完成
+            let list_id = req.query.list_id;
+            // console.log(list_id);
+            if (!list_id) {
+                return res.json({
+                    "code": 400,
+                    "error": "参数不能为空"
+                })
+            }
+            if (list_id == 0) {
+                list_id = "4,5,6,7";
+            } else if (list_id == 1) {
+                list_id = 0;
+            } else if (list_id == 2) {
+                list_id = 2;
+            } else if (list_id == 3) {
+                list_id = 3;
+            }
+            // mysql
+            let mysql = `SELECT id,order_sn,total_price,addtime FROM bl_orders WHERE user_id = ${decoded.id} AND status in (${list_id})`;
+            db.query(mysql, (error, result) => {
+                if (error) return res.json({
+                    "code": 400,
+                    "error": error
+                })
+                if (result.length == 0) {
+                    return res.json({
+                        "code": 200,
+                        "data": result
+                    })
+                }
+                let str = [];
+                result.forEach(element => {
+                    str.push(element.id)
+                });
+                // console.log(str);
+                let mysql = `SELECT id,goods_name,goods_image,price,buy_count,order_id FROM bl_order_goods WHERE order_id in (${str})`
+                db.query(mysql, (error, result1) => {
+                    if (error) return res.json({
+                        "code": 400,
+                        "error": error
+                    })
+                    // console.log(result);
+                    // 数组 二维
+                    let arr = [];
+                    // 代 存器
+                    let strData = [];
+                    str.forEach((element, i) => {
+                        result1.forEach((item, index) => {
+                            if (element == item.order_id) {
+                                item.order_sn = result[i].order_sn;
+                                item.total_price = result[i].total_price;
+                                item.addtime = result[i].addtime;
+                                strData.push(item)
+                            }
+                        });
+                        // console.log(strData);
+                        arr.push(strData);
+                        strData = [];
+                    });
+                    res.json({
+                        "code": 200,
+                        "data": arr
+                    })
+                })
+
+            })
+        } catch (err) {
+            return res.json({
+                "code": 400,
+                "error": "令牌无效!"
+            })
+        }
+    }
+})
+
+// 取消订单 cancel
+router.get("/order_cancel", (req, res) => {
+    // 获取令牌
+    let token = req.headers.authorization;
+    // console.log(token);
+
+    // 判断有没有令牌  没有令牌的话 返回 令牌不存在
+    if (token === undefined) {
+        return res.json({
+            "code": 400,
+            "error": "令牌不存在!"
+        })
+    } else {
+        // 如果令牌存在  那么就解析令牌 解析令牌的时候自己会判断 不会写的话，去npm里查询 jsonwebtoken  因为现在解析的是 令牌
+        // invalid token - synchronous
+        try {
+            // 先截取 token 字符串 因为添加 token 的时候 我们 自己 多加了 7个字符
+            token = token.substring(7);
+            // console.log(token);
+
+            // 如果解析失败 就会错误， 解析成功 就会把之前放的数据 解析出来 用户ID
+            let decoded = jsonwebtoken.verify(token, config.jwt.key);
+            // console.log(decoded.id);
+            let order_id = req.query.order_id;
+
+            let mysql = `UPDATE bl_orders SET status=6 WHERE user_id = ${decoded.id} AND id = ${order_id}`;
+            db.query(mysql, (error, result) => {
+                if (error) return res.json({
+                    "code": 400,
+                    "error": error
+                })
+                res.json({
+                    "code": 200,
+                    "message": "取消订单成功!"
+                })
+            })
+
+        } catch (err) {
+            return res.json({
+                "code": 400,
+                "error": "令牌无效!"
+            })
+        }
+    }
+})
+
+// 确认收货 receiving
+router.get("/order_receiving", (req, res) => {
+    // 获取令牌
+    let token = req.headers.authorization;
+    // console.log(token);
+
+    // 判断有没有令牌  没有令牌的话 返回 令牌不存在
+    if (token === undefined) {
+        return res.json({
+            "code": 400,
+            "error": "令牌不存在!"
+        })
+    } else {
+        // 如果令牌存在  那么就解析令牌 解析令牌的时候自己会判断 不会写的话，去npm里查询 jsonwebtoken  因为现在解析的是 令牌
+        // invalid token - synchronous
+        try {
+            // 先截取 token 字符串 因为添加 token 的时候 我们 自己 多加了 7个字符
+            token = token.substring(7);
+            // console.log(token);
+
+            // 如果解析失败 就会错误， 解析成功 就会把之前放的数据 解析出来 用户ID
+            let decoded = jsonwebtoken.verify(token, config.jwt.key);
+            // console.log(decoded.id);
+            let order_id = req.query.order_id;
+
+            let mysql = `UPDATE bl_orders SET status=3 WHERE user_id = ${decoded.id} AND id = ${order_id}`;
+            db.query(mysql, (error, result) => {
+                if (error) return res.json({
+                    "code": 400,
+                    "error": error
+                })
+                res.json({
+                    "code": 200,
+                    "message": "收货成功!"
+                })
+            })
+
+        } catch (err) {
+            return res.json({
+                "code": 400,
+                "error": "令牌无效!"
+            })
+        }
+    }
+})
+
+// 退货 retreat
+router.get("/order_retreat", (req, res) => {
+    // 获取令牌
+    let token = req.headers.authorization;
+    // console.log(token);
+
+    // 判断有没有令牌  没有令牌的话 返回 令牌不存在
+    if (token === undefined) {
+        return res.json({
+            "code": 400,
+            "error": "令牌不存在!"
+        })
+    } else {
+        // 如果令牌存在  那么就解析令牌 解析令牌的时候自己会判断 不会写的话，去npm里查询 jsonwebtoken  因为现在解析的是 令牌
+        // invalid token - synchronous
+        try {
+            // 先截取 token 字符串 因为添加 token 的时候 我们 自己 多加了 7个字符
+            token = token.substring(7);
+            // console.log(token);
+
+            // 如果解析失败 就会错误， 解析成功 就会把之前放的数据 解析出来 用户ID
+            let decoded = jsonwebtoken.verify(token, config.jwt.key);
+            // console.log(decoded.id);
+            let order_id = req.query.order_id;
+
+            let mysql = `UPDATE bl_orders SET status=5 WHERE user_id = ${decoded.id} AND id = ${order_id}`;
+            db.query(mysql, (error, result) => {
+                if (error) return res.json({
+                    "code": 400,
+                    "error": error
+                })
+                res.json({
+                    "code": 200,
+                    "message": "退货成功!"
+                })
+            })
+
+        } catch (err) {
+            return res.json({
+                "code": 400,
+                "error": "令牌无效!"
+            })
+        }
+    }
+})
+
+// 评价 evaluation
+router.get("/order_evaluation", (req, res) => {
+    // 获取令牌
+    let token = req.headers.authorization;
+    // console.log(token);
+
+    // 判断有没有令牌  没有令牌的话 返回 令牌不存在
+    if (token === undefined) {
+        return res.json({
+            "code": 400,
+            "error": "令牌不存在!"
+        })
+    } else {
+        // 如果令牌存在  那么就解析令牌 解析令牌的时候自己会判断 不会写的话，去npm里查询 jsonwebtoken  因为现在解析的是 令牌
+        // invalid token - synchronous
+        try {
+            // 先截取 token 字符串 因为添加 token 的时候 我们 自己 多加了 7个字符
+            token = token.substring(7);
+            // console.log(token);
+
+            // 如果解析失败 就会错误， 解析成功 就会把之前放的数据 解析出来 用户ID
+            let decoded = jsonwebtoken.verify(token, config.jwt.key);
+            // console.log(decoded.id);
+            let order_id = req.query.order_id;
+
+            let mysql = `UPDATE bl_orders SET status=7 WHERE user_id = ${decoded.id} AND id = ${order_id}`;
+            db.query(mysql, (error, result) => {
+                if (error) return res.json({
+                    "code": 400,
+                    "error": error
+                })
+                res.json({
+                    "code": 200,
+                    "message": "评价成功!"
+                })
+            })
+
         } catch (err) {
             return res.json({
                 "code": 400,

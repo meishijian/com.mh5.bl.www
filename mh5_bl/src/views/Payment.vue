@@ -81,7 +81,7 @@ export default {
         })
         .then(res => {
           //   console.log(res);
-          this.$router.push("/myorder");
+          this.$router.push("/myorder/2");
         });
     }
   }

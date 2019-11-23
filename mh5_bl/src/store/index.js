@@ -11,7 +11,7 @@ export default new Vuex.Store({
 
     getInfoData(state, data) {
       state.infoData = data
-      
+
     }
   },
   actions: {

@@ -164,31 +164,31 @@
       </van-grid>
       <!-- 收货 -->
       <van-grid :column-num="5" class="van_grid_ji">
-        <van-grid-item icon="paid" text="待付款" to="/myorder">
+        <van-grid-item icon="paid" text="待付款" to="/myorder/1">
           <div slot="text">
             <p class="paid_p">待付款</p>
             <span class="paid_p_i" v-if="statusData.payment > 0">{{statusData.payment}}</span>
           </div>
         </van-grid-item>
-        <van-grid-item icon="logistics" text="待收货" to="/myorder">
+        <van-grid-item icon="logistics" text="待收货" to="/myorder/2">
           <div slot="text">
             <p class="paid_p">待收货</p>
             <span class="paid_p_i" v-if="statusData.receiving >0">{{statusData.receiving}}</span>
           </div>
         </van-grid-item>
-        <van-grid-item icon="comment-o" text="待评价" to="/myorder">
+        <van-grid-item icon="comment-o" text="待评价" to="/myorder/3">
           <div slot="text">
             <p class="paid_p">待评价</p>
             <span class="paid_p_i" v-if="statusData.evaluate > 0">{{statusData.evaluate}}</span>
           </div>
         </van-grid-item>
-        <van-grid-item icon="balance-pay" text="售后" to="/myorder">
+        <van-grid-item icon="balance-pay" text="售后">
           <div slot="text">
             <p class="paid_p">售后</p>
             <span class="paid_p_i" v-if="statusData.sale > 0">{{statusData.sale}}</span>
           </div>
         </van-grid-item>
-        <van-grid-item icon="description" text="我的订单" to="/myorder"></van-grid-item>
+        <van-grid-item icon="description" text="我的订单" to="/myorder/0"></van-grid-item>
       </van-grid>
 
       <!-- 银行卡活动 -->
@@ -274,7 +274,10 @@
       <van-tabbar-item icon="wap-home-o" to="/">首页</van-tabbar-item>
       <van-tabbar-item icon="coupon-o" to="/class">分类</van-tabbar-item>
       <van-tabbar-item icon="shopping-cart-o" to="/shopping">
-        <span class="paid_p_span">{{JSON.parse(infoData).length}}</span>购物车
+        <span
+          class="paid_p_span"
+          v-if="JSON.parse(infoData).length == 0"
+        >{{JSON.parse(infoData).length}}</span>购物车
       </van-tabbar-item>
       <van-tabbar-item icon="manager-o" to="/me">我的</van-tabbar-item>
     </van-tabbar>

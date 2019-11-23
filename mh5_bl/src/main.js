@@ -35,6 +35,31 @@ axios.interceptors.request.use(config => {
 });
 
 
+// 全局 过滤器
+Vue.filter("dateFormat", (originVal) => {
+  // console.log(originVal);
+  // 1574445164416194193
+  const data = new Date(originVal * 1000);
+  // console.log(data);
+  // console.log(data);
+  // 年
+  const y = data.getFullYear();
+  // 月
+  const m = (data.getMonth() + 1).toLocaleString().padStart(2, '0');
+  // 日
+  const d = data.getDate().toLocaleString().padStart(2, '0');
+  // 小时
+  const hh = data.getHours().toLocaleString().padStart(2, '0');
+  // 分
+  const mm = data.getMinutes().toLocaleString().padStart(2, '0');
+  // 秒
+  const ss = data.getSeconds().toLocaleString().padStart(2, '0');
+  // console.log(hh);
+
+  // 返回
+  return `${y}-${m}-${d} ${hh}:${mm}:${ss}`;
+
+})
 new Vue({
   router,
   store,

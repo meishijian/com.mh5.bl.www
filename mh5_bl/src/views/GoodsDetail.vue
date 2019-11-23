@@ -102,13 +102,65 @@
 
     <van-goods-action class="goods_action">
       <van-goods-action-icon icon="chat-o">客服</van-goods-action-icon>
-      <van-goods-action-icon icon="cart-o" @click="shoping_click">购物车</van-goods-action-icon>
-      <van-goods-action-button type="warning" @click="sorry">加入购物车</van-goods-action-button>
-      <van-goods-action-button type="danger" @click="sorry">立即购买</van-goods-action-button>
+      <van-goods-action-icon
+        icon="cart-o"
+        @click="shoping_click"
+        :info="JSON.parse(infoData).length == false ? '' : JSON.parse(infoData).length"
+      >购物车</van-goods-action-icon>
+      <van-goods-action-button type="warning" @click="sku_shows">加入购物车</van-goods-action-button>
+      <van-goods-action-button type="danger" @click="sku_sorrys">立即购买</van-goods-action-button>
     </van-goods-action>
+    <!-- 加入购物车 -->
+    <van-popup
+      v-model="sku_show"
+      :round="true"
+      closeable
+      position="bottom"
+      :style="{ height: '60%' }"
+      class="popup"
+    >
+      <van-panel :icon="goodsDetail.image" :title="'￥' + goodsDetail.price" desc="有货"></van-panel>
+      <van-row gutter="110" class="row_gutter">
+        <van-col span="13" class="row_col_one">
+          数量
+          <span class="row_col_one_span">每单限购50件</span>
+        </van-col>
+        <van-col span="10">
+          <van-stepper v-model="stepper_value" max="50" />
+        </van-col>
+      </van-row>
+      <van-button
+        class="button_large"
+        size="large"
+        type="warning"
+        @click="addShop(goodsDetail.id)"
+      >确定</van-button>
+    </van-popup>
+    <!-- 立即购买 -->
+    <van-popup
+      v-model="sku_sorry"
+      :round="true"
+      closeable
+      position="bottom"
+      :style="{ height: '60%' }"
+      class="popup"
+    >
+      <van-panel :icon="goodsDetail.image" :title="'￥' + goodsDetail.price" desc="有货"></van-panel>
+      <van-row gutter="110" class="row_gutter">
+        <van-col span="13" class="row_col_one">
+          数量
+          <span class="row_col_one_span">每单限购50件</span>
+        </van-col>
+        <van-col span="10">
+          <van-stepper v-model="sorry_value" max="50" />
+        </van-col>
+      </van-row>
+      <van-button class="button_large" size="large" type="warning" @click="orderSorry">确定</van-button>
+    </van-popup>
   </div>
 </template>
-  <script>
+<script>
+import { mapState, mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -137,24 +189,35 @@ export default {
           // ....
         }
       },
-
       // 图标默认显示true
       icon: true,
       // 商品数据
       goodsDetail: [],
       // 热门商品
       commodity: [],
-
       // 选择地址
       show: false,
       actions: [
         { name: "选项" },
         { name: "选项" },
         { name: "选项", subname: "描述信息" }
-      ]
+      ],
+      // 加入购物车
+      sku_show: false,
+      // 加入购物车 步进器
+      stepper_value: 1,
+      // 立即购买
+      sku_sorry: false,
+      // 加入购物车 步进器
+      sorry_value: 1
     };
   },
   methods: {
+    ...mapMutations(["getInfoData"]),
+    sorry() {},
+    sku_shows() {
+      this.sku_show = true;
+    },
     // 点击箭头返回
     onClickLeft() {
       window.history.back(-1);
@@ -195,7 +258,7 @@ export default {
     address() {
       this.show = true;
     },
-    sorry() {},
+
     // 选择地址 取消
     onCancel() {
       this.show = false;
@@ -203,6 +266,78 @@ export default {
     // 跳转到 购物车
     shoping_click() {
       this.$router.push("/shopping");
+    },
+    // 加入购物车
+    addShop(id) {
+      // 成功提示
+      // this.$toast("提示文案");
+      this.$toast.success("添加商品成功");
+      // console.log(id);
+      // 把id从浏览器取出来
+      let goods_id = localStorage.getItem("goods_id");
+      // 判断 添加数据的第一条是不是为Null
+      if (goods_id == null) {
+        // 定义一个空数组
+        (goods_id = []),
+          // 把需要的Id 数据放进去
+          goods_id.push(id);
+      } else {
+        // 如果有数据的话 就转换成数组形式
+        goods_id = JSON.parse(goods_id);
+        // 再把需要的id  push进去
+        goods_id.push(id);
+        // 防止重复
+        goods_id = Array.from(new Set(goods_id));
+      }
+      // 最后把数据放进浏览器  字符串形式
+      localStorage.setItem("goods_id", JSON.stringify(goods_id));
+
+      // 把cart 从浏览器取出
+      let cart = localStorage.getItem("cart");
+      // 添加数据 要判断第一条是不是null
+      if (cart === null) {
+        // 定义一个空数组
+        cart = [];
+        // 把需要的id数据放进去
+        cart[id] = {
+          // 默认勾选
+          ischk: false,
+          // 总数量
+          count: this.stepper_value
+        };
+      } else {
+        // 有数据的时候 转换成数组形式
+        cart = JSON.parse(cart);
+        // 没有数据就添加默认数据
+        if (cart[id] === null || cart[id] == undefined) {
+          // 数据添加
+          cart[id] = {
+            // 默认勾选
+            ischk: false,
+            // 总数量
+            count: this.stepper_value
+          };
+        } else {
+          // 数量加加
+          cart[id].count += this.stepper_value;
+        }
+      }
+      // 最后把 cart 添加到浏览器 字符串形式
+      localStorage.setItem("cart", JSON.stringify(cart));
+      /**---------------购物车的数量-------------------------*/
+      // console.log(id);
+      // 购物车的数量 也就是 添加了多少 商品的长度
+      this.getInfoData(goods_id.length);
+    },
+    // 立即购买
+    sku_sorrys() {
+      this.sku_sorry = true;
+    },
+    //
+    orderSorry() {
+      localStorage.setItem("orderSorry_id", this.goodsDetail.id);
+      localStorage.setItem("orderSorry_cart", this.sorry_value);
+      this.$router.push("/orderSorry");
     }
   },
   created() {
@@ -212,6 +347,10 @@ export default {
     setTimeout(() => {
       this.commodityList();
     }, 500);
+  },
+  computed: {
+    // 隱射
+    ...mapState(["infoData"])
   }
 };
 </script>
@@ -223,7 +362,6 @@ export default {
     // height: 80px;
     // border: 1px solid olive;
   }
-
   .dahang_tabbar {
     background-color: pink;
     height: 60px;
@@ -308,6 +446,51 @@ export default {
     line-height: 40px;
     margin-left: 109px;
     margin-top: 19px;
+  }
+  .paid_p_span {
+    position: absolute;
+    top: -29px;
+    right: -1px;
+    display: inline-block;
+    background-color: #ff6f6f;
+    border-radius: 50%;
+    width: 14px;
+    height: 15px;
+    line-height: 15px;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+  }
+  .popup {
+    overflow-x: hidden;
+    .van-cell {
+      height: 160px;
+    }
+    .van-icon__image {
+      width: 150px;
+      height: 150px;
+    }
+    .van-image {
+      top: 0;
+    }
+    .van-cell__title {
+      margin-top: 18px;
+    }
+  }
+  .row_gutter {
+    margin-top: 20px;
+    .row_col_one {
+      margin-left: 10px;
+      font-size: 13px;
+      .row_col_one_span {
+        margin-left: 10px;
+        color: #ff7373;
+      }
+    }
+  }
+  .button_large {
+    margin-top: 142px;
+    background-color: #ff6f6f;
   }
 }
 
