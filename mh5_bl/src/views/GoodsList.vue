@@ -91,7 +91,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["getInfoData"]),
+    ...mapMutations(["getInfoData", "getId"]),
     // 左边箭头返回
     onClickLeft() {
       window.history.back(-1);
@@ -162,6 +162,7 @@ export default {
       localStorage.setItem("list_id", id);
       this.$router.push("/goodsDetail");
     },
+    // 添加到 购物车
     addShop(id) {
       // 成功提示
       // this.$toast("提示文案");
@@ -222,7 +223,9 @@ export default {
       // console.log(id);
       // 购物车的数量 也就是 添加了多少 商品的长度
       this.getInfoData(goods_id.length);
+      this.getId(goods_id.length);
     },
+
     // 跳转到 购物车
     shoping_click() {
       this.$router.push("/shopping");

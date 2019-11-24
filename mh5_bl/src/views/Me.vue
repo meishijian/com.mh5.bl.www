@@ -357,10 +357,9 @@ export default {
         if (res.data.code !== 200) {
           return;
         }
-
         this.integral = res.data.data.integral;
         this.nickname = res.data.data.nickname;
-        this.fileList.url = res.data.data.face;
+        this.fileList[0].url = res.data.data.face;
       });
     },
     // 订单管理 显示

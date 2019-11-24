@@ -140,3 +140,7 @@
     background-color: #fff;
 }
 
+.myinfo .van-uploader__preview-image {
+    border-radius: 50% !important;
+    overflow: initial !important;
+}

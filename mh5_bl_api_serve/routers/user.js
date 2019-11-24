@@ -138,7 +138,7 @@ router.get("/order_status", (req, res) => {
 
 
 // 上传头像
-router.post("/pic_upload", multer().single("pic"), (req, res) => {
+router.post("/user_pic_upload", multer().single("pic"), (req, res) => {
     // console.log(req.file);
     fs.writeFileSync(path.join(__dirname, picAddress + req.file.originalname), req.file.buffer);
     // 写入成功
@@ -156,6 +156,59 @@ router.get("/public/image/*", (req, res) => {
 
 })
 
+// 设置用户显示信息
+router.get("/user_display_all", (req, res) => {
+    // 获取令牌
+    let token = req.headers.authorization;
+    // console.log(token);
+
+    // 判断有没有令牌  没有令牌的话 返回 令牌不存在
+    if (token === undefined) {
+        return res.json({
+            "code": 400,
+            "error": "令牌不存在!"
+        })
+    } else {
+        // 如果令牌存在  那么就解析令牌 解析令牌的时候自己会判断 不会写的话，去npm里查询 jsonwebtoken  因为现在解析的是 令牌
+        // invalid token - synchronous
+        try {
+            // 先截取 token 字符串 因为添加 token 的时候 我们 自己 多加了 7个字符
+            token = token.substring(7);
+            // console.log(token);
+
+            // 如果解析失败 就会错误， 解析成功 就会把之前放的数据 解析出来 用户ID
+            let decoded = jsonwebtoken.verify(token, config.jwt.key);
+            // console.log(decoded.id);
+            let mysql = `SELECT id,nickname,face,sex,birth,preference FROM bl_users WHERE id= ${decoded.id}`;
+            db.query(mysql, (error, result) => {
+                if (error) return res.json({
+                    "code": 400,
+                    "error": error
+                })
+                result[0].face = fileBaseUrl + result[0].face;
+                if (result[0].sex == null) {
+                    result[0].sex = ''
+                } else if (result[0].sex == 0) {
+                    result[0].sex = '保密'
+                } else if (result[0].sex == 1) {
+                    result[0].sex = '男'
+                } else if (result[0].sex == 2) {
+                    result[0].sex = '女'
+                }
+                // console.log(result[0]);
+                res.json({
+                    "code": 200,
+                    "data": result[0]
+                })
+            })
+        } catch (err) {
+            return res.json({
+                "code": 400,
+                "error": "令牌无效!"
+            })
+        }
+    }
+})
 
 // 导出路由
 module.exports = router;
