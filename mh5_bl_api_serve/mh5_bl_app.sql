@@ -11,7 +11,7 @@
  Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 23/11/2019 03:49:02
+ Date: 24/11/2019 17:49:02
 */
 
 SET NAMES utf8mb4;
@@ -32,7 +32,7 @@ CREATE TABLE `bl_address`  (
   `isdefault` tinyint(3) UNSIGNED NOT NULL COMMENT '是否默认，0：不是  1：是',
   `user_id` int(10) UNSIGNED NOT NULL COMMENT '用户ID 关联shop_users 表中的id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bl_address
@@ -315,16 +315,16 @@ CREATE TABLE `bl_goods`  (
 -- ----------------------------
 -- Records of bl_goods
 -- ----------------------------
-INSERT INTO `bl_goods` VALUES (1, 1, 'Kiehls 科颜氏 高保湿面霜 125ml', 495.00, 'https://img16.iblimg.com/mp-175/mp/goods/1150495629_200x200.jpg', 4988, '跨境', 200, 44, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
-INSERT INTO `bl_goods` VALUES (2, 1, 'SISLEY 希思黎 全能乳液 125ml', 1516.00, 'https://img17.iblimg.com/mp-175/mp/goods/1003364565_200x200.jpg', 4963, '跨境', 100, 44, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_4.jpg,goods_6.jpg');
+INSERT INTO `bl_goods` VALUES (1, 1, 'Kiehls 科颜氏 高保湿面霜 125ml', 495.00, 'https://img16.iblimg.com/mp-175/mp/goods/1150495629_200x200.jpg', 4970, '跨境', 200, 44, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
+INSERT INTO `bl_goods` VALUES (2, 1, 'SISLEY 希思黎 全能乳液 125ml', 1516.00, 'https://img17.iblimg.com/mp-175/mp/goods/1003364565_200x200.jpg', 4960, '跨境', 100, 44, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_4.jpg,goods_6.jpg');
 INSERT INTO `bl_goods` VALUES (3, 1, 'SK-II 大红瓶面霜 第六代肌源赋活修护精华霜 80g', 1276.00, 'https://img17.iblimg.com/mp-175/mp/goods/1016509789_200x200.jpg', 4958, '跨境', 410, 44, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
-INSERT INTO `bl_goods` VALUES (4, 1, 'La Prairie 莱珀妮 鱼子精华充盈面霜 60ml', 4516.00, 'http://img16.iblimg.com/mp-175/mp/goods/998064083_200x200.jpg', 4990, '跨境', 75, 44, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
+INSERT INTO `bl_goods` VALUES (4, 1, 'La Prairie 莱珀妮 鱼子精华充盈面霜 60ml', 4516.00, 'http://img16.iblimg.com/mp-175/mp/goods/998064083_200x200.jpg', 4989, '跨境', 75, 44, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
 INSERT INTO `bl_goods` VALUES (5, 1, 'LA MER/海蓝之谜 精华面霜 经典传奇面霜 30ml 中国香港 直邮', 1346.00, 'https://Img.iblimg.com/photo-42/3030/1197463230_200x200.jpg', 4951, '跨境', 41, 44, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
 INSERT INTO `bl_goods` VALUES (6, 1, 'POLA宝丽 B.A保湿滋润乳液 80ml 中国香港直邮', 1698.00, 'https://Img.iblimg.com/photo-42/3030/1895449770_200x200.jpg', 4905, '跨境', 0, 44, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
 INSERT INTO `bl_goods` VALUES (7, 1, 'LA MER 海蓝之谜 精华面霜 60ml', 2506.00, 'https://Img33.iblimg.com/photo-3/1000/468592171_200x200.jpg', 4996, '跨境', 0, 44, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
 INSERT INTO `bl_goods` VALUES (8, 1, '【百联专柜直送】 雅漾 修复霜 100ml', 268.00, 'https://img18.iblimg.com/mp-177/mp/goods/1010143200_200x200.jpg', 5000, '自营百股', 0, 44, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
 INSERT INTO `bl_goods` VALUES (9, 1, 'Blackmores 澳佳宝 维生素E保湿润肤霜 冰冰霜 50g2 澳洲原装进口', 115.00, 'https://img20.iblimg.com/mp-176/mp/goods/1358765487_200x200.jpg', 5000, '跨境', 3213, 44, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
-INSERT INTO `bl_goods` VALUES (10, 1, 'Kao 花王 Curel 珂润 润浸保湿面霜 40g 日本原装进口', 194.00, 'https://Img.iblimg.com/photo-42/3030/1842548886_200x200.jpg', 5000, '跨境', 123, 44, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
+INSERT INTO `bl_goods` VALUES (10, 1, 'Kao 花王 Curel 珂润 润浸保湿面霜 40g 日本原装进口', 194.00, 'https://Img.iblimg.com/photo-42/3030/1842548886_200x200.jpg', 4996, '跨境', 123, 44, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
 INSERT INTO `bl_goods` VALUES (11, 1, '【百联专柜货源】资生堂(SHISEIDO)新透白美肌夜间祛斑柔护乳75ml 乳液', 520.00, 'https://Img.iblimg.com/photo-42/3030/1047405294_200x200.jpg', 5000, '自营百股', 0, 44, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
 INSERT INTO `bl_goods` VALUES (12, 1, 'POLA宝丽 B.A滋养美容面霜膏 30g 中国香港直邮', 2680.00, 'https://img18.iblimg.com/mp-175/mp/goods/2086783014_200x200.jpg', 5000, '跨境', 0, 44, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
 INSERT INTO `bl_goods` VALUES (13, 1, 'CPB肌肤之钥光采夜间修护霜50ml', 968.00, 'https://img18.iblimg.com/mp-175/mp/goods/2087594145_200x200.jpg', 5000, '自营百股', 321, 44, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
@@ -383,7 +383,7 @@ INSERT INTO `bl_goods` VALUES (65, 1, 'Curel珂润 2号深层润净保湿补水�
 INSERT INTO `bl_goods` VALUES (66, 1, '悦木之源 韦博士灵芝焕能精华面霜 50ml', 620.00, 'https://img18.iblimg.com/mp-175/mp/goods/986513940_200x200.jpg', 5000, '自营百股', 28, 2, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
 INSERT INTO `bl_goods` VALUES (67, 1, 'Erno Laszlo奥伦纳素 活力润泽晚霜豆腐霜 清爽保湿 50ml 中国香港直邮', 781.00, 'https://img20.iblimg.com/mp-175/mp/goods/871298347_200x200.jpg', 5000, '跨境', 28, 3, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
 INSERT INTO `bl_goods` VALUES (68, 1, '【百联专柜直送】 悦木之源 咖啡因水亮嘟嘟凝乳 50ml', 295.00, 'https://img19.iblimg.com/mp-177/mp/goods/283535522_200x200.jpg', 5000, '自营百股', 28, 3, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
-INSERT INTO `bl_goods` VALUES (69, 1, '【百联专柜直送】 SKII 金钻臻致升华修护霜 50g', 2750.00, 'https://img18.iblimg.com/mp-175/mp/goods/698867244_200x200.jpg', 5000, '自营百股', 28, 3, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
+INSERT INTO `bl_goods` VALUES (69, 1, '【百联专柜直送】 SKII 金钻臻致升华修护霜 50g', 2750.00, 'https://img18.iblimg.com/mp-175/mp/goods/698867244_200x200.jpg', 4999, '自营百股', 28, 3, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
 INSERT INTO `bl_goods` VALUES (70, 1, '【百联专柜货源】雅诗兰黛 新弹性紧实晚霜 50ML', 880.00, 'https://img.iblimg.com/photo-42/1000/1597825496_200x200.jpg', 5000, '自营百股', 28, 3, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
 INSERT INTO `bl_goods` VALUES (71, 1, '【百联专柜直送】 资生堂 鲜润赋活日乳 75ml', 450.00, 'https://img18.iblimg.com/mp-177/mp/goods/716419842_200x200.jpg', 5000, '自营百股', 28, 3, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
 INSERT INTO `bl_goods` VALUES (72, 1, '倩碧 眼部护理水凝霜 15ml 水磁场眼霜', 390.00, 'https://img33.iblimg.com/goods-18/1000/2016/10/SP_1000_100027024906_01_10006.jpg', 5000, '自营百股', 28, 3, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
@@ -433,7 +433,7 @@ INSERT INTO `bl_goods` VALUES (115, 1, '丝芙兰 柠檬籽透亮元气霜 50ml'
 INSERT INTO `bl_goods` VALUES (116, 1, '娇韵诗 焕颜弹力日霜(滋润型) 50ml', 630.00, 'https://img16.iblimg.com/mp-175/mp/goods/53304790_200x200.jpg', 5000, '自营百股', 28, 4, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
 INSERT INTO `bl_goods` VALUES (117, 1, 'COSME DECORTE 黛珂 牛油果乳液 150ml', 464.00, 'https://img16.iblimg.com/mp-175/mp/goods/1245358462_200x200.jpg', 5000, '跨境', 28, 4, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
 INSERT INTO `bl_goods` VALUES (118, 1, 'Fresh馥蕾诗 意大利白泥控油净肤保湿乳 50ml', 306.00, 'https://img17.iblimg.com/mp-175/mp/goods/102998372_200x200.jpg', 5000, '自营百股', 28, 4, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
-INSERT INTO `bl_goods` VALUES (119, 1, '【百联专柜直送】 娇韵诗 清透润白淡斑修护晚安霜 50ml', 640.00, 'https://img19.iblimg.com/mp-175/mp/goods/1214349034_200x200.jpg', 5000, '自营百股', 28, 4, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
+INSERT INTO `bl_goods` VALUES (119, 1, '【百联专柜直送】 娇韵诗 清透润白淡斑修护晚安霜 50ml', 640.00, 'https://img19.iblimg.com/mp-175/mp/goods/1214349034_200x200.jpg', 4999, '自营百股', 28, 4, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
 INSERT INTO `bl_goods` VALUES (120, 1, '伊思 晶钻蜗牛再生乳液II 滋润型 140ml 保税区邮', 152.00, 'https://img20.iblimg.com/mp-175/mp/goods/924848520_200x200.jpg', 5000, '跨境', 28, 4, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
 INSERT INTO `bl_goods` VALUES (121, 2, 'SKII 神仙水经典礼盒 295ml（SKII 护肤精华露230ml+SKII 嫩肤清莹露30ml+SKII 护肤洁面霜20g+SKII 微肌因赋活修护精华霜15g）神仙水 大红瓶', 1540.00, 'https://img18.iblimg.com/mp-175/mp/goods/547701713_200x200.jpg', 5000, '自营百股', 28, 4, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
 INSERT INTO `bl_goods` VALUES (122, 2, '【百联专柜直送】 后 天气丹花献光彩紧颜系列礼盒7件套 333ml', 1540.00, 'https://img17.iblimg.com/mp-175/mp/goods/772026683_200x200.jpg', 5000, '自营百股', 456, 4, 'https://img17.iblimg.com/mp-175/mp/desc/1194115191.jpg', 'goods_1.jpg,goods_2.jpg,goods_3.jpg');
@@ -1972,7 +1972,7 @@ CREATE TABLE `bl_goods_sku`  (
   `price` decimal(10, 2) NULL DEFAULT NULL COMMENT '每个属性的价格',
   `goods_pic` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '商品图片',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bl_goods_sku
@@ -1992,7 +1992,7 @@ CREATE TABLE `bl_order_goods`  (
   `goods_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '商品的名称',
   `goods_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '商品的图片',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 124 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bl_order_goods
@@ -2105,6 +2105,22 @@ INSERT INTO `bl_order_goods` VALUES (105, 4, 1, 68, 4516.00, 'La Prairie 莱珀�
 INSERT INTO `bl_order_goods` VALUES (106, 6, 1, 69, 1698.00, 'POLA宝丽 B.A保湿滋润乳液 80ml 中国香港直邮', 'https://Img.iblimg.com/photo-42/3030/1895449770_200x200.jpg');
 INSERT INTO `bl_order_goods` VALUES (107, 7, 1, 70, 2506.00, 'LA MER 海蓝之谜 精华面霜 60ml', 'https://Img33.iblimg.com/photo-3/1000/468592171_200x200.jpg');
 INSERT INTO `bl_order_goods` VALUES (108, 7, 1, 71, 2506.00, 'LA MER 海蓝之谜 精华面霜 60ml', 'https://Img33.iblimg.com/photo-3/1000/468592171_200x200.jpg');
+INSERT INTO `bl_order_goods` VALUES (109, 1, 8, 72, 495.00, 'Kiehls 科颜氏 高保湿面霜 125ml', 'https://img16.iblimg.com/mp-175/mp/goods/1150495629_200x200.jpg');
+INSERT INTO `bl_order_goods` VALUES (110, 2, 2, 73, 1516.00, 'SISLEY 希思黎 全能乳液 125ml', 'https://img17.iblimg.com/mp-175/mp/goods/1003364565_200x200.jpg');
+INSERT INTO `bl_order_goods` VALUES (111, 1, 1, 74, 495.00, 'Kiehls 科颜氏 高保湿面霜 125ml', 'https://img16.iblimg.com/mp-175/mp/goods/1150495629_200x200.jpg');
+INSERT INTO `bl_order_goods` VALUES (112, 1, 1, 75, 495.00, 'Kiehls 科颜氏 高保湿面霜 125ml', 'https://img16.iblimg.com/mp-175/mp/goods/1150495629_200x200.jpg');
+INSERT INTO `bl_order_goods` VALUES (113, 10, 4, 76, 194.00, 'Kao 花王 Curel 珂润 润浸保湿面霜 40g 日本原装进口', 'https://Img.iblimg.com/photo-42/3030/1842548886_200x200.jpg');
+INSERT INTO `bl_order_goods` VALUES (114, 1, 1, 77, 495.00, 'Kiehls 科颜氏 高保湿面霜 125ml', 'https://img16.iblimg.com/mp-175/mp/goods/1150495629_200x200.jpg');
+INSERT INTO `bl_order_goods` VALUES (115, 1, 1, 78, 495.00, 'Kiehls 科颜氏 高保湿面霜 125ml', 'https://img16.iblimg.com/mp-175/mp/goods/1150495629_200x200.jpg');
+INSERT INTO `bl_order_goods` VALUES (116, 1, 1, 79, 495.00, 'Kiehls 科颜氏 高保湿面霜 125ml', 'https://img16.iblimg.com/mp-175/mp/goods/1150495629_200x200.jpg');
+INSERT INTO `bl_order_goods` VALUES (117, 2, 1, 80, 1516.00, 'SISLEY 希思黎 全能乳液 125ml', 'https://img17.iblimg.com/mp-175/mp/goods/1003364565_200x200.jpg');
+INSERT INTO `bl_order_goods` VALUES (118, 1, 1, 81, 495.00, 'Kiehls 科颜氏 高保湿面霜 125ml', 'https://img16.iblimg.com/mp-175/mp/goods/1150495629_200x200.jpg');
+INSERT INTO `bl_order_goods` VALUES (119, 1, 2, 82, 495.00, 'Kiehls 科颜氏 高保湿面霜 125ml', 'https://img16.iblimg.com/mp-175/mp/goods/1150495629_200x200.jpg');
+INSERT INTO `bl_order_goods` VALUES (120, 4, 1, 83, 4516.00, 'La Prairie 莱珀妮 鱼子精华充盈面霜 60ml', 'http://img16.iblimg.com/mp-175/mp/goods/998064083_200x200.jpg');
+INSERT INTO `bl_order_goods` VALUES (121, 1, 1, 84, 495.00, 'Kiehls 科颜氏 高保湿面霜 125ml', 'https://img16.iblimg.com/mp-175/mp/goods/1150495629_200x200.jpg');
+INSERT INTO `bl_order_goods` VALUES (122, 1, 1, 85, 495.00, 'Kiehls 科颜氏 高保湿面霜 125ml', 'https://img16.iblimg.com/mp-175/mp/goods/1150495629_200x200.jpg');
+INSERT INTO `bl_order_goods` VALUES (123, 69, 1, 86, 2750.00, '【百联专柜直送】 SKII 金钻臻致升华修护霜 50g', 'https://img18.iblimg.com/mp-175/mp/goods/698867244_200x200.jpg');
+INSERT INTO `bl_order_goods` VALUES (124, 119, 1, 87, 640.00, '【百联专柜直送】 娇韵诗 清透润白淡斑修护晚安霜 50ml', 'https://img19.iblimg.com/mp-175/mp/goods/1214349034_200x200.jpg');
 
 -- ----------------------------
 -- Table structure for bl_orders
@@ -2113,7 +2129,7 @@ DROP TABLE IF EXISTS `bl_orders`;
 CREATE TABLE `bl_orders`  (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '订单基本信息表',
   `user_id` int(11) UNSIGNED NOT NULL COMMENT '用户id，关联shop_users表中的id',
-  `status` tinyint(3) UNSIGNED NULL DEFAULT 0 COMMENT '下单的状态：  0：未支付    1：已支付，待发货      2：已发货，待评价    3：已评价   4：退款    5：关闭',
+  `status` tinyint(3) UNSIGNED NULL DEFAULT 0 COMMENT '下单的状态：  0：未支付    1：已支付，待发货      2：已发货，待收货    3：已收货  未评价   4：已评价  5 ：退款    6：取消  7：完成',
   `addtime` int(11) UNSIGNED NOT NULL COMMENT '下单的时间戳',
   `order_sn` char(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '下单的 订单号',
   `shr_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '收货人的姓名',
@@ -2125,45 +2141,45 @@ CREATE TABLE `bl_orders`  (
   `total_price` decimal(10, 2) UNSIGNED NOT NULL COMMENT '商品的总价',
   `post_order_sn` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '快递单号',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 88 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bl_orders
 -- ----------------------------
-INSERT INTO `bl_orders` VALUES (1, 1, 0, 1573840017, '15738400171282682545', '账上', '17553041262', '江苏', '宿迁', '沭阳', '传智', 9447.00, NULL);
-INSERT INTO `bl_orders` VALUES (2, 1, 2, 1573840141, '15738401413945054817', '账上', '17553041262', '江苏', '宿迁', '沭阳', '传智', 9447.00, NULL);
-INSERT INTO `bl_orders` VALUES (3, 1, 0, 1573840228, '15738402281683557217', '账上', '17553041262', '江苏', '宿迁', '沭阳', '传智', 9447.00, NULL);
-INSERT INTO `bl_orders` VALUES (4, 1, 2, 1573840422, '15738404229924732354', '账上', '17553041262', '江苏', '宿迁', '沭阳', '传智', 9447.00, NULL);
-INSERT INTO `bl_orders` VALUES (5, 1, 0, 1573841507, '15738415079443956039', '账上', '17553041262', '江苏', '宿迁', '沭阳', '传智', 4332.00, NULL);
+INSERT INTO `bl_orders` VALUES (1, 1, 6, 1573840017, '15738400171282682545', '账上', '17553041262', '江苏', '宿迁', '沭阳', '传智', 9447.00, NULL);
+INSERT INTO `bl_orders` VALUES (2, 1, 7, 1573840141, '15738401413945054817', '账上', '17553041262', '江苏', '宿迁', '沭阳', '传智', 9447.00, NULL);
+INSERT INTO `bl_orders` VALUES (3, 1, 5, 1573840228, '15738402281683557217', '账上', '17553041262', '江苏', '宿迁', '沭阳', '传智', 9447.00, NULL);
+INSERT INTO `bl_orders` VALUES (4, 1, 3, 1573840422, '15738404229924732354', '账上', '17553041262', '江苏', '宿迁', '沭阳', '传智', 9447.00, NULL);
+INSERT INTO `bl_orders` VALUES (5, 1, 6, 1573841507, '15738415079443956039', '账上', '17553041262', '江苏', '宿迁', '沭阳', '传智', 4332.00, NULL);
 INSERT INTO `bl_orders` VALUES (6, 4, 0, 1573873477, '1573873477898885472', '账上', '17553041262', '江苏', '宿迁', '沭阳', '传智', 9447.00, NULL);
-INSERT INTO `bl_orders` VALUES (7, 1, 3, 1574296689, '15742966895972765589', '张三', '17553041262', '江苏', '宿迁', '沭阳', '传智', 64400.00, NULL);
-INSERT INTO `bl_orders` VALUES (8, 1, 3, 1574296710, '15742967103292530932', '张三', '17553041262', '江苏', '宿迁', '沭阳', '传智', 64400.00, NULL);
-INSERT INTO `bl_orders` VALUES (9, 1, 3, 1574298334, '15742983349035789883', '张三', '17553041262', '江苏', '宿迁', '沭阳', '传智', 64400.00, NULL);
-INSERT INTO `bl_orders` VALUES (10, 1, 5, 1574298450, '15742984502138930932', '张三', '17553041262', '江苏', '宿迁', '沭阳', '传智', 43680.00, NULL);
-INSERT INTO `bl_orders` VALUES (11, 1, 5, 1574405678, '15744056782252046321', '张三', '17553041262', '江苏', '宿迁', '沭阳', '传智', 5400.00, NULL);
-INSERT INTO `bl_orders` VALUES (12, 1, 5, 1574439523, '15744395230591794449', '张三', '17553041262', '江苏', '宿迁', '沭阳', '传智', 5400.00, NULL);
-INSERT INTO `bl_orders` VALUES (13, 1, 5, 1574439543, '15744395438884160438', '张三', '17553041262', '江苏', '宿迁', '沭阳', '传智', 5400.00, NULL);
-INSERT INTO `bl_orders` VALUES (14, 1, 5, 1574441151, '15744411516592365378', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 16240.00, NULL);
-INSERT INTO `bl_orders` VALUES (15, 1, 5, 1574441364, '15744413640015360600', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 16240.00, NULL);
-INSERT INTO `bl_orders` VALUES (16, 1, 5, 1574441381, '15744413813038168440', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2692.00, NULL);
-INSERT INTO `bl_orders` VALUES (17, 1, 5, 1574441382, '15744413829866720401', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2692.00, NULL);
-INSERT INTO `bl_orders` VALUES (18, 1, 5, 1574441393, '15744413936578034574', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2692.00, NULL);
-INSERT INTO `bl_orders` VALUES (19, 1, 5, 1574441414, '15744414147055414139', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2692.00, NULL);
-INSERT INTO `bl_orders` VALUES (20, 1, 5, 1574441451, '15744414516091307582', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2692.00, NULL);
-INSERT INTO `bl_orders` VALUES (21, 1, 5, 1574441452, '15744414528114045395', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2692.00, NULL);
-INSERT INTO `bl_orders` VALUES (22, 1, 5, 1574441466, '15744414663686082851', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2692.00, NULL);
-INSERT INTO `bl_orders` VALUES (23, 1, 5, 1574441628, '15744416280745633307', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
-INSERT INTO `bl_orders` VALUES (24, 1, 5, 1574441629, '15744416295396736957', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
-INSERT INTO `bl_orders` VALUES (25, 1, 5, 1574441629, '15744416297639055405', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
-INSERT INTO `bl_orders` VALUES (26, 1, 5, 1574441629, '15744416299231897448', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
-INSERT INTO `bl_orders` VALUES (27, 1, 5, 1574441630, '15744416300823009486', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
-INSERT INTO `bl_orders` VALUES (28, 1, 5, 1574441631, '15744416318751225154', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
-INSERT INTO `bl_orders` VALUES (29, 1, 5, 1574441639, '15744416391541010562', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
-INSERT INTO `bl_orders` VALUES (30, 1, 5, 1574441649, '157444164996963910', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
-INSERT INTO `bl_orders` VALUES (31, 1, 5, 1574443817, '15744438176898979037', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
-INSERT INTO `bl_orders` VALUES (32, 1, 5, 1574443944, '15744439444809100311', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
-INSERT INTO `bl_orders` VALUES (33, 1, 5, 1574443945, '15744439455871423162', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
-INSERT INTO `bl_orders` VALUES (34, 1, 5, 1574443946, '15744439460662015610', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
+INSERT INTO `bl_orders` VALUES (7, 1, 4, 1574296689, '15742966895972765589', '张三', '17553041262', '江苏', '宿迁', '沭阳', '传智', 64400.00, NULL);
+INSERT INTO `bl_orders` VALUES (8, 1, 7, 1574296710, '15742967103292530932', '张三', '17553041262', '江苏', '宿迁', '沭阳', '传智', 64400.00, NULL);
+INSERT INTO `bl_orders` VALUES (9, 1, 7, 1574298334, '15742983349035789883', '张三', '17553041262', '江苏', '宿迁', '沭阳', '传智', 64400.00, NULL);
+INSERT INTO `bl_orders` VALUES (10, 1, 7, 1574298450, '15742984502138930932', '张三', '17553041262', '江苏', '宿迁', '沭阳', '传智', 43680.00, NULL);
+INSERT INTO `bl_orders` VALUES (11, 1, 7, 1574405678, '15744056782252046321', '张三', '17553041262', '江苏', '宿迁', '沭阳', '传智', 5400.00, NULL);
+INSERT INTO `bl_orders` VALUES (12, 1, 7, 1574439523, '15744395230591794449', '张三', '17553041262', '江苏', '宿迁', '沭阳', '传智', 5400.00, NULL);
+INSERT INTO `bl_orders` VALUES (13, 1, 7, 1574439543, '15744395438884160438', '张三', '17553041262', '江苏', '宿迁', '沭阳', '传智', 5400.00, NULL);
+INSERT INTO `bl_orders` VALUES (14, 1, 7, 1574441151, '15744411516592365378', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 16240.00, NULL);
+INSERT INTO `bl_orders` VALUES (15, 1, 7, 1574441364, '15744413640015360600', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 16240.00, NULL);
+INSERT INTO `bl_orders` VALUES (16, 1, 7, 1574441381, '15744413813038168440', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2692.00, NULL);
+INSERT INTO `bl_orders` VALUES (17, 1, 7, 1574441382, '15744413829866720401', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2692.00, NULL);
+INSERT INTO `bl_orders` VALUES (18, 1, 7, 1574441393, '15744413936578034574', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2692.00, NULL);
+INSERT INTO `bl_orders` VALUES (19, 1, 7, 1574441414, '15744414147055414139', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2692.00, NULL);
+INSERT INTO `bl_orders` VALUES (20, 1, 7, 1574441451, '15744414516091307582', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2692.00, NULL);
+INSERT INTO `bl_orders` VALUES (21, 1, 7, 1574441452, '15744414528114045395', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2692.00, NULL);
+INSERT INTO `bl_orders` VALUES (22, 1, 7, 1574441466, '15744414663686082851', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2692.00, NULL);
+INSERT INTO `bl_orders` VALUES (23, 1, 7, 1574441628, '15744416280745633307', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
+INSERT INTO `bl_orders` VALUES (24, 1, 7, 1574441629, '15744416295396736957', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
+INSERT INTO `bl_orders` VALUES (25, 1, 6, 1574441629, '15744416297639055405', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
+INSERT INTO `bl_orders` VALUES (26, 1, 6, 1574441629, '15744416299231897448', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
+INSERT INTO `bl_orders` VALUES (27, 1, 6, 1574441630, '15744416300823009486', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
+INSERT INTO `bl_orders` VALUES (28, 1, 6, 1574441631, '15744416318751225154', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
+INSERT INTO `bl_orders` VALUES (29, 1, 6, 1574441639, '15744416391541010562', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
+INSERT INTO `bl_orders` VALUES (30, 1, 6, 1574441649, '157444164996963910', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
+INSERT INTO `bl_orders` VALUES (31, 1, 6, 1574443817, '15744438176898979037', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
+INSERT INTO `bl_orders` VALUES (32, 1, 6, 1574443944, '15744439444809100311', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
+INSERT INTO `bl_orders` VALUES (33, 1, 6, 1574443945, '15744439455871423162', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
+INSERT INTO `bl_orders` VALUES (34, 1, 6, 1574443946, '15744439460662015610', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
 INSERT INTO `bl_orders` VALUES (35, 1, 5, 1574443946, '1574443946244319600', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
 INSERT INTO `bl_orders` VALUES (36, 1, 5, 1574443946, '15744439463785682324', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
 INSERT INTO `bl_orders` VALUES (37, 1, 5, 1574443946, '15744439465385701', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
@@ -2171,36 +2187,52 @@ INSERT INTO `bl_orders` VALUES (38, 1, 5, 1574443958, '1574443958985978064', '�
 INSERT INTO `bl_orders` VALUES (39, 1, 5, 1574443960, '15744439604999341704', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
 INSERT INTO `bl_orders` VALUES (40, 1, 5, 1574443966, '15744439666153822512', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2011.00, NULL);
 INSERT INTO `bl_orders` VALUES (41, 1, 5, 1574443980, '15744439801586420376', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2011.00, NULL);
-INSERT INTO `bl_orders` VALUES (42, 1, 5, 1574444220, '15744442205035576445', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2011.00, NULL);
-INSERT INTO `bl_orders` VALUES (43, 1, 5, 1574444244, '15744442445525378505', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2011.00, NULL);
-INSERT INTO `bl_orders` VALUES (44, 1, 5, 1574444262, '15744442624149090056', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2011.00, NULL);
-INSERT INTO `bl_orders` VALUES (45, 1, 5, 1574444314, '15744443145443194877', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2011.00, NULL);
-INSERT INTO `bl_orders` VALUES (46, 1, 5, 1574444322, '1574444322224729318', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
-INSERT INTO `bl_orders` VALUES (47, 1, 5, 1574444342, '15744443427305628960', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 21534.00, NULL);
-INSERT INTO `bl_orders` VALUES (48, 1, 5, 1574444351, '1574444351208969437', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2974.00, NULL);
-INSERT INTO `bl_orders` VALUES (49, 1, 5, 1574444354, '15744443541306043357', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1698.00, NULL);
-INSERT INTO `bl_orders` VALUES (50, 1, 5, 1574444448, '15744444487438729967', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2011.00, NULL);
-INSERT INTO `bl_orders` VALUES (51, 1, 5, 1574444573, '15744445739362287863', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2011.00, NULL);
-INSERT INTO `bl_orders` VALUES (52, 1, 5, 1574444682, '15744446821117443441', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2011.00, NULL);
-INSERT INTO `bl_orders` VALUES (53, 1, 5, 1574444734, '15744447344567138244', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2011.00, NULL);
-INSERT INTO `bl_orders` VALUES (54, 1, 5, 1574444761, '15744447616324183585', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2792.00, NULL);
-INSERT INTO `bl_orders` VALUES (55, 1, 5, 1574445105, '15744451052897716526', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2792.00, NULL);
-INSERT INTO `bl_orders` VALUES (56, 1, 5, 1574445148, '1574445148244196344', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2792.00, NULL);
-INSERT INTO `bl_orders` VALUES (57, 1, 5, 1574445164, '1574445164416194193', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2792.00, NULL);
-INSERT INTO `bl_orders` VALUES (58, 1, 5, 1574445165, '15744451659231529434', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2792.00, NULL);
-INSERT INTO `bl_orders` VALUES (59, 1, 5, 1574445192, '15744451924393276829', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2792.00, NULL);
-INSERT INTO `bl_orders` VALUES (60, 1, 5, 1574445283, '15744452838496974821', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2792.00, NULL);
-INSERT INTO `bl_orders` VALUES (61, 1, 5, 1574445336, '15744453365686717328', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2792.00, NULL);
-INSERT INTO `bl_orders` VALUES (62, 1, 5, 1574445358, '15744453582157223918', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 5550.00, NULL);
-INSERT INTO `bl_orders` VALUES (63, 1, 5, 1574445559, '15744455599202415708', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 495.00, NULL);
-INSERT INTO `bl_orders` VALUES (64, 1, 5, 1574445681, '15744456812081085825', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1276.00, NULL);
-INSERT INTO `bl_orders` VALUES (65, 1, 5, 1574445769, '15744457695685812091', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
-INSERT INTO `bl_orders` VALUES (66, 1, 5, 1574445955, '15744459553914463412', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1276.00, NULL);
-INSERT INTO `bl_orders` VALUES (67, 1, 5, 1574446220, '15744462201348817433', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 540.00, NULL);
-INSERT INTO `bl_orders` VALUES (68, 1, 5, 1574446493, '15744464937706924051', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 5011.00, NULL);
-INSERT INTO `bl_orders` VALUES (69, 1, 5, 1574449740, '15744497408676606400', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1698.00, NULL);
-INSERT INTO `bl_orders` VALUES (70, 1, 0, 1574449979, '15744499799151983436', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2506.00, NULL);
-INSERT INTO `bl_orders` VALUES (71, 1, 2, 1574450046, '15744500468394612394', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2506.00, NULL);
+INSERT INTO `bl_orders` VALUES (42, 1, 6, 1574444220, '15744442205035576445', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2011.00, NULL);
+INSERT INTO `bl_orders` VALUES (43, 1, 6, 1574444244, '15744442445525378505', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2011.00, NULL);
+INSERT INTO `bl_orders` VALUES (44, 1, 6, 1574444262, '15744442624149090056', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2011.00, NULL);
+INSERT INTO `bl_orders` VALUES (45, 1, 6, 1574444314, '15744443145443194877', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2011.00, NULL);
+INSERT INTO `bl_orders` VALUES (46, 1, 6, 1574444322, '1574444322224729318', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
+INSERT INTO `bl_orders` VALUES (47, 1, 6, 1574444342, '15744443427305628960', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 21534.00, NULL);
+INSERT INTO `bl_orders` VALUES (48, 1, 6, 1574444351, '1574444351208969437', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2974.00, NULL);
+INSERT INTO `bl_orders` VALUES (49, 1, 6, 1574444354, '15744443541306043357', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1698.00, NULL);
+INSERT INTO `bl_orders` VALUES (50, 1, 6, 1574444448, '15744444487438729967', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2011.00, NULL);
+INSERT INTO `bl_orders` VALUES (51, 1, 6, 1574444573, '15744445739362287863', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2011.00, NULL);
+INSERT INTO `bl_orders` VALUES (52, 1, 6, 1574444682, '15744446821117443441', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2011.00, NULL);
+INSERT INTO `bl_orders` VALUES (53, 1, 7, 1574444734, '15744447344567138244', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2011.00, NULL);
+INSERT INTO `bl_orders` VALUES (54, 1, 7, 1574444761, '15744447616324183585', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2792.00, NULL);
+INSERT INTO `bl_orders` VALUES (55, 1, 7, 1574445105, '15744451052897716526', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2792.00, NULL);
+INSERT INTO `bl_orders` VALUES (56, 1, 7, 1574445148, '1574445148244196344', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2792.00, NULL);
+INSERT INTO `bl_orders` VALUES (57, 1, 7, 1574445164, '1574445164416194193', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2792.00, NULL);
+INSERT INTO `bl_orders` VALUES (58, 1, 7, 1574445165, '15744451659231529434', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2792.00, NULL);
+INSERT INTO `bl_orders` VALUES (59, 1, 7, 1574445192, '15744451924393276829', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2792.00, NULL);
+INSERT INTO `bl_orders` VALUES (60, 1, 7, 1574445283, '15744452838496974821', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2792.00, NULL);
+INSERT INTO `bl_orders` VALUES (61, 1, 7, 1574445336, '15744453365686717328', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2792.00, NULL);
+INSERT INTO `bl_orders` VALUES (62, 1, 7, 1574445358, '15744453582157223918', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 5550.00, NULL);
+INSERT INTO `bl_orders` VALUES (63, 1, 7, 1574445559, '15744455599202415708', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 495.00, NULL);
+INSERT INTO `bl_orders` VALUES (64, 1, 7, 1574445681, '15744456812081085825', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1276.00, NULL);
+INSERT INTO `bl_orders` VALUES (65, 1, 7, 1574445769, '15744457695685812091', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
+INSERT INTO `bl_orders` VALUES (66, 1, 7, 1574445955, '15744459553914463412', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1276.00, NULL);
+INSERT INTO `bl_orders` VALUES (67, 1, 7, 1574446220, '15744462201348817433', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 540.00, NULL);
+INSERT INTO `bl_orders` VALUES (68, 1, 6, 1574446493, '15744464937706924051', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 5011.00, NULL);
+INSERT INTO `bl_orders` VALUES (69, 1, 6, 1574449740, '15744497408676606400', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1698.00, NULL);
+INSERT INTO `bl_orders` VALUES (70, 1, 6, 1574449979, '15744499799151983436', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2506.00, NULL);
+INSERT INTO `bl_orders` VALUES (71, 1, 7, 1574450046, '15744500468394612394', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2506.00, NULL);
+INSERT INTO `bl_orders` VALUES (72, 1, 7, 1574498241, '15744982417512831669', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 3960.00, NULL);
+INSERT INTO `bl_orders` VALUES (73, 1, 2, 1574498256, '15744982564044195147', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 3032.00, NULL);
+INSERT INTO `bl_orders` VALUES (74, 1, 7, 1574498415, '15744984159646277729', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 495.00, NULL);
+INSERT INTO `bl_orders` VALUES (75, 1, 7, 1574498663, '15744986639507812447', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 495.00, NULL);
+INSERT INTO `bl_orders` VALUES (76, 1, 2, 1574498788, '15744987881179542512', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 776.00, NULL);
+INSERT INTO `bl_orders` VALUES (77, 1, 2, 1574498813, '15744988138537357271', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 495.00, NULL);
+INSERT INTO `bl_orders` VALUES (78, 1, 7, 1574499195, '15744991959731504817', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 495.00, NULL);
+INSERT INTO `bl_orders` VALUES (79, 1, 6, 1574500142, '15745001420511947033', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 495.00, NULL);
+INSERT INTO `bl_orders` VALUES (80, 1, 7, 1574500220, '15745002208939565886', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 1516.00, NULL);
+INSERT INTO `bl_orders` VALUES (81, 1, 7, 1574522682, '15745226821714723062', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 495.00, NULL);
+INSERT INTO `bl_orders` VALUES (82, 1, 6, 1574522706, '15745227063364593276', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 990.00, NULL);
+INSERT INTO `bl_orders` VALUES (83, 1, 2, 1574524514, '15745245145865932888', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 4516.00, NULL);
+INSERT INTO `bl_orders` VALUES (84, 1, 7, 1574525135, '15745251352113706267', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 495.00, NULL);
+INSERT INTO `bl_orders` VALUES (85, 1, 7, 1574525237, '15745252374333125390', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 495.00, NULL);
+INSERT INTO `bl_orders` VALUES (86, 1, 5, 1574532100, '157453210028442420', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 2750.00, NULL);
+INSERT INTO `bl_orders` VALUES (87, 1, 2, 1574534411, '1574534411321238884', '移动', '18573522318', '黑龙江省', '哈尔滨市', '道里区', '杭州市西湖区 黄龙万科中心', 640.00, NULL);
 
 -- ----------------------------
 -- Table structure for bl_shop
@@ -2209,7 +2241,7 @@ DROP TABLE IF EXISTS `bl_shop`;
 CREATE TABLE `bl_shop`  (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '店铺',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for bl_sort
@@ -3141,17 +3173,17 @@ CREATE TABLE `bl_users`  (
   `certificates_number` int(11) UNSIGNED NULL DEFAULT NULL COMMENT '证件号码',
   `integral` int(255) UNSIGNED NULL DEFAULT 0 COMMENT '积分',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bl_users
 -- ----------------------------
-INSERT INTO `bl_users` VALUES (1, '17553041262', '96597773c8e79ab3fb26fb82b1c68163', 1574045007, '70.jpg', '17553041262', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `bl_users` VALUES (2, '17553041265', '96597773c8e79ab3fb26fb82b1c68163', 1574045092, '70.jpg', '17553041265', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `bl_users` VALUES (3, '17553011212', 'd031de2cfa15701ba134526f7ea26cb2', 1574342728, '70.jpg', '17553011212', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `bl_users` VALUES (4, '17553041261', '2a4c9da9d08b6b420bd725398b08dbbe', 1574388126, '70.jpg', '17553041261', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `bl_users` VALUES (5, '18573522318', '70672a2998fa19953fe019f361f37bc7', 1574404048, '70.jpg', '18573522318', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `bl_users` VALUES (6, '17511112222', '2a4c9da9d08b6b420bd725398b08dbbe', 1574417961, '70.jpg', '17511112222', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `bl_users` VALUES (7, '17553140323', '2a4c9da9d08b6b420bd725398b08dbbe', 1574418173, '70.jpg', '17553140323', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `bl_users` VALUES (1, '17553041262', '96597773c8e79ab3fb26fb82b1c68163', 1574045007, '09.jpg', '17553041262', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `bl_users` VALUES (2, '17553041265', '96597773c8e79ab3fb26fb82b1c68163', 1574045092, '09.jpg', '17553041265', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `bl_users` VALUES (3, '17553011212', 'd031de2cfa15701ba134526f7ea26cb2', 1574342728, '09.jpg', '17553011212', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `bl_users` VALUES (4, '17553041261', '2a4c9da9d08b6b420bd725398b08dbbe', 1574388126, '09.jpg', '17553041261', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `bl_users` VALUES (5, '18573522318', '70672a2998fa19953fe019f361f37bc7', 1574404048, '09.jpg', '18573522318', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `bl_users` VALUES (6, '17511112222', '2a4c9da9d08b6b420bd725398b08dbbe', 1574417961, '09.jpg', '17511112222', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `bl_users` VALUES (7, '17553140323', '2a4c9da9d08b6b420bd725398b08dbbe', 1574418173, '09.jpg', '17553140323', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 
 SET FOREIGN_KEY_CHECKS = 1;
