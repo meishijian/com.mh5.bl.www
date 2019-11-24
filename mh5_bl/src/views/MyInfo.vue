@@ -27,6 +27,7 @@
           class="pink_imgs pink_img"
           v-model="fileList"
           :deletable="false"
+          :after-read="afterRead"
           multiple
           :max-count="1"
         />
@@ -144,6 +145,10 @@ export default {
     userOut() {
       localStorage.clear();
       this.$router.push("/me");
+    },
+    // 上传头像
+    afterRead(a) {
+      console.log(a);
     }
   },
   computed: {
