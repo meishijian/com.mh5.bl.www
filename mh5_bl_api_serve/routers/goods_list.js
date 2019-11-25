@@ -541,9 +541,10 @@ router.get("/address_single", (req, res) => {
             // console.log(token);
             // 如果解析失败 就会错误， 解析成功 就会把之前放的数据 解析出来 用户ID
             let decoded = jsonwebtoken.verify(token, config.jwt.key);
-            let id = req.query.id || "";
+            let id = req.query.id;
+            // console.log(id);
             let mysql = ""
-            if (id) {
+            if (!(id == 0)) {
                 mysql = `SELECT id,shr_name,mobile,province,city,area,address,isdefault FROM bl_address WHERE user_id = ${decoded.id} AND id = ${id}`
             } else {
                 mysql = `SELECT id,shr_name,mobile,province,city,area,address,isdefault FROM bl_address WHERE user_id = ${decoded.id} AND isdefault = 1`

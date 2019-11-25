@@ -105,10 +105,20 @@ const routes = [
       judge: true
     }
   },
+  // 确认订单 userNickname
   {
     path: "/orderSorry",
     component: () =>
       import("../views/OrderSorry.vue"),
+    meta: {
+      judge: true
+    }
+  },
+  // 我的昵称 userNickname
+  {
+    path: "/userNickname",
+    component: () =>
+      import("../views/UserNickname.vue"),
     meta: {
       judge: true
     }

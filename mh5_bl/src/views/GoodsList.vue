@@ -240,6 +240,7 @@ export default {
 </script>
 <style lang="less">
 .goods {
+  overflow-x: hidden;
   .totop_i {
     color: #fff;
     border-radius: 50%;

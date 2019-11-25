@@ -37,7 +37,7 @@
     <!-- 昵称 -->
     <van-nav-bar class="div_credit_pay_one">
       <div slot="left" class="div_credit_pay">昵称</div>
-      <div slot="right" class="div_arrow">
+      <div slot="right" class="div_arrow" @click="userNickname">
         {{userData.nickname}}
         <van-icon name="play" class="arrow" />
       </div>
@@ -46,30 +46,53 @@
     <!-- 性别 -->
     <van-nav-bar class="div_credit_pay_one">
       <div slot="left" class="div_credit_pay">性别</div>
-      <div slot="right" class="div_arrow">
+      <div slot="right" class="div_arrow" @click="sexPopup=!sexPopup">
         {{userData.sex}}
         <van-icon name="play" class="arrow" />
       </div>
     </van-nav-bar>
-
+    <van-popup v-model="sexPopup" position="bottom" :style="{ height: '22.5%' }">
+      <van-button type="default" size="large" @click="userSex(1)">男</van-button>
+      <van-button type="default" size="large" @click="userSex(2)">女</van-button>
+      <van-button type="default" size="large" @click="userSex(0)">保密</van-button>
+    </van-popup>
     <!-- 出生日期 -->
     <van-nav-bar class="div_credit_pay_one">
       <div slot="left" class="div_credit_pay">出生日期</div>
-      <div slot="right" class="div_arrow">
+      <div slot="right" class="div_arrow" @click="birthPopup=!birthPopup">
         {{userData.birth}}
         <van-icon name="play" class="arrow" />
       </div>
     </van-nav-bar>
-
+    <van-popup v-model="birthPopup" position="bottom" :style="{ height: '50%' }">
+      <van-datetime-picker
+        v-model="currentDate"
+        type="date"
+        :min-date="minDate"
+        @confirm="confirm"
+      />
+    </van-popup>
     <!-- 偏好 -->
     <van-nav-bar class="div_credit_pay_one">
       <div slot="left" class="div_credit_pay">偏好</div>
-      <div slot="right" class="div_arrow">
+      <div slot="right" class="div_arrow" @click="preferencePopup=!preferencePopup">
         {{userData.preference}}
         <van-icon name="play" class="arrow" />
       </div>
     </van-nav-bar>
-
+    <van-popup v-model="preferencePopup" position="bottom" :style="{ height: '70%' }">
+      <van-button
+        v-for="(item, index) in goodsDate"
+        :key="index"
+        type="default"
+        size="large"
+        @click="userPre(item.id)"
+      >{{item.cla_name}}</van-button>
+      <div style="position: relative;">
+        <van-button type="default" size="normal" @click="defaultDetermine">取消</van-button>
+        <van-button type="primary" size="normal" class="primary" @click="primaryDetermine">确定</van-button>
+      </div>
+    </van-popup>
     <!-- 地址管理 -->
     <van-nav-bar class="div_credit_pay_one">
       <div slot="left" class="div_credit_pay">地址管理</div>
@@ -116,7 +139,6 @@
   </div>
 </template>
 <script>
-import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -124,7 +146,19 @@ export default {
       icon: false,
       // 头像
       fileList: [],
-      userData: {}
+      userData: {},
+      // 性别
+      sexPopup: false,
+      // 出生日期
+      birthPopup: false,
+      currentDate: new Date(),
+      minDate: new Date(1947, 0, 1),
+      // 偏好
+      preferencePopup: false,
+      // 偏好 商品分类
+      goodsDate: [],
+      // 存放 偏好
+      preData: []
     };
   },
   methods: {
@@ -147,16 +181,98 @@ export default {
       this.$router.push("/me");
     },
     // 上传头像
-    afterRead(a) {
-      console.log(a);
+    afterRead(params) {
+      // console.log(params.file)
+      let formdate = new FormData();
+      formdate.append("pic", params.file);
+      let config = {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      };
+      this.$http.post("/user_pic_upload", formdate, config).then(res => {
+        // console.log(res);
+        this.$toast.success("上传头像成功!");
+      });
+    },
+    // 跳转到 我的昵称
+    userNickname() {
+      this.$router.push("/userNickname");
+    },
+    // 修改 性别
+    userSex(sex) {
+      this.$http
+        .put("/user_modify_sex", {
+          sex: sex
+        })
+        .then(res => {
+          this.$toast.success(res.data.message);
+          this.sexPopup = false;
+          // 渲染 用户信息
+          this.getUserData();
+        });
+    },
+    // 修改 出生日期
+    confirm(value) {
+      const data = new Date(value);
+      // 年
+      const y = data.getFullYear();
+      // 月
+      const m = (data.getMonth() + 1).toLocaleString().padStart(2, "0");
+      // 日
+      const d = data
+        .getDate()
+        .toLocaleString()
+        .padStart(2, "0");
+      let birth = `${y}-${m}-${d}`;
+      this.$http
+        .put("/user_modify_birth", {
+          birth: birth
+        })
+        .then(res => {
+          this.$toast.success(res.data.message);
+          this.birthPopup = false;
+          // 渲染 用户信息
+          this.getUserData();
+        });
+    },
+    // 获取 分类 左侧菜单
+    getPreferencePopup() {
+      this.$http.get("/goods_left_side").then(res => {
+        // console.log(res);
+        this.goodsDate = res.data.data;
+      });
+    },
+    // 修改 偏好 数据
+    userPre(pre) {
+      // console.log(pre);
+      this.preData.push(pre);
+    },
+    // 修改 偏好
+    primaryDetermine() {
+      this.$http
+        .put("/user_modify_pre", {
+          claId: this.preData.join(",")
+        })
+        .then(res => {
+          this.$toast.success(res.data.message);
+          this.preferencePopup = false;
+          // 渲染 用户信息
+          this.getUserData();
+          this.preData = [];
+        });
+    },
+    // 取消 修改 偏好
+    defaultDetermine() {
+      this.preferencePopup = false;
+      this.preData = [];
     }
-  },
-  computed: {
-    ...mapState(["id"])
   },
   created() {
     // 渲染 用户信息
     this.getUserData();
+    // 渲染 获取 分类 左侧菜单
+    this.getPreferencePopup();
   }
 };
 </script>
@@ -168,7 +284,6 @@ export default {
     overflow: none;
     overflow: inherit;
   }
-
   .van-cell__value {
     overflow: inherit;
   }
@@ -239,6 +354,10 @@ export default {
     position: relative;
     top: 28px;
     border-radius: 50%;
+  }
+  .primary {
+    position: absolute;
+    right: 0;
   }
 }
 </style>

@@ -107,8 +107,9 @@ export default {
           tel: "s",
           id: 0
         }
-      ]
+      ],
       // show: false,
+      address: localStorage.getItem("address") || 0
     };
   },
   methods: {
@@ -203,14 +204,22 @@ export default {
     },
     // 获取收货 地址 信息
     getList() {
-      this.$http.get("address_single").then(res => {
-        // console.log(res);
-        this.list[0].name = res.data.data[0].shr_name;
-        this.list[0].tel = res.data.data[0].mobile;
-        this.list[0].id = res.data.data[0].id;
-        this.chosenContactId = res.data.data[0].id;
-        // console.log(this.list);
-      });
+      console.log(this.address);
+      
+      this.$http
+        .get("/address_single", {
+          params: {
+            id: this.address
+          }
+        })
+        .then(res => {
+          // console.log(res);
+          this.list[0].name = res.data.data[0].shr_name;
+          this.list[0].tel = res.data.data[0].mobile;
+          this.list[0].id = res.data.data[0].id;
+          this.chosenContactId = res.data.data[0].id;
+          // console.log(this.list);
+        });
     }
   },
   computed: {

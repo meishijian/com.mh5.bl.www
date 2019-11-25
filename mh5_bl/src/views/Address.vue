@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       icon: false,
-      chosenAddressId: "1",
+      chosenAddressId: "",
       // 存放地址的数据
       addressData: []
     };
@@ -47,12 +47,16 @@ export default {
         // console.log(res);
         this.addressData = res.data.data;
         // console.log(this.addressData);
-        
       });
     }
   },
   created() {
     this.getAddress();
+  },
+  watch: {
+    chosenAddressId: function(va) {
+      localStorage.setItem("address", va);
+    }
   }
 };
 </script>
