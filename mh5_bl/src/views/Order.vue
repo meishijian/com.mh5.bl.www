@@ -204,7 +204,7 @@ export default {
     },
     // 获取收货 地址 信息
     getList() {
-      console.log(this.address);
+      // console.log(this.address);
       
       this.$http
         .get("/address_single", {

@@ -91,7 +91,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["getInfoData", "getId"]),
+    ...mapMutations(["getInfoData"]),
     // 左边箭头返回
     onClickLeft() {
       window.history.back(-1);
@@ -108,14 +108,31 @@ export default {
       let id = localStorage.getItem("id");
       // console.log(id);
 
-      this.$http
-        .get("/goods_list", {
-          params: { id: id }
-        })
-        .then(res => {
-          // console.log(res);
-          this.commodityData = res.data.data;
-        });
+      // 提示
+      const toast = this.$toast.loading({
+        duration: 0, // 持续展示 toast
+        forbidClick: true,
+        message: `加载中`
+      });
+      let second = 2;
+      const timer = setInterval(() => {
+        second--;
+        if (second) {
+          toast.message = `加载中`;
+        } else {
+          clearInterval(timer);
+          // 手动清除 Toast
+          this.$toast.clear();
+          this.$http
+            .get("/goods_list", {
+              params: { id: id }
+            })
+            .then(res => {
+              // console.log(res);
+              this.commodityData = res.data.data;
+            });
+        }
+      }, 1000);
     },
 
     // 销量排序
@@ -223,7 +240,6 @@ export default {
       // console.log(id);
       // 购物车的数量 也就是 添加了多少 商品的长度
       this.getInfoData(goods_id.length);
-      this.getId(goods_id.length);
     },
 
     // 跳转到 购物车

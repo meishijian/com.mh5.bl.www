@@ -275,6 +275,7 @@ router.post("/orders", (req, res) => {
             // console.log(decoded);
             // 获取页面上的数据 收货地址 id
             let address_id = req.body.address_id;
+
             // 数据 
             /** 
 `                   "cart":[
@@ -546,6 +547,20 @@ router.get("/address_single", (req, res) => {
             let mysql = ""
             if (!(id == 0)) {
                 mysql = `SELECT id,shr_name,mobile,province,city,area,address,isdefault FROM bl_address WHERE user_id = ${decoded.id} AND id = ${id}`
+            } else if (id == 0) {
+                return res.json({
+                    "code": 200,
+                    "data": [{
+                        address: "您还没有添加过地址",
+                        area: "",
+                        city: "",
+                        id: "",
+                        isdefault: "",
+                        mobile: "您还没有添加过地址",
+                        province: "您还没有添加过地址",
+                        shr_name: "您还没有添加过地址",
+                    }]
+                })
             } else {
                 mysql = `SELECT id,shr_name,mobile,province,city,area,address,isdefault FROM bl_address WHERE user_id = ${decoded.id} AND isdefault = 1`
             }

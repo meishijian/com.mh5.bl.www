@@ -34,7 +34,8 @@ export default {
   },
   methods: {
     onClickLeft() {
-      window.history.back(-1);
+      // window.history.back(-1);
+      this.$router.push("/order");
     },
     // 新添加地址按钮
     onAdd() {
@@ -55,6 +56,7 @@ export default {
   },
   watch: {
     chosenAddressId: function(va) {
+      // console.log(va);
       localStorage.setItem("address", va);
     }
   }

@@ -90,7 +90,7 @@ export default {
     return {
       // 获取cart 转换成字符串
       cart: JSON.parse(localStorage.getItem("cart")),
-      orderSorry_cart: localStorage.getItem("orderSorry_cart"),
+      orderSorry_cart: localStorage.getItem("orderSorry_cart") || 0,
       // 放商品数据
       goodsData: [],
       chosenContactId: null,
@@ -116,7 +116,9 @@ export default {
     ...mapMutations(["getInfoData"]),
     //   返回上一级
     onClickLeft() {
-      window.history.back(-1);
+      // window.history.back(-1);
+      this.$router.push("/order");
+
     },
     order() {
       this.showList = true;
@@ -169,7 +171,7 @@ export default {
         })
         .then(res => {
           // console.log(res);
-          
+
           this.$router.push({
             path: "/payment",
             query: {
@@ -184,14 +186,20 @@ export default {
     },
     // 获取收货 地址 信息
     getList() {
-      this.$http.get("address_single").then(res => {
-        // console.log(res);
-        this.list[0].name = res.data.data[0].shr_name;
-        this.list[0].tel = res.data.data[0].mobile;
-        this.list[0].id = res.data.data[0].id;
-        this.chosenContactId = res.data.data[0].id;
-        // console.log(this.list);
-      });
+      this.$http
+        .get("/address_single", {
+          params: {
+            id: localStorage.getItem("address") || 0
+          }
+        })
+        .then(res => {
+          // console.log(res);
+          this.list[0].name = res.data.data[0].shr_name;
+          this.list[0].tel = res.data.data[0].mobile;
+          this.list[0].id = res.data.data[0].id;
+          this.chosenContactId = res.data.data[0].id;
+          // console.log(this.list);
+        });
     }
   },
   computed: {

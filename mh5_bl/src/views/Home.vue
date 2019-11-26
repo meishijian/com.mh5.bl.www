@@ -26,7 +26,10 @@
           size="25px"
           @click="gouwuche"
         >
-          <span class="paid_p_span" v-if="JSON.parse(infoData).length == 0">{{JSON.parse(infoData).length}}</span>
+          <span
+            class="paid_p_span"
+            v-if="JSON.parse(infoData).length == 0"
+          >{{JSON.parse(infoData).length}}</span>
         </van-icon>
         <van-icon @click="me" name="manager-o" color="#838383" size="25px" />
       </div>
@@ -171,7 +174,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   data() {
@@ -479,6 +482,7 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(["getInfoData"]),
     onSearch() {},
     // 跳转购物车页面
     gouwuche() {
@@ -570,6 +574,8 @@ export default {
     this.qualityList();
     this.brandList();
     this.likeList();
+
+    // this.getInfoData(JSON.parse(localStorage.getItem("goods_id")).length);
   },
   computed: {
     // 隱射
