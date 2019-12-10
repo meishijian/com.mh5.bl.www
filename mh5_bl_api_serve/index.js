@@ -40,5 +40,5 @@ app.use('/api/v1', require("./routers/backstage/login"));
 // 启动服务器
 // 这些需要一致 把这些放在配置文件中 在这里使用 需要改的时候 就在配置文件中修改 就OK了
 app.listen(9494, () => {
-    console.log("http://127.0.0.1:9494");
+    console.log("http://39.98.244.141:9494/api/v1/");
 })
