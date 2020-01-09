@@ -41,8 +41,8 @@
 export default {
   data() {
     return {
-      mobile: "17553041262",
-      password: "123456",
+      mobile: "",
+      password: "",
       errorMobile: "",
       errorPassword: ""
     };

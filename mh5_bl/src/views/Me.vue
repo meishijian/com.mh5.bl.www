@@ -290,7 +290,7 @@ export default {
   data() {
     return {
       // 图片
-      url: "http://127.0.0.1:9494/api/v1/public/image/",
+      url: "http://m.chenmsj.com:59885/api/v1/public/image/",
       // list列表 加载
       loading: false,
       finished: false,
@@ -301,7 +301,7 @@ export default {
       // 头像
       fileList: [
         {
-          url: "http://127.0.0.1:9494/api/v1/public/image/70.jpg",
+          url: "http://m.chenmsj.com:59885/api/v1/public/image/70.jpg",
           isImage: true
         }
       ],

@@ -127,7 +127,8 @@ const routes = [
 // Shopping.vue
 
 const router = new VueRouter({
-  mode: "history",
+  // mode: "history",
+  mode: "hash",
   base: process.env.BASE_URL,
   routes
 });

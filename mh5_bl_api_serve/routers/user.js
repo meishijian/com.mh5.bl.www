@@ -18,7 +18,7 @@ const jsonwebtoken = require('jsonwebtoken');
 // 保存 图片路径 地址  
 const picAddress = "../public/image/";
 //  访问 服务器中的图片 路径  前端使用的图片路径是 服务器的路径图片地址
-const fileBaseUrl = "http://127.0.0.1:9494/api/v1/public/image/";
+const fileBaseUrl = "http://m.chenmsj.com:59885/api/v1/public/image/";
 // git@github.com:meishijian/com.mh5.bl.www.git
 // 用户信息渲染
 router.get("/users", (req, res) => {

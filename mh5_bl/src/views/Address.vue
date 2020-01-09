@@ -45,7 +45,7 @@ export default {
     // 获取所有的地址
     getAddress() {
       this.$http.get("/address_all").then(res => {
-        // console.log(res);
+        // conconsole.log(res);
         this.addressData = res.data.data;
         // console.log(this.addressData);
       });

@@ -48,7 +48,7 @@
     <van-overlay :show="show" @click="show = false">
       <div class="wrapper" @click.stop>
         <div class="block">
-          <img class="img" src="http://127.0.0.1:9494/api/v1/public/image/weixin.jpg" alt />
+          <img class="img" src="http://m.chenmsj.com:59885/api/v1/public/image/weixin.jpg" alt />
           <van-nav-bar
             left-text="未支付"
             right-text="已支付"

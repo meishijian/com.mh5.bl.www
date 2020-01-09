@@ -71,7 +71,7 @@ export default {
           password: this.password
         })
         .then(res => {
-          console.log(res);
+          // console.log(res);
           // 判断错误
           if (res.data.code !== 200) {
             if (res.data.error == "手机号已存在!") {

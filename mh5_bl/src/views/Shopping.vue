@@ -206,7 +206,7 @@ export default {
       },
       // 点击全选按钮 所有的选项都选中
       set: function(val) {
-        console.log(val);
+        // console.log(val);
         // val 默认为true
         // // 循环数组
         for (let i = 0; i < this.cart.length; i++) {

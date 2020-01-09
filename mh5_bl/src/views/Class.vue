@@ -74,7 +74,7 @@ export default {
     },
     // 点击时 获取右侧分类列表
     change(index) {
-      console.log(index);
+      // console.log(index);
       this.$http
         .get("/goods_right_sort", {
           params: { id: index + 1 }

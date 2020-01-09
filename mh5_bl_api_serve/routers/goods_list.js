@@ -6,7 +6,7 @@ const jsonwebtoken = require("jsonwebtoken");
 const config = require("../config");
 // 导入 二、db数据库文件
 const db = require('../db');
-const fileBaseUrl = "http://127.0.0.1:9494/api/v1/public/image/";
+const fileBaseUrl = "http://m.chenmsj.com:59885/api/v1/public/image/";
 // 商品
 router.get("/goods_list", (req, res) => {
     // 分类id
@@ -157,7 +157,7 @@ router.post("/goods_sort", (req, res) => {
 })
 
 // 商品 点击每一个商品就入每一个商品详情页
-router.get('/goods_detail', (req, res) => {
+router.get('/goods_detail', (req, res) => { 
     let id = req.query.id;
     // console.log(id);
     let mysql = "SELECT a.id,a.goods_name,a.price,a.image,a.service,a.pic_details,b.id bra_id, b.bra_name,b.bra_image FROM bl_brand b,bl_goods a WHERE a.brand_id = b.id AND  a.id = ?"
@@ -468,7 +468,7 @@ router.post("/orders", (req, res) => {
 })
 
 // 商品 点击每一个商品就入每一个商品详情页
-router.get('/goods_details', (req, res) => {
+router.get('/goods_details', (req, res) => { 
     let id = req.query.id;
     // console.log(id);
     let mysql = "SELECT a.id,a.goods_name,a.price,a.image,a.service,a.pic_details,a.goods_pic,b.id bra_id, b.bra_name,b.bra_image FROM bl_brand b,bl_goods a WHERE a.brand_id = b.id AND  a.id = ?"
@@ -486,9 +486,12 @@ router.get('/goods_details', (req, res) => {
         let pic = result[0].goods_pic.split(",");
         pic.forEach((element, index) => {
             pic[index] = fileBaseUrl + element
-        });
+        }); 
+        
         result[0].goods_pic = pic;
-        // console.log(result[0].goods_pic);
+        
+        // console.log(result);
+        
         res.json({
             "code": 200,
             "data": result[0]
