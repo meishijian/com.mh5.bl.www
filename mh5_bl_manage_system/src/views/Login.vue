@@ -21,7 +21,7 @@
             <el-input v-model="loginForm.mobile"></el-input>
           </el-form-item>
           <el-form-item label="密码" prop="password">
-            <el-input v-model="loginForm.password"></el-input>
+            <el-input v-model="loginForm.password"  show-password></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="submitForm">登录</el-button>
@@ -40,7 +40,7 @@ export default {
       // 表单数据
       loginForm: {
         mobile: "17553041262",
-        password: "123456"
+        password: "123123"
       },
       // 表单数据 验证
       loginFormRules: {
@@ -54,8 +54,8 @@ export default {
       this.$refs.loginFormRef.validate(valid => {
         if (!valid) return this.$message.error("错了哦，输入用户名或密码");
         // 请求
-        this.$http.post("/login", this.loginForm).then(res => {
-          console.log(res);
+        this.$http.post("/back/login", this.loginForm).then(res => {
+          // console.log(res);
 
           if (res.data.code == 400) {
             return this.$message.error(res.data.error);

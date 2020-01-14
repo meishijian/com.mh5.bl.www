@@ -10,11 +10,11 @@ import Vant from 'vant';
 import 'vant/lib/index.css';
 
 Vue.use(Vant);
-
+import {main_host} from './config.js'
 import axios from 'axios';
 // 配置axios请求的地址
-// axios.defaults.baseURL = "http://127.0.0.1:59885/api/v1/";
-axios.defaults.baseURL = "http://m.chenmsj.com:59885/api/v1/";
+axios.defaults.baseURL = main_host;
+// axios.defaults.baseURL = "http://m.chenmsj.com:59885/api/v1/";
 Vue.prototype.$http = axios;
 
 // 引入mock

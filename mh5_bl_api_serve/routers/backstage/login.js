@@ -12,7 +12,7 @@ const jsonwebtoken = require('jsonwebtoken');
 const config = require('../../config');
 
 // 注册
-router.post("/regist", (req, res) => {
+router.post("/back/regist", (req, res) => {
     let mobile = req.body.mobile;
     let password = req.body.password;
     // 设置 body-parser
@@ -33,7 +33,7 @@ router.post("/regist", (req, res) => {
         })
     }
     // 查询 用户名 手机号是否存在
-    let mysql = "SELECT COUNT(*) c FROM bl_users where mobile=?";
+    let mysql = "SELECT COUNT(*) c FROM bl_root where mobile=?";
     db.query(mysql, mobile, (error, result) => {
         if (error) return res.json({
             "code": 400,
@@ -46,11 +46,10 @@ router.post("/regist", (req, res) => {
                 "error": "手机号已存在!"
             })
         }
-        mysql = "INSERT INTO bl_users SET ?";
+        mysql = "INSERT INTO bl_root SET ?";
         let data = {
             mobile,
-            password: md5(password + config.md5),
-            regtime: new Date().getTime().toString().substring(0, 10)
+            password: md5(password + config.md5)
         }
 
         db.query(mysql, data, (error, result) => {
@@ -67,7 +66,7 @@ router.post("/regist", (req, res) => {
 })
 
 // 登录
-router.post("/login", (req, res) => {
+router.post("/back/login", (req, res) => {
     let mobile = req.body.mobile;
     let password = req.body.password;
     // 设置 body-parser
@@ -89,7 +88,7 @@ router.post("/login", (req, res) => {
     }
 
     // 查询 用户名 手机号是否存在
-    let mysql = "SELECT id,password FROM bl_users where mobile=?";
+    let mysql = "SELECT id,password FROM bl_root where mobile=?";
     db.query(mysql, mobile, (error, result) => {
         if (error) return res.json({
             "code": 400,
