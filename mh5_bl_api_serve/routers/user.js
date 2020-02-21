@@ -193,7 +193,6 @@ router.post("/user_pic_upload", multer().single("pic"), (req, res) => {
 router.get("/public/image/*", (req, res) => {
     let imgName = req.params[0]
     res.sendFile(path.join(__dirname, picAddress + imgName))
-
 })
 
 // 设置用户显示信息
