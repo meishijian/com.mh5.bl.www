@@ -2,12 +2,32 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 
+
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    component: Home
+    component: Home,
+    children: [
+      // 分类目录
+      {
+        path: "/class",
+        component: () =>
+          import("../components/Class.vue")
+      },
+      // 轮播
+      {
+        path: "/swipe",
+        component: () =>
+          import("../components/Swipe.vue")
+      }
+    ]
   },
   {
     path: "/login",

@@ -2,7 +2,7 @@ module.exports = {
     // 启动服务器时使用的端口 和 IP
     server: {
         // 启动服务器端口号
-        port: 3306,
+        port: 59885,
         // IP
         ip: '127.0.0.1'
     },

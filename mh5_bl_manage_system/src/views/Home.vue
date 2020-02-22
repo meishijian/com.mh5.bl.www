@@ -5,25 +5,36 @@
     </el-header>
     <el-container>
       <el-aside width="200px">
-        <el-menu default-active="1-1" class="el-menu-vertical-demo" :unique-opened="true">
+        <el-menu
+          default-active="1"
+          class="el-menu-vertical-demo"
+          :unique-opened="true"
+          :router="true"
+        >
           <el-submenu index="1">
             <template slot="title">
-              <i class="el-icon-location"></i>
+              <i class="el-icon-mouse"></i>
               <span>商品管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="1-1">商品列表</el-menu-item>
-              <el-menu-item index="1-2">商品评论</el-menu-item>
+              <el-menu-item index="/goodslist">商品列表</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
 
-          <el-menu-item index="2">
-            <i class="el-icon-setting"></i>
-            <span slot="title">商家管理</span>
+          <el-menu-item index="/class">
+            <i class="el-icon-collection"></i>
+            <span slot="title">分类</span>
+          </el-menu-item>
+
+          <el-menu-item index="/swipe">
+            <i class="el-icon-magic-stick"></i>
+            <span slot="title">首页轮播图</span>
           </el-menu-item>
         </el-menu>
       </el-aside>
-      <el-main>Main</el-main>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -64,7 +75,7 @@ export default {
     background-color: rgb(94, 79, 79);
   }
   .el-aside {
-    background-color: rgb(201, 219, 133);
+    background-color: rgb(252, 191, 214);
   }
   .el-main {
     background-color: rgb(90, 212, 206);
