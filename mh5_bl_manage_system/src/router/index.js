@@ -26,6 +26,22 @@ const routes = [
         path: "/swipe",
         component: () =>
           import("../components/Swipe.vue")
+      },
+      // 商品列表
+      {
+        path: "/goodslist",
+        component: () =>
+          import("../components/Goodslist.vue")
+      },
+      {
+        // 商品列表  添加
+        path: '/goodslist/add',
+        component: () => import("../components/Goods_add.vue"),
+      },
+      {
+        // 商品列表  编辑
+        path: '/goodslist/edit/:id',
+        component: () => import("../components/Goods_edit.vue"),
       }
     ]
   },

@@ -3,11 +3,13 @@ const express = require('express');
 // 导入路由
 const router = express.Router();
 const jsonwebtoken = require("jsonwebtoken");
-const config = require("../config");
+// 导入 全体配置文件
+const config = require('../config');
 // 导入 二、db数据库文件
 const db = require('../db');
 const fileBaseUrl = "http://m.chenmsj.com:59885/api/v1/public/image/";
-// 商品
+
+// 前台商品
 router.get("/goods_list", (req, res) => {
     // 分类id
     let cat_id = req.query.id;
@@ -25,7 +27,7 @@ router.get("/goods_list", (req, res) => {
     let datas = [];
     // 判断 id
     if (cat_id) {
-        where = ` WHERE cat_id= ${cat_id}`;
+        where = ` WHERE a.cat_id= ${cat_id}`;
     } else {
         return res.json({
             "code": 400,
@@ -42,18 +44,473 @@ router.get("/goods_list", (req, res) => {
 
     let mysql = "SELECT count(*) total FROM bl_goods WHERE cat_id= ?";
     db.query(mysql, cat_id, (error, data) => {
-        let mysql = `SELECT id,goods_name,price,image,service FROM bl_goods ${where}`
+        let mysql = `SELECT 
+        a.id,a.goods_name,a.price,a.image,a.service,b.bra_name,
+        GROUP_CONCAT(c.goods_details_pic) goods_details_pic,f.goods_swipe_pic 
+        FROM bl_goods a LEFT JOIN bl_brand b ON a.brand_id = b.id 
+        LEFT JOIN bl_goods_details c ON a.id = c.goods_id 
+        LEFT JOIN (
+            SELECT GROUP_CONCAT(e.goods_swipe_pic  SEPARATOR ',') goods_swipe_pic,e.goods_id 
+            FROM bl_goods d, bl_goods_swipe e WHERE d.id = e.goods_id GROUP BY e.goods_id) f 
+        ON a.id = f.goods_id 
+        ${where} GROUP BY c.goods_id`;
         // console.log(mysql);
         db.query(mysql, (error, result) => {
             // result.forEach(element => {
             //     element.image = fileBaseUrl + element.image
             // });
+            // console.log(result);
+            result.forEach(e => {
+                e.image = `http://${config.server.ip}:${config.server.port}/${e.image}`;
+            });
             res.json({
                 "code": 200,
                 "total": data[0].total,
                 "data": result
             })
         })
+    })
+})
+
+// 后台 商品列表
+router.get("/goods_get", (req, res) => {
+    // 【可选】 页数
+    const page = req.query.pagenum || 1;
+    // 【可选】 一条多少数据
+    const pagesize = req.query.pagesize;
+
+    // 【可选】 排序 升序 或 降序
+    const sortway = req.query.sortway || 'asc';
+    // 排序
+    const order = ` ORDER BY id ${sortway}`;
+    // limit
+    let limit = '';
+    if (pagesize !== undefined) {
+        // 翻页
+        let offset = (page - 1) * pagesize;
+        // limit
+        limit = ` LIMIT ${offset},${pagesize}`;
+    }
+    // mysql
+    let mysql = "SELECT count(*) total FROM bl_goods";
+    db.query(mysql, (error, data) => {
+        // 判断
+        if (error) return res.json(error);
+        let mysql = `SELECT 
+        a.id,a.goods_name,a.price,a.image,a.service,a.stock,b.bra_name,
+        GROUP_CONCAT(c.goods_details_pic) goods_details_pic,f.goods_swipe_pic 
+        FROM bl_goods a LEFT JOIN bl_brand b ON a.brand_id = b.id 
+        LEFT JOIN bl_goods_details c ON a.id = c.goods_id 
+        LEFT JOIN (
+            SELECT GROUP_CONCAT(e.goods_swipe_pic  SEPARATOR ',') goods_swipe_pic,e.goods_id 
+            FROM bl_goods d, bl_goods_swipe e WHERE d.id = e.goods_id GROUP BY e.goods_id) f 
+        ON a.id = f.goods_id GROUP BY c.goods_id ${order} ${limit}`;
+        // console.log(mysql);
+        db.query(mysql, (error, result) => {
+            // 判断
+            if (error) return res.json(error);
+            // console.log(result); 
+            result.forEach(e => {
+                // 商品 详情
+                e.goods_details_pic = e.goods_details_pic.split(",");
+                // 商品 轮播
+                e.goods_swipe_pic = e.goods_swipe_pic.split(",");
+                // 商品 封面
+                e.image = `http://${config.server.ip}:${config.server.port}/${e.image}`;
+                // 商品 详情
+                for (const i in e.goods_details_pic) {
+                    e.goods_details_pic[i] = `http://${config.server.ip}:${config.server.port}/${e.goods_details_pic[i]}`;
+                }
+                // 商品 轮播
+                for (const i in e.goods_swipe_pic) {
+                    e.goods_swipe_pic[i] = `http://${config.server.ip}:${config.server.port}/${e.goods_swipe_pic[i]}`;
+                }
+                // 服务类型
+                if (e.service === 0) {
+                    e.service = "百股自营"
+                } else if (e.service === 1) {
+                    e.service = "跨境"
+                }
+            });
+            res.json({
+                "code": 200,
+                "total": data[0].total,
+                "data": result
+            })
+        })
+    })
+})
+
+// 添加商品
+router.post("/goods_list", (req, res) => {
+    // 那个分类 
+    let cat_id = req.body.cat_id;
+    if (cat_id === undefined) {
+        return res.json({
+            'code': 400,
+            'error': '分类ID不能为空!'
+        })
+    }
+    // 商品名称
+    let goods_name = req.body.goods_name;
+    if (goods_name === undefined) {
+        return res.json({
+            'code': 400,
+            'error': '商品名称不能为空!'
+        })
+    }
+    // 价格
+    let price = req.body.price;
+    if (price === undefined) {
+        return res.json({
+            'code': 400,
+            'error': '价格不能为空!'
+        })
+    }
+    // 封面图片
+    let image = req.body.image;
+    if (image === undefined) {
+        return res.json({
+            'code': 400,
+            'error': '封面图片不能为空!'
+        })
+    }
+    // 商品数量
+    let stock = req.body.stock;
+    if (stock === undefined) {
+        return res.json({
+            'code': 400,
+            'error': '商品数量不能为空!'
+        })
+    }
+    // 服务 0 百股自营 1 跨境
+    let service = req.body.service;
+    if (service === undefined) {
+        return res.json({
+            'code': 400,
+            'error': '服务类型不能为空!'
+        })
+    }
+    // 商品店铺
+    let brand_id = req.body.brand_id;
+    if (brand_id === undefined) {
+        return res.json({
+            'code': 400,
+            'error': '商品店铺ID不能为空!'
+        })
+    }
+    // 商品详细 JSON.parse(req.body.goods_details)
+    let goods_details = req.body.goods_details;
+    if (goods_details === undefined) {
+        return res.json({
+            'code': 400,
+            'error': '商品详细不能为空!'
+        })
+    }
+    // 商品图片轮播  JSON.parse(req.body.goods_swipe)
+    let goods_swipe = req.body.goods_swipe;
+    if (goods_swipe === undefined) {
+        return res.json({
+            'code': 400,
+            'error': '商品图片轮播不能为空!'
+        })
+    }
+
+    // 商品
+    let goodsData = {
+        cat_id,
+        goods_name,
+        price,
+        image,
+        stock,
+        service,
+        brand_id
+    }
+    // mysql
+    let mysql = `INSERT INTO bl_goods SET ?`;
+    db.query(mysql, goodsData, (error, result) => {
+        // 判断
+        if (error) return res.json(error);
+        // 添加后商品的id
+        let goods_id = result.insertId;
+
+        // console.log(goods_details);
+
+        // 添加 商品详细
+        for (let i = 0; i < goods_details.length; i++) {
+            let detailsData = {
+                goods_id,
+                goods_details_pic: goods_details[i]
+            }
+            mysql = `INSERT INTO bl_goods_details SET ?`;
+            db.query(mysql, detailsData, (error, result) => {
+                if (error) return res.json({
+                    "code": 400,
+                    "error": error
+                })
+            })
+        }
+        // 添加 商品图片轮播
+        for (let i = 0; i < goods_swipe.length; i++) {
+            let swipeData = {
+                goods_id,
+                goods_swipe_pic: goods_swipe[i]
+            }
+            mysql = `INSERT INTO bl_goods_swipe SET ?`;
+            db.query(mysql, swipeData, (error, result) => {
+                if (error) return res.json({
+                    "code": 400,
+                    "error": error
+                })
+            })
+        }
+        res.json({
+            'code': 200,
+            'message': "添加商品成功"
+        })
+
+
+    })
+})
+
+// 回显数据
+router.get("/goods_get/:id(\\d+)", (req, res) => {
+    // 获取分类ID
+    let id = req.params.id;
+    // 分类ID 没有传时
+    if (!id) {
+        return res.json({
+            "code": 400,
+            "error": "分类ID不能为空"
+        });
+    }
+    // mysql
+    let mysql = `SELECT 
+        a.id,a.goods_name,a.cat_id,a.price,a.image,a.service,a.stock,b.id brand_id,
+        GROUP_CONCAT(c.goods_details_pic) goods_details,f.goods_swipe_pic goods_swipe
+        FROM bl_goods a LEFT JOIN bl_brand b ON a.brand_id = b.id 
+        LEFT JOIN bl_goods_details c ON a.id = c.goods_id 
+        LEFT JOIN (
+            SELECT GROUP_CONCAT(e.goods_swipe_pic  SEPARATOR ',') goods_swipe_pic,e.goods_id 
+            FROM bl_goods d, bl_goods_swipe e WHERE d.id = e.goods_id GROUP BY e.goods_id) f 
+        ON a.id = f.goods_id WHERE a.id = ? GROUP BY c.goods_id`;
+    // console.log(mysql);
+    db.query(mysql, id, (error, result) => {
+        // 判断
+        if (error) return res.json(error);
+        result.forEach(e => {
+            // 商品 详情
+            e.goods_details = e.goods_details.split(",");
+            // 商品 轮播
+            e.goods_swipe = e.goods_swipe.split(",");
+            // 商品 封面
+            // e.image = `http://${config.server.ip}:${config.server.port}/${e.image}`;
+            // 商品 详情
+            // for (const i in e.goods_details_pic) {
+            //     e.goods_details_pic[i] = `http://${config.server.ip}:${config.server.port}/${e.goods_details_pic[i]}`;
+            // }
+            // // 商品 轮播
+            // for (const i in e.goods_swipe_pic) {
+            //     e.goods_swipe_pic[i] = `http://${config.server.ip}:${config.server.port}/${e.goods_swipe_pic[i]}`;
+            // }
+            // 服务类型
+            if (e.service === 0) {
+                e.service = "0"
+            } else if (e.service === 1) {
+                e.service = "1"
+            }
+        });
+        res.json({
+            "code": 200,
+            "data": result[0]
+        })
+    })
+})
+
+// 修改商品
+router.put("/goods_list", (req, res) => {
+    // 获取分类ID
+    let id = req.body.id;
+    // 分类ID 没有传时
+    if (!id) {
+        return res.json({
+            "code": 400,
+            "error": "分类ID不能为空"
+        });
+    }
+    // 那个分类 
+    let cat_id = req.body.cat_id;
+    if (cat_id === undefined) {
+        return res.json({
+            'code': 400,
+            'error': '分类ID不能为空!'
+        })
+    }
+    // 商品名称
+    let goods_name = req.body.goods_name;
+    if (goods_name === undefined) {
+        return res.json({
+            'code': 400,
+            'error': '商品名称不能为空!'
+        })
+    }
+    // 价格
+    let price = req.body.price;
+    if (price === undefined) {
+        return res.json({
+            'code': 400,
+            'error': '价格不能为空!'
+        })
+    }
+    // 封面图片
+    let image = req.body.image;
+    if (image === undefined) {
+        return res.json({
+            'code': 400,
+            'error': '封面图片不能为空!'
+        })
+    }
+    // 商品数量
+    let stock = req.body.stock;
+    if (stock === undefined) {
+        return res.json({
+            'code': 400,
+            'error': '商品数量不能为空!'
+        })
+    }
+    // 服务 0 百股自营 1 跨境
+    let service = req.body.service;
+    if (service === undefined) {
+        return res.json({
+            'code': 400,
+            'error': '服务类型不能为空!'
+        })
+    }
+    // 商品店铺
+    let brand_id = req.body.brand_id;
+    if (brand_id === undefined) {
+        return res.json({
+            'code': 400,
+            'error': '商品店铺ID不能为空!'
+        })
+    }
+    // 商品详细 JSON.parse(req.body.goods_details)
+    let goods_details = req.body.goods_details;
+    if (goods_details === undefined) {
+        return res.json({
+            'code': 400,
+            'error': '商品详细不能为空!'
+        })
+    }
+    // 商品图片轮播  JSON.parse(req.body.goods_swipe)
+    let goods_swipe = req.body.goods_swipe;
+    if (goods_swipe === undefined) {
+        return res.json({
+            'code': 400,
+            'error': '商品图片轮播不能为空!'
+        })
+    }
+
+    // 商品
+    let goodsData = {
+        cat_id,
+        goods_name,
+        price,
+        image,
+        stock,
+        service,
+        brand_id
+    }
+    // mysql   
+    let mysql = `UPDATE bl_goods SET ? WHERE id = ?`;
+    db.query(mysql, [goodsData, id], (error, result) => {
+        // 判断
+        if (error) return res.json(error);
+
+        // console.log(goods_details);
+        // 先删除  商品详细 在添加
+        mysql = `DELETE FROM bl_goods_details WHERE goods_id = ?`;
+        db.query(mysql, id, (error, result) => {
+            if (error) return res.json({
+                "code": 400,
+                "error": error
+            })
+        })
+        // 添加 商品详细
+        for (let i = 0; i < goods_details.length; i++) {
+            let detailsData = {
+                goods_id: id,
+                goods_details_pic: goods_details[i]
+            }
+            mysql = `INSERT INTO bl_goods_details SET ?`;
+            db.query(mysql, detailsData, (error, result) => {
+                if (error) return res.json({
+                    "code": 400,
+                    "error": error
+                })
+            })
+        }
+        // 先删除  商品图片轮播 在添加
+        mysql = `DELETE FROM bl_goods_swipe WHERE goods_id = ?`;
+        db.query(mysql, id, (error, result) => {
+            if (error) return res.json({
+                "code": 400,
+                "error": error
+            })
+        })
+        // 添加 商品图片轮播
+        for (let i = 0; i < goods_swipe.length; i++) {
+            let swipeData = {
+                goods_id: id,
+                goods_swipe_pic: goods_swipe[i]
+            }
+            mysql = `INSERT INTO bl_goods_swipe SET ?`;
+            db.query(mysql, swipeData, (error, result) => {
+                if (error) return res.json({
+                    "code": 400,
+                    "error": error
+                })
+            })
+        }
+        res.json({
+            'code': 200,
+            'message': "修改商品成功"
+        })
+    })
+})
+
+// 修改商品
+router.delete("/goods_list/:id(\\d+)", (req, res) => {
+    // 获取分类ID
+    let id = req.params.id;
+    // 分类ID 没有传时
+    if (!id) {
+        return res.json({
+            "code": 400,
+            "error": "ID不能为空"
+        });
+    }
+    // mysql   
+    let mysql = `DELETE FROM bl_goods WHERE id = ?`;
+    db.query(mysql, id, (error, result) => {
+        // 判断
+        if (error) return res.json(error);
+    })
+    // 删除商品详细
+    mysql = `DELETE FROM bl_goods_details WHERE goods_id = ?`;
+    db.query(mysql, id, (error, result) => {
+        // 判断
+        if (error) return res.json(error);
+    })
+    // 删除商品图片轮播
+    mysql = `DELETE FROM bl_goods_swipe WHERE goods_id = ?`;
+    db.query(mysql, id, (error, result) => {
+        // 判断
+        if (error) return res.json(error);
+    })
+    res.json({
+        'code': 200,
+        'message': "删除商品成功"
     })
 })
 
@@ -157,7 +614,7 @@ router.post("/goods_sort", (req, res) => {
 })
 
 // 商品 点击每一个商品就入每一个商品详情页
-router.get('/goods_detail', (req, res) => { 
+router.get('/goods_detail', (req, res) => {
     let id = req.query.id;
     // console.log(id);
     let mysql = "SELECT a.id,a.goods_name,a.price,a.image,a.service,a.pic_details,b.id bra_id, b.bra_name,b.bra_image FROM bl_brand b,bl_goods a WHERE a.brand_id = b.id AND  a.id = ?"
@@ -468,7 +925,7 @@ router.post("/orders", (req, res) => {
 })
 
 // 商品 点击每一个商品就入每一个商品详情页
-router.get('/goods_details', (req, res) => { 
+router.get('/goods_details', (req, res) => {
     let id = req.query.id;
     // console.log(id);
     let mysql = "SELECT a.id,a.goods_name,a.price,a.image,a.service,a.pic_details,a.goods_pic,b.id bra_id, b.bra_name,b.bra_image FROM bl_brand b,bl_goods a WHERE a.brand_id = b.id AND  a.id = ?"
@@ -486,12 +943,12 @@ router.get('/goods_details', (req, res) => {
         let pic = result[0].goods_pic.split(",");
         pic.forEach((element, index) => {
             pic[index] = fileBaseUrl + element
-        }); 
-        
+        });
+
         result[0].goods_pic = pic;
-        
+
         // console.log(result);
-        
+
         res.json({
             "code": 200,
             "data": result[0]
@@ -925,6 +1382,40 @@ router.get("/order_evaluation", (req, res) => {
             })
         }
     }
+})
+
+// 查询所有得 店铺 
+router.get("/goods_list_brand", (req, res) => {
+    let mysql = "SELECT * FROM bl_brand";
+    db.query(mysql, (error, result) => {
+        if (error) return res.json({
+            "code": 400,
+            "error": error
+        })
+        res.json({
+            "code": 200,
+            "data": result
+        })
+    })
+})
+
+// 查询所有得  服务类型 
+router.get("/goods_list_service", (req, res) => {
+    res.json({
+        "code": 200,
+        "data": [
+            {
+                id: 1,
+                ser_name: "百股自营",
+                value: "0"
+            },
+            {
+                id: 2,
+                ser_name: "跨境",
+                value: "1"
+            }
+        ]
+    })
 })
 
 // 导出路由

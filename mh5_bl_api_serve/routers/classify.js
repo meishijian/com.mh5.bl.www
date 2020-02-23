@@ -52,7 +52,8 @@ router.get("/goods_classify", (req, res) => {
     // 【可选】 页数
     const page = req.query.pagenum || 1;
     // 【可选】 一条多少数据
-    const pagesize = req.query.pagesize || 3;
+    const pagesize = req.query.pagesize;
+
     // 【可选】 排序 升序 或 降序
     const sortway = req.query.sortway || 'asc';
     // 根据查询参数拼 SQL 语句
@@ -71,10 +72,14 @@ router.get("/goods_classify", (req, res) => {
     // }
     // 排序
     const order = ` ORDER BY id ${sortway}`;
-    // 翻页
-    let offset = (page - 1) * pagesize;
     // limit
-    let limit = ` LIMIT ${offset},${pagesize}`;
+    let limit = '';
+    if (pagesize !== undefined) {
+        // 翻页
+        let offset = (page - 1) * pagesize;
+        // limit
+        limit = ` LIMIT ${offset},${pagesize}`;
+    }
     // mysql
     let mysql = `SELECT COUNT(*) total FROM bl_classify`;
     db.query(mysql, (error, results) => {
@@ -104,7 +109,7 @@ router.get("/goods_classify", (req, res) => {
                                     data.push({
                                         id: element1.id,
                                         cla_name: element1.sort_name,
-                                        sort_image: element1.sort_image.indexOf("https://img") != -1 ? element1.sort_image : `http://${config.server.ip}:${config.server.port}/${element1.sort_image}`,
+                                        sort_image: element1.sort_image.indexOf("https://") != -1 ? element1.sort_image : `http://${config.server.ip}:${config.server.port}/${element1.sort_image}`,
                                         part: "2"
                                     });
                                 }
@@ -261,7 +266,6 @@ router.post("/goods_classify_three", (req, res) => {
 // 回显各级分类
 router.get('/goods_classify/:id(\\d+)', (req, res) => {
     let part = req.query.part; // 0 一级 1 二级  2 三级 
-
     // 获取分类ID
     let id = req.params.id;
     // 分类ID 没有传时

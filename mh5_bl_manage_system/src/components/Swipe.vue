@@ -21,8 +21,20 @@
         </el-table-column>
         <el-table-column prop="link" label="链接跳转"></el-table-column>
         <el-table-column label="操作">
-          <el-button type="primary" icon="el-icon-edit" size="mini">编辑</el-button>
-          <el-button type="danger" icon="el-icon-delete" size="mini">删除</el-button>
+          <template slot-scope="scoped">
+            <el-button
+              type="primary"
+              icon="el-icon-edit"
+              size="mini"
+              @click="add_eachs('1',scoped.row)"
+            >编辑</el-button>
+            <el-button
+              type="danger"
+              icon="el-icon-delete"
+              size="mini"
+              @click="delCat(scoped.row)"
+            >删除</el-button>
+          </template>
         </el-table-column>
       </el-table>
 
@@ -135,10 +147,51 @@ export default {
     "my-upload": myUpload
   },
   methods: {
+    // 删除
+    async delCat(row) {
+      const confirmStr = await this.$confirm(
+        "此操作将永久删除该分类, 是否继续?",
+        "提示",
+        {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
+        }
+      ).catch(error => error);
+      // console.log(confirmStr);
+      // 判断 如果取消
+      if (confirmStr === "cancel") {
+        return this.$message("已取消删除该分类");
+      }
+      const { data: res } = await this.$http.delete(
+        "/main_ad_images/" + row.id
+      );
+      // console.log(res);
+      // 错误时
+      if (res.code !== 200) return this.$message.error(res.error);
+      // 成功时
+      this.$message.success(res.message);
+      // console.log(this.catData);
+      // 删除该页面最后一条数据时，会出现没有数据 这样不符合逻辑 让当前数据的长度 和 当前页面 必须不是第一个页面 层级不为一级时
+      if (this.imageData.length === 1 && this.catInfo.pagenum > 1) {
+        // 让 页数 减减
+        --this.catInfo.pagenum;
+      }
+      // 渲染 分类目录数据
+      this.imageList();
+    },
     // 判断 几级分类
-    add_eachs(part) {
+    add_eachs(part, row) {
       this.add_each = part;
       this.threeVisible = true;
+      if (part == 1) {
+        this.$http.get("main_ad_images/" + row.id).then(res => {
+          // console.log(res);
+          this.threeForm = res.data.data;
+          // 上传时需要 图片路径
+          this.imgDataUrl = image + res.data.data.image;
+        });
+      }
     },
     // 修改 头像状态
     toggleShow() {
@@ -161,7 +214,7 @@ export default {
       // console.log("上传失败状态" + status);
       this.$message.error("上传失败，请重试");
     },
-    // 添加三级分类
+    // 添加轮播图
     threeAddCat() {
       this.$refs.threeForm.validate(async valid => {
         // 判断是否正确
@@ -170,7 +223,6 @@ export default {
         if (this.threeForm.sort_image === "") {
           return this.$message.error("图片必须选择!");
         }
-
         // 添加时
         if (this.add_each === "0") {
           // 正确的话 ，请求
@@ -184,13 +236,10 @@ export default {
           // 成功时
           this.$message.success(res.message);
         } else {
-          let { data: res } = await this.$http.put("/goods_classify", {
-            part: this.part,
-            id: this.threeForm.id,
-            cla_name: this.threeForm.sort_name,
-            sort_image: this.threeForm.sort_image,
-            cat_id: this.threeForm.cat_id
-          });
+          let { data: res } = await this.$http.put(
+            "/main_ad_images",
+            this.threeForm
+          );
         }
         // 渲染 分类目录数据
         this.imageList();
