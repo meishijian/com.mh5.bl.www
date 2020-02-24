@@ -104,6 +104,11 @@ router.get('/main_ad_images/:id(\\d+)', (req, res) => {
                 "error": "轮播图ID错误"
             });
         }
+        console.log(result);
+
+        result.forEach(e => {
+            e.image = e.image.indexOf("https://img") != -1 ? e.image : `http://${config.server.ip}:${config.server.port}/${e.image}`;
+        });
         // 成功时
         res.json({
             "code": 200,
@@ -216,6 +221,9 @@ router.get("/main_small_images", (req, res) => {
                 data.push(element)
             }
         });
+        data.forEach(e => {
+            e.image = e.image.indexOf("https://img") != -1 ? e.image : `http://${config.server.ip}:${config.server.port}/${e.image}`;
+        });
         res.json({
             "code": 200,
             data
@@ -242,6 +250,11 @@ router.get("/main_goods_ranking", (req, res) => {
                 "code": 400,
                 "error": error
             })
+
+            data.forEach(e => {
+                // 店铺图标
+                e.sort_image = e.sort_image.indexOf("https://") != -1 ? e.sort_image : `http://${config.server.ip}:${config.server.port}/${e.sort_image}`;
+            });
             res.json({
                 "code": 200,
                 data
@@ -290,6 +303,10 @@ router.get("/main_brand_ranking", (req, res) => {
                 "code": 400,
                 "error": error
             })
+            data.forEach(e => {
+                // 店铺图标
+                e.bra_image = e.bra_image.indexOf("http://img") != -1 ? e.bra_image : `http://${config.server.ip}:${config.server.port}/${e.bra_image}`;
+            });
             res.json({
                 "code": 200,
                 data
@@ -300,12 +317,18 @@ router.get("/main_brand_ranking", (req, res) => {
 
 // 猜你喜欢
 router.get("/guess", (req, res) => {
+    // console.log(11);
     // let page = req.query.page;
-    let mysql = "SELECT count(*) c FROM bl_goods";
+    let mysql = "SELECT id FROM bl_goods";
     db.query(mysql, (error, result) => {
         let num = [];
-        for (let i = 0; i < 10; i++) {
-            num.push(Math.floor(Math.random() * result[0].c))
+        for (; num.length < 10;) {
+            let random = Math.ceil(Math.random() * result[result.length - 1].id);
+            for (let i = 0; i < result.length; i++) {
+                if (random === result[i].id) {
+                    num.push(random)
+                }
+            }
         }
         // 查询 轮播图
         let mysql = `SELECT id,goods_name,image,price FROM bl_goods  WHERE id IN (${num})`;
@@ -314,6 +337,11 @@ router.get("/guess", (req, res) => {
                 "code": 400,
                 "error": error
             })
+            data.forEach(e => {
+                // 商品 封面
+                e.image = `http://${config.server.ip}:${config.server.port}/${e.image}`;
+            });
+
             res.json({
                 "code": 200,
                 data

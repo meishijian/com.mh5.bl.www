@@ -279,13 +279,16 @@ export default {
   created() {
     // console.log(this.id);
     this.$http.get("/goods_get/" + this.id).then(res => {
+      // console.log(res);
       // 判断
       if (res.data.code !== 200) {
         return this.$message.error("回显数据失败");
       }
       this.addForm = res.data.data;
       this.imageDataUrl = image + res.data.data.image;
-      this.catIds.push(res.data.data.cat_id);
+      this.catIds = res.data.data.cat_id;
+      this.addForm.cat_id =
+        res.data.data.cat_id[res.data.data.cat_id.length - 1];
       // 商品 详情
       for (const i in this.addForm.goods_details) {
         this.detailsDataUrl[i] = `${image}${this.addForm.goods_details[i]}`;
@@ -433,14 +436,15 @@ export default {
         // 判断表单验证
         if (!valid) return this.$message.error("请完善 商品基本信息 在添加!");
         // 分类列表
-        console.log(this.catIds.length);
 
-        if (this.catIds.length === 0) {
+        // 分类列表
+        if (this.catIds.length !== 3) {
           this.$message.error("请选择商品分类！");
           return false;
-        } else if (this.catIds.length === 3) {
+        } else {
           this.addForm.cat_id = this.catIds[this.catIds.length - 1];
         }
+
         // 商品店铺
         if (this.addForm.brand_id === "") {
           this.$message.error("请选择商品店铺！");

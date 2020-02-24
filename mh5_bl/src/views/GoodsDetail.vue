@@ -22,7 +22,7 @@
       </div>
 
       <van-swipe class="goods-swipe" :autoplay="3000">
-        <van-swipe-item v-for="(item, index) in goodsDetail.goods_pic" :key="index">
+        <van-swipe-item v-for="(item, index) in goodsDetail.goods_swipe_pic" :key="index">
           <img class="swipe_img" :src="item" />
         </van-swipe-item>
       </van-swipe>
@@ -93,11 +93,12 @@
       </van-tabs>
       <div class="tuwen">图文详情</div>
       <!--商品介绍 -->
-      <van-grid class="grid">
-        <van-grid-item icon="photo-o" text="文字">
-          <img class="jieshao" :src="goodsDetail.pic_details" alt />
-        </van-grid-item>
-      </van-grid>
+      <img
+        :src="item"
+        width="100%"
+        v-for="(item, index) in goodsDetail.goods_details_pic"
+        :key="index"
+      />
     </div>
 
     <van-goods-action class="goods_action">
@@ -233,6 +234,9 @@ export default {
         .then(res => {
           this.goodsDetail = res.data.data;
           // console.log(res);
+          this.goodsDetail.goods_details_pic.sort(function(a, b) {
+            return a.localeCompare(b);
+          });
           // console.log(this.goodsDetail);
         });
     },

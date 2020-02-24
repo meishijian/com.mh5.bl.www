@@ -42,6 +42,11 @@ const routes = [
         // 商品列表  编辑
         path: '/goodslist/edit/:id',
         component: () => import("../components/Goods_edit.vue"),
+      },
+      {
+        // 商品店铺
+        path: '/brand',
+        component: () => import("../components/Brand.vue"),
       }
     ]
   },
@@ -49,6 +54,11 @@ const routes = [
     path: "/login",
     component: () =>
       import("../views/Login.vue")
+  },
+  {
+    path: "/login_brand",
+    component: () =>
+      import("../views/Login_brand.vue")
   },
   {
     path: "/regist",
@@ -68,6 +78,7 @@ const router = new VueRouter({
 router.beforeEach((to, form, next) => {
   // 2、 进入login网页 但是没给login放行
   if (to.path === "/login") return next();
+  if (to.path === "/login_brand") return next();
   if (to.path === "/regist") return next();
   // 1、 访问其他页面的时候 没有token的话就无法访问其他网页
   const tokenStr = window.sessionStorage.getItem("token");

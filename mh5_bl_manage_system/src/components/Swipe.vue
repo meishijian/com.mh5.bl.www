@@ -189,7 +189,7 @@ export default {
           // console.log(res);
           this.threeForm = res.data.data;
           // 上传时需要 图片路径
-          this.imgDataUrl = image + res.data.data.image;
+          this.imgDataUrl = res.data.data.image;
         });
       }
     },

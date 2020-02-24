@@ -8,9 +8,11 @@ Vue.config.productionTip = false;
 // 引入vant
 import Vant from 'vant';
 import 'vant/lib/index.css';
-
 Vue.use(Vant);
-import {main_host} from './config.js'
+
+
+
+import { main_host } from './config.js'
 import axios from 'axios';
 // 配置axios请求的地址
 axios.defaults.baseURL = main_host;

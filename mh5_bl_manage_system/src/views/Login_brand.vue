@@ -2,7 +2,7 @@
   <div class="login">
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <span>管理员登录</span>
+        <span>商家登录</span>
         <el-button style="float: right; padding: 3px 0" type="text" @click="regist">未店铺，请注册店铺</el-button>
         <br />
       </div>
@@ -30,7 +30,7 @@
           </el-form-item>
         </el-form>
 
-        <el-button style="float: right; padding: 3px 0" type="text" @click="Login_brand">商家用户登录</el-button>
+        <el-button style="float: right; padding: 3px 0" type="text" @click="Login">管理员登录</el-button>
       </div>
     </el-card>
   </div>
@@ -44,7 +44,7 @@ export default {
       // 表单数据
       loginForm: {
         mobile: "17553041262",
-        password: "123123"
+        password: "123456"
       },
       // 表单数据 验证
       loginFormRules: {
@@ -58,14 +58,14 @@ export default {
       this.$refs.loginFormRef.validate(valid => {
         if (!valid) return this.$message.error("错了哦，输入用户名或密码");
         // 请求
-        this.$http.post("/back/login", this.loginForm).then(res => {
+        this.$http.post("/login_brand", this.loginForm).then(res => {
           // console.log(res);
 
           if (res.data.code == 400) {
             return this.$message.error(res.data.error);
           }
           sessionStorage.setItem("token", res.data.token);
-          sessionStorage.setItem("login", "root");
+          sessionStorage.setItem("login", "brand");
           this.$message.success("登录成功");
           this.$router.push("/");
         });
@@ -77,8 +77,8 @@ export default {
     regist() {
       this.$router.push("/regist");
     },
-    Login_brand() {
-      this.$router.push("/login_brand");
+    Login() {
+      this.$router.push("/login");
     }
   }
 };

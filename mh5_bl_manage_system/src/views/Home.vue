@@ -21,15 +21,20 @@
             </el-menu-item-group>
           </el-submenu>
 
-          <el-menu-item index="/class">
-            <i class="el-icon-collection"></i>
-            <span slot="title">分类</span>
-          </el-menu-item>
-
-          <el-menu-item index="/swipe">
-            <i class="el-icon-magic-stick"></i>
-            <span slot="title">首页轮播图</span>
-          </el-menu-item>
+          <template v-if="login === 'root'">
+            <el-menu-item index="/class">
+              <i class="el-icon-collection"></i>
+              <span slot="title">分类</span>
+            </el-menu-item>
+            <el-menu-item index="/swipe">
+              <i class="el-icon-magic-stick"></i>
+              <span slot="title">首页轮播图</span>
+            </el-menu-item>
+            <el-menu-item index="/brand">
+              <i class="el-icon-s-operation"></i>
+              <span slot="title">商家店铺</span>
+            </el-menu-item>
+          </template>
         </el-menu>
       </el-aside>
       <el-main>
@@ -44,7 +49,7 @@
 export default {
   data() {
     return {
-      mm: "21e"
+      login: sessionStorage.getItem("login")
     };
   },
   methods: {

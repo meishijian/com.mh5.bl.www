@@ -62,6 +62,12 @@ router.get("/goods_list", (req, res) => {
             // console.log(result);
             result.forEach(e => {
                 e.image = `http://${config.server.ip}:${config.server.port}/${e.image}`;
+                // 服务类型
+                if (e.service === 0) {
+                    e.service = "百股自营"
+                } else if (e.service === 1) {
+                    e.service = "跨境"
+                }
             });
             res.json({
                 "code": 200,
@@ -320,10 +326,23 @@ router.get("/goods_get/:id(\\d+)", (req, res) => {
                 e.service = "1"
             }
         });
-        res.json({
-            "code": 200,
-            "data": result[0]
+
+        mysql = `SELECT d.id,c.id class_id,b.id cat_id FROM bl_goods a LEFT JOIN bl_sort b ON a.cat_id = b.id LEFT JOIN bl_categories c ON b.cat_id = c.id LEFT JOIN bl_classify d ON c.class_id = d.id WHERE a.id = ?`
+        db.query(mysql, id, (error, result1) => {
+            // 判断
+            if (error) return res.json(error);
+
+            result[0].cat_id = [];
+            result[0].cat_id.push(result1[0].id)
+            result[0].cat_id.push(result1[0].class_id)
+            result[0].cat_id.push(result1[0].cat_id)
+
+            res.json({
+                "code": 200,
+                "data": result[0]
+            })
         })
+
     })
 })
 
@@ -928,27 +947,48 @@ router.post("/orders", (req, res) => {
 router.get('/goods_details', (req, res) => {
     let id = req.query.id;
     // console.log(id);
-    let mysql = "SELECT a.id,a.goods_name,a.price,a.image,a.service,a.pic_details,a.goods_pic,b.id bra_id, b.bra_name,b.bra_image FROM bl_brand b,bl_goods a WHERE a.brand_id = b.id AND  a.id = ?"
+    let mysql = "SELECT a.id,a.goods_name,a.price,a.image,a.service,a.pic_details,a.goods_pic,b.id bra_id, b.bra_name,b.bra_image FROM bl_brand b,bl_goods a WHERE a.brand_id = b.id AND a.id = ?"
+
+    mysql = `SELECT 
+    a.id,a.goods_name,a.price,a.image,a.service,a.stock,b.id bra_id,b.bra_name,b.bra_image,
+    GROUP_CONCAT(c.goods_details_pic) goods_details_pic,f.goods_swipe_pic 
+    FROM bl_goods a LEFT JOIN bl_brand b ON a.brand_id = b.id 
+    LEFT JOIN bl_goods_details c ON a.id = c.goods_id 
+    LEFT JOIN (
+        SELECT GROUP_CONCAT(e.goods_swipe_pic  SEPARATOR ',') goods_swipe_pic,e.goods_id 
+        FROM bl_goods d, bl_goods_swipe e WHERE d.id = e.goods_id GROUP BY e.goods_id) f 
+    ON a.id = f.goods_id WHERE a.id = ? GROUP BY c.goods_id  ORDER BY c.goods_details_pic asc `;
     db.query(mysql, id, (error, result) => {
         if (error) return res.json({
             "code": 400,
             "error": error
         })
-        if (result.length == 0) {
-            return res.json({
-                "code": 200,
-                "data": []
-            })
-        }
-        let pic = result[0].goods_pic.split(",");
-        pic.forEach((element, index) => {
-            pic[index] = fileBaseUrl + element
-        });
-
-        result[0].goods_pic = pic;
 
         // console.log(result);
-
+        result.forEach(e => {
+            // 商品 详情
+            e.goods_details_pic = e.goods_details_pic.split(",");
+            // 商品 轮播
+            e.goods_swipe_pic = e.goods_swipe_pic.split(",");
+            // 商品 封面
+            e.image = `http://${config.server.ip}:${config.server.port}/${e.image}`;
+            // 店铺 封面
+            e.bra_image = e.bra_image.indexOf("http://img") != -1 ? e.bra_image : `http://${config.server.ip}:${config.server.port}/${e.bra_image}`;
+            // 商品 详情
+            for (const i in e.goods_details_pic) {
+                e.goods_details_pic[i] = `http://${config.server.ip}:${config.server.port}/${e.goods_details_pic[i]}`;
+            }
+            // 商品 轮播
+            for (const i in e.goods_swipe_pic) {
+                e.goods_swipe_pic[i] = `http://${config.server.ip}:${config.server.port}/${e.goods_swipe_pic[i]}`;
+            }
+            // 服务类型
+            if (e.service === 0) {
+                e.service = "百股自营"
+            } else if (e.service === 1) {
+                e.service = "跨境"
+            }
+        });
         res.json({
             "code": 200,
             "data": result[0]
@@ -1386,17 +1426,52 @@ router.get("/order_evaluation", (req, res) => {
 
 // 查询所有得 店铺 
 router.get("/goods_list_brand", (req, res) => {
-    let mysql = "SELECT * FROM bl_brand";
-    db.query(mysql, (error, result) => {
-        if (error) return res.json({
-            "code": 400,
-            "error": error
-        })
-        res.json({
-            "code": 200,
-            "data": result
+    // 【可选】 页数
+    const page = req.query.pagenum || 1;
+    // 【可选】 一条多少数据
+    const pagesize = req.query.pagesize;
+
+    // 【可选】 排序 升序 或 降序
+    const sortway = req.query.sortway || 'asc';
+    // 排序
+    const order = ` ORDER BY id ${sortway}`;
+    // limit
+    let limit = '';
+    if (pagesize !== undefined) {
+        // 翻页
+        let offset = (page - 1) * pagesize;
+        // limit
+        limit = ` LIMIT ${offset},${pagesize}`;
+    }
+    // mysql
+    let mysql = `SELECT COUNT(*) total FROM bl_brand`;
+    db.query(mysql, (error, results) => {
+        // 判断
+        if (error) return res.json(error);
+        // 总条数据
+        let total = results[0].total;
+        // mysql
+        mysql = `SELECT * FROM bl_brand ${order} ${limit}`;
+        db.query(mysql, (error, result) => {
+            if (error) return res.json({
+                "code": 400,
+                "error": error
+            })
+            result.forEach(e => {
+                // 店铺图标
+                e.bra_image = e.bra_image.indexOf("http://img") != -1 ? e.bra_image : `http://${config.server.ip}:${config.server.port}/${e.bra_image}`;
+            });
+            res.json({
+                "code": 200,
+                total,
+                "data": result
+            })
         })
     })
+
+
+
+
 })
 
 // 查询所有得  服务类型 
