@@ -52,6 +52,11 @@ const routes = [
         // 用户信息
         path: '/users',
         component: () => import("../components/Users.vue"),
+      },
+      {
+        // 订单管理
+        path: '/orders',
+        component: () => import("../components/Orders.vue"),
       }
     ]
   },

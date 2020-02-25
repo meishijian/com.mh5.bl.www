@@ -11,34 +11,85 @@
           :unique-opened="true"
           :router="true"
         >
-          <el-submenu index="1">
+          <template v-if="login === 'root'">
+            <!-- 用户管理 -->
+            <el-submenu index="1">
+              <template slot="title">
+                <i class="el-icon-user-solid"></i>
+                <span>用户管理</span>
+              </template>
+              <el-menu-item-group>
+                <el-menu-item index="/users">
+                  <i class="el-icon-user"></i>
+                  <span slot="title">用户信息</span>
+                </el-menu-item>
+              </el-menu-item-group>
+            </el-submenu>
+            <!-- 用户管理 -->
+            <el-submenu index="2">
+              <template slot="title">
+                <i class="el-icon-document-copy"></i>
+                <span>分类管理</span>
+              </template>
+              <el-menu-item-group>
+                <el-menu-item index="/class">
+                  <i class="el-icon-document"></i>
+                  <span slot="title">分类</span>
+                </el-menu-item>
+              </el-menu-item-group>
+            </el-submenu>
+            <!-- 首页轮播图 -->
+            <el-submenu index="3">
+              <template slot="title">
+                <i class="el-icon-s-home"></i>
+                <span>首页管理</span>
+              </template>
+              <el-menu-item-group>
+                <el-menu-item index="/swipe">
+                  <i class="el-icon-house"></i>
+                  <span slot="title">轮播图</span>
+                </el-menu-item>
+              </el-menu-item-group>
+            </el-submenu>
+            <!-- 订单管理 -->
+            <el-submenu index="4">
+              <template slot="title">
+                <i class="el-icon-present"></i>
+                <span>订单管理</span>
+              </template>
+              <el-menu-item-group>
+                <el-menu-item index="/orders">
+                  <i class="el-icon-bank-card"></i>
+                  <span slot="title">订单列表</span>
+                </el-menu-item>
+              </el-menu-item-group>
+            </el-submenu>
+            <!-- 商家店铺 -->
+            <el-submenu index="5">
+              <template slot="title">
+                <i class="el-icon-mobile"></i>
+                <span>商家管理</span>
+              </template>
+              <el-menu-item-group>
+                <el-menu-item index="/brand">
+                  <i class="el-icon-takeaway-box"></i>
+                  <span slot="title">商家店铺</span>
+                </el-menu-item>
+              </el-menu-item-group>
+            </el-submenu>
+          </template>
+          <el-submenu index="6">
             <template slot="title">
-              <i class="el-icon-mouse"></i>
+              <i class="el-icon-goods"></i>
               <span>商品管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="/goodslist">商品列表</el-menu-item>
+              <el-menu-item index="/goodslist">
+                <i class="el-icon-s-goods"></i>
+                <span slot="title">商品列表</span>
+              </el-menu-item>
             </el-menu-item-group>
           </el-submenu>
-
-          <template v-if="login === 'root'">
-            <el-menu-item index="/class">
-              <i class="el-icon-collection"></i>
-              <span slot="title">分类</span>
-            </el-menu-item>
-            <el-menu-item index="/swipe">
-              <i class="el-icon-magic-stick"></i>
-              <span slot="title">首页轮播图</span>
-            </el-menu-item>
-            <el-menu-item index="/brand">
-              <i class="el-icon-s-operation"></i>
-              <span slot="title">商家店铺</span>
-            </el-menu-item>
-            <el-menu-item index="/users">
-              <i class="el-icon-user-solid"></i>
-              <span slot="title">用户信息</span>
-            </el-menu-item>
-          </template>
         </el-menu>
       </el-aside>
       <el-main>

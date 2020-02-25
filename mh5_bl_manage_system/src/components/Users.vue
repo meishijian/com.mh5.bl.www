@@ -3,6 +3,7 @@
     <!-- 面包屑 -->
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>用户管理</el-breadcrumb-item>
       <el-breadcrumb-item>用户信息</el-breadcrumb-item>
     </el-breadcrumb>
 
@@ -84,7 +85,7 @@ export default {
     //轮播图
     imageList() {
       this.$http.get("/users_list", { params: this.catInfo }).then(res => {
-        console.log(res);
+        // console.log(res);
         this.imageData = res.data.data;
         // 总数
         this.total = res.data.total;

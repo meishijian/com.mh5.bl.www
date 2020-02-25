@@ -1468,10 +1468,6 @@ router.get("/goods_list_brand", (req, res) => {
             })
         })
     })
-
-
-
-
 })
 
 // 回显 店铺
@@ -1609,6 +1605,49 @@ router.get("/goods_list_service", (req, res) => {
         ]
     })
 })
+
+// 查询所有的订单 
+router.get("/orders_lists", (req, res) => {
+    // 【可选】 页数
+    const page = req.query.pagenum || 1;
+    // 【可选】 一条多少数据
+    const pagesize = req.query.pagesize;
+
+    // 【可选】 排序 升序 或 降序
+    const sortway = req.query.sortway || 'asc';
+    // 排序
+    const order = ` ORDER BY id ${sortway}`;
+    // limit
+    let limit = '';
+    if (pagesize !== undefined) {
+        // 翻页
+        let offset = (page - 1) * pagesize;
+        // limit
+        limit = ` LIMIT ${offset},${pagesize}`;
+    }
+    // mysql
+    let mysql = `SELECT COUNT(*) total FROM bl_orders`;
+    db.query(mysql, (error, results) => {
+        // 判断
+        if (error) return res.json(error);
+        // 总条数据
+        let total = results[0].total;
+        // mysql
+        mysql = `SELECT * FROM bl_orders ${order} ${limit}`;
+        db.query(mysql, (error, result) => {
+            if (error) return res.json({
+                "code": 400,
+                "error": error
+            })
+            res.json({
+                "code": 200,
+                total,
+                "data": result
+            })
+        })
+    })
+})
+
 
 // 导出路由
 module.exports = router;
