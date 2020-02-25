@@ -1474,6 +1474,123 @@ router.get("/goods_list_brand", (req, res) => {
 
 })
 
+// 回显 店铺
+router.get("/goods_list_brand/:id(\\d+)", (req, res) => {
+    // 获取分类ID
+    let id = req.params.id;
+    // 分类ID 没有传时
+    if (!id) {
+        return res.json({
+            "code": 400,
+            "error": "分类ID不能为空"
+        });
+    }
+    // mysql
+    let mysql = `SELECT * FROM bl_brand WHERE id = ?`;
+    // console.log(mysql);
+    db.query(mysql, id, (error, result) => {
+        // 判断
+        if (error) return res.json(error);
+        result.forEach(e => {
+            // 店铺图标
+            e.bra_image = e.bra_image.indexOf("http://img") != -1 ? e.bra_image : `http://${config.server.ip}:${config.server.port}/${e.bra_image}`;
+        });
+        res.json({
+            "code": 200,
+            "data": result[0]
+        })
+    })
+})
+
+// 修改 店铺
+router.put("/goods_list_brand", (req, res) => {
+    // 获取分类ID
+    let id = req.body.id;
+    if (id === undefined) {
+        return res.json({
+            'code': 400,
+            'error': 'ID不能为空!'
+        })
+    }
+    // 店铺名称
+    let bra_name = req.body.bra_name;
+    if (bra_name === undefined) {
+        return res.json({
+            'code': 400,
+            'error': '店铺名称不能为空!'
+        })
+    }
+    // 店铺图标
+    let bra_image = req.body.bra_image;
+    if (bra_image === undefined) {
+        return res.json({
+            'code': 400,
+            'error': '店铺图标不能为空!'
+        })
+    }
+    // mysql
+    let mysql = "SELECT * FROM bl_brand WHERE id = ?";
+    db.query(mysql, id, (error, result) => {
+        // 判断
+        if (error) return res.json(error);
+        // 如果不存在 该ID
+        if (result.length === 0) {
+            return res.json({
+                "code": 400,
+                "error": "不存在该店铺"
+            });
+        }
+        // 进行修改 编辑
+        mysql = "UPDATE bl_brand SET bra_name = ?,bra_image = ? WHERE id = ?";
+        db.query(mysql, [bra_name, bra_image, id], (error, result) => {
+            // 判断
+            if (error) return res.json(error);
+            // 修改编辑 成功
+            res.json({
+                "code": 200,
+                "message": "修改店铺成功"
+            });
+        })
+    })
+
+})
+
+// 删除 店铺
+router.delete("/goods_list_brand/:id(\\d+)", (req, res) => {
+    // 获取分类ID
+    let id = req.params.id;
+    // 分类ID 没有传时
+    if (!id) {
+        return res.json({
+            "code": 400,
+            "error": "ID不能为空"
+        });
+    }
+    // mysql
+    let mysql = "SELECT * FROM bl_brand WHERE id = ?";
+    db.query(mysql, id, (error, result2) => {
+        // 判断
+        if (error) return res.json(error);
+        // console.log(result[0].id);
+        if (result2.length === 0) {
+            return res.json({
+                'code': 400,
+                "error": "ID不正确"
+            })
+        }
+        mysql = `DELETE FROM bl_brand WHERE id in ( ${id} )`;
+        db.query(mysql, (error, resuly) => {
+            // 判断
+            if (error) return res.json(error);
+
+            res.json({
+                "code": 200,
+                "message": "删除成功"
+            });
+        })
+    })
+})
+
 // 查询所有得  服务类型 
 router.get("/goods_list_service", (req, res) => {
     res.json({

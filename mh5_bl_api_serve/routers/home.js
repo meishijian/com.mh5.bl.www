@@ -229,7 +229,7 @@ router.get("/main_small_images", (req, res) => {
             data
         })
     })
-})
+}) 
 
 // 好货排行榜
 router.get("/main_goods_ranking", (req, res) => {

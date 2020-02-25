@@ -146,8 +146,8 @@
               @crop-upload-success="detailsUploadSuccess"
               @crop-upload-fail="cropUploadFail"
               v-model="detailsShow"
-              :width="560"
-              :height="750"
+              :width="750"
+              :height="1800"
               img-format="png"
               :size="size"
               langType="zh"
@@ -196,7 +196,7 @@ export default {
       imageDataUrl: "",
       // 商品封面 状态
       imageShow: false,
-      size: 2.1,
+      size: 5.1,
       // 图片上传路径
       uploadURL: add_Arti_upload,
       // 请求头
