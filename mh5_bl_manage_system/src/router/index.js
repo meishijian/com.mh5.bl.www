@@ -47,6 +47,11 @@ const routes = [
         // 商品店铺
         path: '/brand',
         component: () => import("../components/Brand.vue"),
+      },
+      {
+        // 用户信息
+        path: '/users',
+        component: () => import("../components/Users.vue"),
       }
     ]
   },

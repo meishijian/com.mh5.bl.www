@@ -20,6 +20,65 @@ const picAddress = "../public/image/";
 //  访问 服务器中的图片 路径  前端使用的图片路径是 服务器的路径图片地址
 const fileBaseUrl = "http://m.chenmsj.com:59885/api/v1/public/image/";
 // git@github.com:meishijian/com.mh5.bl.www.git
+
+// 所有的用户信息
+router.get("/users_list", (req, res) => {
+    // 【可选】 页数
+    const page = req.query.pagenum || 1;
+    // 【可选】 一条多少数据
+    const pagesize = req.query.pagesize || 3;
+
+    // 【可选】 排序 升序 或 降序
+    const sortway = req.query.sortway || 'asc';
+    // 排序
+    const order = ` ORDER BY id ${sortway}`;
+    // limit
+    let limit = '';
+    if (pagesize !== undefined) {
+        // 翻页
+        let offset = (page - 1) * pagesize;
+        // limit
+        limit = ` LIMIT ${offset},${pagesize}`;
+    }
+    // mysql
+    let mysql = `SELECT COUNT(*) total FROM bl_users`;
+    db.query(mysql, (error, results) => {
+        // 判断
+        if (error) return res.json(error);
+        // 总条数据
+        let total = results[0].total;
+
+        let mysql = `SELECT * FROM bl_users ${order} ${limit}`;
+        db.query(mysql, (error, result) => {
+            if (error) return res.json({
+                "code": 400,
+                "error": error
+            })
+            result.forEach(e => {
+                // 店铺图标
+                e.face = e.face.indexOf("http://img") != -1 ? e.face : `http://${config.server.ip}:${config.server.port}/${e.face}`;
+                if (e.sex === 0) {
+                    e.sex = "保密"
+                } else if (e.sex === 1) {
+                    e.sex = "男"
+                } else if (e.sex === 2) {
+                    e.sex = "女"
+                } else {
+                    e.sex = "未设置"
+                }
+            });
+            // result[0].face = fileBaseUrl + result[0].face;
+
+            res.json({
+                "code": 200,
+                total,
+                "data": result
+            })
+        })
+    })
+
+})
+
 // 用户信息渲染
 router.get("/users", (req, res) => {
 
@@ -135,7 +194,6 @@ router.get("/order_status", (req, res) => {
         }
     }
 })
-
 
 // 上传头像
 router.post("/user_pic_upload", multer().single("pic"), (req, res) => {

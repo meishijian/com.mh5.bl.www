@@ -64,6 +64,7 @@ Vue.filter("dateFormat", originVal => {
   return `${y}-${m}-${d} ${hh}:${mm}:${ss}`;
 });
 
+import './assets/css/index.css'
 Vue.config.productionTip = false;
 
 new Vue({

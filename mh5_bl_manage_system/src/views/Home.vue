@@ -34,6 +34,10 @@
               <i class="el-icon-s-operation"></i>
               <span slot="title">商家店铺</span>
             </el-menu-item>
+            <el-menu-item index="/users">
+              <i class="el-icon-user-solid"></i>
+              <span slot="title">用户信息</span>
+            </el-menu-item>
           </template>
         </el-menu>
       </el-aside>

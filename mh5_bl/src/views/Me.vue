@@ -6,8 +6,8 @@
       <van-nav-bar title="个人中心" left-arrow @click-left="onClickLeft" />
       <!-- 大红色背景 -->
       <div class="pink">
-        <img class="pink_img" src="https://mh5.bl.com/static/img/set.4cf7c7f.png" alt />
-        <img class="pink_imgs" src="https://mh5.bl.com/static/img/shareLogo.png" alt />
+        <img class="pink_img" :src="image + 'she.png'" alt />
+        <img class="pink_imgs" :src="image + 'shareLogo.png'" alt />
         <span class="login">登录/</span>
         <span class="zhuce">注册</span>
       </div>
@@ -15,9 +15,9 @@
       <!-- <img class="tup" src="https://img23.iblimg.com/market-3/images/activity/285948628.jpg" alt /> -->
       <!-- 收藏福利人人惠 -->
       <van-grid :column-num="3">
-        <van-grid-item :icon="url + 'ia_100000001.png'" text="我的收藏"></van-grid-item>
-        <van-grid-item :icon="url + 'ia_100000002.png'" text="我的福利"></van-grid-item>
-        <van-grid-item :icon="url + 'ia_100000003.png'" text="人人惠"></van-grid-item>
+        <van-grid-item :icon="image + 'ia_100000001.png'" text="我的收藏"></van-grid-item>
+        <van-grid-item :icon="image + 'ia_100000002.png'" text="我的福利"></van-grid-item>
+        <van-grid-item :icon="image + 'ia_100000003.png'" text="人人惠"></van-grid-item>
       </van-grid>
       <!-- 积分 优惠劵 -->
       <van-grid :column-num="5" class="van_grid_ji">
@@ -285,12 +285,12 @@
 </template>
 
 <script>
+import { image } from "../config.js";
 import { mapState } from "vuex";
 export default {
   data() {
     return {
-      // 图片
-      url: "http://m.chenmsj.com:59885/api/v1/public/image/",
+      image: image,
       // list列表 加载
       loading: false,
       finished: false,
@@ -530,10 +530,10 @@ export default {
     font-size: 12px;
     text-align: center;
   }
+  // overflow: hidden; /*超出部分隐藏*/
+  // text-overflow: ellipsis; /* 超出部分显示省略号 */
+  // white-space: nowrap; /*规定段落中的文本不进行换行 */
+  // width: 150px; /*需要配合宽度来使用*/
 }
 </style>
 
-// overflow: hidden; /*超出部分隐藏*/
-// text-overflow: ellipsis; /* 超出部分显示省略号 */
-// white-space: nowrap; /*规定段落中的文本不进行换行 */
-// width: 150px; /*需要配合宽度来使用*/

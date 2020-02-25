@@ -7,3 +7,10 @@ body,
     padding: 0;
     min-width: 1024px;
 }
+
+/* 覆盖默认卡片视图的阴影效果 */
+.el-card {
+    width: 100%;
+    margin-top: 15px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15) !important;
+}
