@@ -116,8 +116,8 @@ export default {
     ...mapMutations(["getInfoData"]),
     //   返回上一级
     onClickLeft() {
-      // window.history.back(-1);
-      this.$router.push("/order");
+      window.history.back(-1);
+      // this.$router.push("/order");
 
     },
     order() {

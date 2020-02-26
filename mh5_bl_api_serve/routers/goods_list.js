@@ -996,7 +996,6 @@ router.get('/goods_details', (req, res) => {
     })
 })
 
-
 // 购物车获取商品
 router.get("/cart_goods", (req, res) => {
     let goods_id = req.query.goods_id;
@@ -1012,6 +1011,16 @@ router.get("/cart_goods", (req, res) => {
             "code": 400,
             "error": error
         });
+        result.forEach(e => {
+            // 商品 封面
+            e.image = `http://${config.server.ip}:${config.server.port}/${e.image}`;
+            // 服务类型
+            if (e.service === 0) {
+                e.service = "百股自营"
+            } else if (e.service === 1) {
+                e.service = "跨境"
+            }
+        });
         res.json({
             "code": 200,
             "data": result
@@ -1019,7 +1028,6 @@ router.get("/cart_goods", (req, res) => {
     })
 
 })
-
 
 // 订单 的  收货地址
 router.get("/address_single", (req, res) => {
@@ -1217,6 +1225,7 @@ router.get("/order_list", (req, res) => {
                                 item.order_sn = result[i].order_sn;
                                 item.total_price = result[i].total_price;
                                 item.addtime = result[i].addtime;
+                                item.goods_image = `http://${config.server.ip}:${config.server.port}/${result1[i].goods_image}`;
                                 strData.push(item)
                             }
                         });

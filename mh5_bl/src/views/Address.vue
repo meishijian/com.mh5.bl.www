@@ -34,8 +34,9 @@ export default {
   },
   methods: {
     onClickLeft() {
-      // window.history.back(-1);
-      this.$router.push("/order");
+      window.history.back(-1);
+      // this.$router.push("/order");
+      // this.$router.push("/orderSorry");
     },
     // 新添加地址按钮
     onAdd() {

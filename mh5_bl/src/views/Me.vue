@@ -121,9 +121,9 @@
       <van-nav-bar title="个人中心" left-arrow @click-left="onClickLeft" />
       <!-- 大红色背景 -->
       <div class="pink">
-        <img class="pink_img" :src="url + 'she.png'" alt @click="myInfo" />
+        <img class="pink_img" :src="image + 'she.png'" alt @click="myInfo" />
         <!-- shareLogo.png -->
-        <img class="pink_imgs" v-if="token== null" :src="url + 'shareLogo.png'" alt />
+        <img class="pink_imgs" v-if="token== null" :src="image + 'shareLogo.png'" alt />
         <van-uploader
           v-model="fileList"
           v-else
@@ -135,9 +135,9 @@
       </div>
       <!-- 收藏福利人人惠 -->
       <van-grid :column-num="3">
-        <van-grid-item :icon="url + 'ia_100000001.png'" text="我的收藏"></van-grid-item>
-        <van-grid-item :icon="url + 'ia_100000002.png'" text="我的福利"></van-grid-item>
-        <van-grid-item :icon="url + 'ia_100000003.png'" text="人人惠"></van-grid-item>
+        <van-grid-item :icon="image + 'ia_100000001.png'" text="我的收藏"></van-grid-item>
+        <van-grid-item :icon="image + 'ia_100000002.png'" text="我的福利"></van-grid-item>
+        <van-grid-item :icon="image + 'ia_100000003.png'" text="人人惠"></van-grid-item>
       </van-grid>
       <!-- 积分 优惠劵 -->
       <van-grid :column-num="5" class="van_grid_ji">
@@ -359,7 +359,7 @@ export default {
         }
         this.integral = res.data.data.integral;
         this.nickname = res.data.data.nickname;
-        this.fileList[0].url = res.data.data.face;
+        this.fileList[0].image = res.data.data.face;
       });
     },
     // 订单管理 显示
