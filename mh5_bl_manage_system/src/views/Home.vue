@@ -1,6 +1,10 @@
 <template>
   <el-container class="home">
     <el-header>
+      <div class="logo-box">
+        <img src="../assets/IMG_20180911_150647.jpg" alt />
+        商城—后台管理系统
+      </div>
       <el-button type="warning" @click="out()">退出</el-button>
     </el-header>
     <el-container>
@@ -133,9 +137,33 @@ export default {
   .el-header {
     padding: 10px;
     background-color: rgb(94, 79, 79);
+    background-image: linear-gradient(90deg, red, yellow);
+    // 头部
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 20px;
+    // 头部分中的左半部分
+    .logo-box {
+      display: flex;
+      color: white;
+      font-size: 22px;
+      align-items: center;
+      // 禁止被用户选中
+      user-select: none;
+
+      img {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+        border-radius: 50%;
+      }
+    }
   }
   .el-aside {
     background-color: rgb(252, 191, 214);
+    background-image: linear-gradient(0deg, yellow, red);
   }
   .el-main {
     background-color: rgb(90, 212, 206);

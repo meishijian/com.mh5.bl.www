@@ -6,6 +6,7 @@ body,
     margin: 0;
     padding: 0;
     min-width: 1024px;
+    user-select: none;
 }
 
 /* 覆盖默认卡片视图的阴影效果 */
