@@ -94,6 +94,18 @@
               </el-menu-item>
             </el-menu-item-group>
           </el-submenu>
+          <el-submenu index="7">
+            <template slot="title">
+              <i class="el-icon-question"></i>
+              <span>数据管理</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="/reports">
+                <i class="el-icon-circle-plus-outline"></i>
+                <span slot="title">数据报表</span>
+              </el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
         </el-menu>
       </el-aside>
       <el-main>
@@ -137,7 +149,11 @@ export default {
   .el-header {
     padding: 10px;
     background-color: rgb(94, 79, 79);
-    background-image: linear-gradient(90deg, red, yellow);
+    background-image: linear-gradient(
+      90deg,
+      rgb(255, 96, 96),
+      rgb(226, 226, 113)
+    );
     // 头部
     height: 60px;
     display: flex;
@@ -163,7 +179,11 @@ export default {
   }
   .el-aside {
     background-color: rgb(252, 191, 214);
-    background-image: linear-gradient(0deg, yellow, red);
+    background-image: linear-gradient(
+      0deg,
+      rgb(226, 226, 113),
+      rgb(255, 96, 96)
+    );
   }
   .el-main {
     background-color: rgb(90, 212, 206);

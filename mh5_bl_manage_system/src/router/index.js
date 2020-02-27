@@ -57,6 +57,11 @@ const routes = [
         // 订单管理
         path: '/orders',
         component: () => import("../components/Orders.vue"),
+      },
+      {
+        // 数据报表
+        path: '/reports',
+        component: () => import("../components/Reports.vue"),
       }
     ]
   },
