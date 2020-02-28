@@ -13,7 +13,7 @@
     </el-card>
   </div>
 </template>
-
+....
 <script>
 // 导入 echart
 import echarts from "echarts";

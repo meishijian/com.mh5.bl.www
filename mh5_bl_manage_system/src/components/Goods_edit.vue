@@ -285,18 +285,42 @@ export default {
         return this.$message.error("回显数据失败");
       }
       this.addForm = res.data.data;
-      this.imageDataUrl = image + res.data.data.image;
+      // result.forEach(e => {
+      //   // 商品 封面
+      //   e.image =
+      //     e.image.indexOf("https://img") != -1
+      //       ? e.image
+      //       : `http://${config.server.ip}:${config.server.port}/${e.image}`;
+      //   // 商品 详情
+      //   // for (const i in e.goods_details_pic) {
+      //   //     e.goods_details_pic[i] = `http://${config.server.ip}:${config.server.port}/${e.goods_details_pic[i]}`;
+      //   // }
+      //   // // 商品 轮播
+      //   // for (const i in e.goods_swipe_pic) {
+      //   //     e.goods_swipe_pic[i] = `http://${config.server.ip}:${config.server.port}/${e.goods_swipe_pic[i]}`;
+      //   // }
+      // });
+      this.imageDataUrl =
+        res.data.data.image.indexOf("https://img") != -1
+          ? res.data.data.image
+          : `${image}/${res.data.data.image}`;
       this.catIds = res.data.data.cat_id;
       this.addForm.cat_id =
         res.data.data.cat_id[res.data.data.cat_id.length - 1];
       // 商品 详情
       for (const i in this.addForm.goods_details) {
-        this.detailsDataUrl[i] = `${image}${this.addForm.goods_details[i]}`;
+        this.detailsDataUrl[i] =
+          this.addForm.goods_details[i].indexOf("https://img") != -1
+            ? this.addForm.goods_details[i]
+            : `${image}/${this.addForm.goods_details[i]}`;
       }
 
       // 商品 轮播
       for (const i in this.addForm.goods_swipe) {
-        this.swipeDataUrl[i] = `${image}${this.addForm.goods_swipe[i]}`;
+        this.swipeDataUrl[i] =
+          this.addForm.goods_swipe[i].indexOf("https://img") != -1
+            ? this.addForm.goods_swipe[i]
+            : `${image}/${this.addForm.goods_swipe[i]}`;
       }
     });
   },

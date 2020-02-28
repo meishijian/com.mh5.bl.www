@@ -374,6 +374,10 @@ export default {
   .swipe_img {
     width: 340px;
     height: 297px;
+    text-align: center;
+  }
+  .van-swipe {
+    text-align: center;
   }
   .goods-price {
     color: #f44;

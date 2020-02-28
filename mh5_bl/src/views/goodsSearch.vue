@@ -61,20 +61,17 @@
     </van-grid>
 
     <!-- 固定 跳转到 购物车 -->
-    <img
-      class="pic_img"
-      @click="shoping_click"
-      src="https://mh5.bl.com/h5/static/img/showcart.74cb7b7.png"
-      alt
-    />
+    <img class="pic_img" @click="shoping_click" :src="src" alt />
     <vueToTop class="totop_i" type="5" right="30" bottom="70" size="22" top="1000"></vueToTop>
   </div>
 </template>
 <script>
 import { mapMutations } from "vuex";
+import { image } from "../config.js";
 export default {
   data() {
     return {
+      src: image + "showcart.74cb7b7.png",
       // 商品数据
       commodityData: [],
       icon_pd: true,

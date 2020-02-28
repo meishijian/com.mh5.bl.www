@@ -339,7 +339,7 @@ router.get("/guess", (req, res) => {
             })
             data.forEach(e => {
                 // 商品 封面
-                e.image = `http://${config.server.ip}:${config.server.port}/${e.image}`;
+                e.image = e.image.indexOf("https://img") != -1 ? e.image : `http://${config.server.ip}:${config.server.port}/${e.image}`;
             });
 
             res.json({

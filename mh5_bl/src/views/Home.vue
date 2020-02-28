@@ -39,7 +39,7 @@
     <!-- 轮播图 -->
     <van-swipe :autoplay="3000" indicator-color="white" class="swipe">
       <van-swipe-item v-for="item in imageData" :key="item.id">
-        <img class="swipe_img" :src="item.image" alt />
+        <img class="swipe_img" :src="item.image" alt width="100%" />
       </van-swipe-item>
     </van-swipe>
     <!--分类区 -->
@@ -99,10 +99,10 @@
         <img class="xiang_swipe" :src="item.image" alt />
       </van-swipe-item>
     </van-swipe>
-    <div>
+    <!-- <div class="x-img_three">
       <img class="x-img" src="https://img22.iblimg.com/market-3/images/activity/473598936.jpg" alt />
       <img class="x-imgs" src="https://img22.iblimg.com/market-3/images/activity/637010217.jpg" alt />
-    </div>
+    </div> -->
     <!-- 精品推荐 -->
     <div class="jingping">
       <img class="jinpimg" src="https://img22.iblimg.com/market-2/images/activity/39653131.png" alt />
@@ -138,7 +138,7 @@
       </van-tab>
     </van-tabs>
     <!-- // 下單即享 -->
-    <img class="xiadan" src="../assets/Snipaste_2019-11-19_08-59-53.png" alt />
+    <!-- <img class="xiadan" src="../assets/Snipaste_2019-11-19_08-59-53.png" alt /> -->
     <!-- 精选活动 -->
     <p class="selected">精选活动</p>
     <img
@@ -332,9 +332,6 @@ export default {
           image: "https://Img.iblimg.com/photo-42/3020/208623902_200x200.jpeg",
           p: "￥399",
           span: "600"
-        },
-        {
-          id: 15
         }
       ],
       // 拼团数据 死数据
@@ -611,7 +608,8 @@ export default {
     top: 10px;
   }
   .swipe_img {
-    width: 375px;
+    // width: 375px;
+    width: 100%;
     height: 200px;
   }
   .grid {
@@ -712,7 +710,8 @@ export default {
     text-align: center;
   }
   .xiang_swipe {
-    width: 375px;
+    // width: 375px;
+    width: 100%;
     height: 180px;
   }
   .x-swipe {
@@ -744,8 +743,9 @@ export default {
     height: 45px;
   }
   .jingping_gouge {
-    width: 375px;
-    height: 272px;
+    // width: 375px;
+    width: 100%;
+    height: 300px;
     // border:6px solid #ffecec
   }
   .gridimg {
@@ -800,13 +800,15 @@ export default {
   }
   .xiadan {
     // margin: 0 auto;
+    width: 100%;
     border: 6px solid #f8f8f8;
   }
   .selected {
     text-align: center;
   }
   .selected_img {
-    width: 359px;
+    // width: 359px;
+    width: 100%;
     height: 160px;
     border-bottom: 8px solid #f8f8f8;
     border-left: 8px solid #f8f8f8;
