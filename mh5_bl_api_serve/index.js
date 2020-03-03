@@ -11,7 +11,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 // 配置 body-parser
 app.use(bodyParser.urlencoded({ extended: true }));
- 
+
 app.use(express.static("public"));
 // 把图片目录暴露出来
 app.use(express.static('uploads'));
@@ -33,7 +33,7 @@ app.use('/api/v1', require("./routers/upload"));
 app.use(require("./routers/image"));
 
 // 后台管理系统
-app.use('/api/v1', require("./routers/backstage/login")); 
+app.use('/api/v1', require("./routers/backstage/login"));
 app.use('/api/v1', require("./routers/backstage/swipe"));
 
 
@@ -47,3 +47,4 @@ const config = require('./config');
 // 启动服务器
 // 这些需要一致 把这些放在配置文件中 在这里使用 需要改的时候 就在配置文件中修改 就OK了
 app.listen(config.server.port, config.server.ip, () => console.log(`${config.server.ip} : 服务器启动： ${config.server.port}`));
+// app.listen(() => console.log(` : 服务器启动： ${config.server.port}`));

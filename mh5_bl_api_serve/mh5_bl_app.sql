@@ -11,7 +11,7 @@
  Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 25/02/2020 19:47:56
+ Date: 28/02/2020 17:44:01
 */
 
 SET NAMES utf8mb4;
@@ -32,7 +32,7 @@ CREATE TABLE `bl_address`  (
   `isdefault` tinyint(3) UNSIGNED NOT NULL COMMENT '是否默认，0：不是  1：是',
   `user_id` int(10) UNSIGNED NOT NULL COMMENT '用户ID 关联shop_users 表中的id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bl_address
@@ -55,6 +55,9 @@ INSERT INTO `bl_address` VALUES (15, '移动', '18573522318', '黑龙江省', '�
 INSERT INTO `bl_address` VALUES (16, '没时间', '17553041262', '内蒙古自治区', '呼和浩特市', '新城区', '杭州市西湖区 黄龙万科中心', 0, 8);
 INSERT INTO `bl_address` VALUES (17, 'zX', '17553041262', '北京市', '北京市', '东城区', '杭州市西湖区 黄龙万科中心', 1, 8);
 INSERT INTO `bl_address` VALUES (18, 'msj', '17553041262', '浙江省', '衢州市', '江山市', '杭州市西湖区 黄龙万科中心', 1, 9);
+INSERT INTO `bl_address` VALUES (19, 'www', '17553041211', '河南省', '开封市', '兰考县', '杭州市西湖区 黄龙万科中心', 0, 11);
+INSERT INTO `bl_address` VALUES (20, 'as', '17553041211', '河北省', '衡水市', '深州市', '杭州市西湖区 黄龙万科中心', 0, 11);
+INSERT INTO `bl_address` VALUES (21, 'qw', '17565304156', '天津市', '天津市', '滨海新区', '杭州市西湖区 黄龙万科中心', 0, 11);
 
 -- ----------------------------
 -- Table structure for bl_brand
@@ -314,14 +317,18 @@ CREATE TABLE `bl_goods`  (
   `volume` int(255) UNSIGNED NULL DEFAULT NULL COMMENT '销量',
   `brand_id` int(11) UNSIGNED NOT NULL COMMENT '商品店铺ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bl_goods
 -- ----------------------------
-INSERT INTO `bl_goods` VALUES (1, 1, 'SISLEY 希思黎 全能乳液 125ml', 1315.00, 'uploads\\20200224\\1582539996511.png', 9975, 0, NULL, 1);
+INSERT INTO `bl_goods` VALUES (1, 1, 'SISLEY 希思黎 全能乳液 125ml', 1315.00, 'uploads\\20200224\\1582539996511.png', 9974, 0, NULL, 1);
 INSERT INTO `bl_goods` VALUES (2, 1, 'Kiehls 科颜氏 高保湿面霜 125ml', 450.00, 'uploads\\20200224\\1582540137480.png', 12232, 1, NULL, 5);
 INSERT INTO `bl_goods` VALUES (3, 1, '奥尔滨 Albion 清新活润渗透乳（保湿型） 200g 奥比虹 日本进口', 360.00, 'uploads\\20200225\\1582631110526.png', 999, 1, NULL, 6);
+INSERT INTO `bl_goods` VALUES (4, 1, 'SK-II 大红瓶面霜 第六代肌源赋活修护精华霜 80g', 1310.00, 'https://img16.iblimg.com/mp-175/mp/goods/355652988_200x200.jpg', 5555, 0, NULL, 2);
+INSERT INTO `bl_goods` VALUES (5, 1, '【百联专柜直送】CPB 肌肤之钥金致乳霜 n 50mL', 6000.00, 'https://img18.iblimg.com/mp-175/mp/goods/1802314773_200x200.jpg', 4444, 0, NULL, 2);
+INSERT INTO `bl_goods` VALUES (6, 1, '得罗夫 精纯胶原立颜凝霜 50ml', 790.00, 'https://img19.iblimg.com/mp-175/mp/goods/926151062_200x200.jpg', 7785, 1, NULL, 2);
+INSERT INTO `bl_goods` VALUES (7, 1, 'POLA 宝丽 RX面霜 乳霜 50g', 1104.00, 'https://img18.iblimg.com/mp-175/mp/goods/1646109447_200x200.jpg', 8585, 0, NULL, 1);
 
 -- ----------------------------
 -- Table structure for bl_goods_details
@@ -348,6 +355,20 @@ INSERT INTO `bl_goods_details` VALUES (8, 2, 'uploads\\20200224\\1582540186923.p
 INSERT INTO `bl_goods_details` VALUES (9, 3, 'uploads\\20200225\\1582631196535.png');
 INSERT INTO `bl_goods_details` VALUES (10, 3, 'uploads\\20200225\\1582631201312.png');
 INSERT INTO `bl_goods_details` VALUES (11, 3, 'uploads\\20200225\\1582631206135.png');
+INSERT INTO `bl_goods_details` VALUES (12, 4, 'https://img17.iblimg.com/mp-175/mp/desc/1916461349.jpg');
+INSERT INTO `bl_goods_details` VALUES (13, 5, 'https://img16.iblimg.com/mp-181/mp/desc/201830702.jpg');
+INSERT INTO `bl_goods_details` VALUES (14, 5, 'https://img18.iblimg.com/mp-181/mp/desc/1979436644.jpg');
+INSERT INTO `bl_goods_details` VALUES (15, 5, 'https://img17.iblimg.com/mp-181/mp/desc/1380904163.jpg');
+INSERT INTO `bl_goods_details` VALUES (16, 5, 'https://img17.iblimg.com/mp-181/mp/desc/1929161974.jpg');
+INSERT INTO `bl_goods_details` VALUES (17, 5, 'https://img17.iblimg.com/mp-181/mp/desc/1797665073.jpg');
+INSERT INTO `bl_goods_details` VALUES (18, 5, 'https://img20.iblimg.com/mp-181/mp/desc/804034919.jpg');
+INSERT INTO `bl_goods_details` VALUES (19, 6, 'https://img20.iblimg.com/mp-175/mp/desc/559733847.jpg');
+INSERT INTO `bl_goods_details` VALUES (20, 6, 'https://img17.iblimg.com/mp-175/mp/desc/864740102.jpg');
+INSERT INTO `bl_goods_details` VALUES (21, 6, 'https://img20.iblimg.com/mp-175/mp/desc/579557153.jpg');
+INSERT INTO `bl_goods_details` VALUES (22, 6, 'https://img19.iblimg.com/mp-175/mp/desc/804961491.jpg');
+INSERT INTO `bl_goods_details` VALUES (23, 6, 'https://img16.iblimg.com/mp-175/mp/desc/671473662.jpg');
+INSERT INTO `bl_goods_details` VALUES (24, 6, 'https://img20.iblimg.com/mp-175/mp/desc/1467759451.jpg');
+INSERT INTO `bl_goods_details` VALUES (25, 7, 'https://img17.iblimg.com/mp-175/mp/desc/1649354144.jpg');
 
 -- ----------------------------
 -- Table structure for bl_goods_swipe
@@ -370,6 +391,14 @@ INSERT INTO `bl_goods_swipe` VALUES (4, 2, 'uploads\\20200224\\1582540152820.png
 INSERT INTO `bl_goods_swipe` VALUES (5, 3, 'uploads\\20200225\\1582631131883.png');
 INSERT INTO `bl_goods_swipe` VALUES (6, 3, 'uploads\\20200225\\1582631137074.png');
 INSERT INTO `bl_goods_swipe` VALUES (7, 3, 'uploads\\20200225\\1582631176094.png');
+INSERT INTO `bl_goods_swipe` VALUES (8, 4, 'https://img16.iblimg.com/mp-175/mp/goods/355652988_500x500.jpg');
+INSERT INTO `bl_goods_swipe` VALUES (9, 5, 'https://img18.iblimg.com/mp-175/mp/goods/1802314773_500x500.jpg');
+INSERT INTO `bl_goods_swipe` VALUES (10, 5, 'https://img20.iblimg.com/mp-175/mp/goods/1721074289_500x500.jpg');
+INSERT INTO `bl_goods_swipe` VALUES (11, 6, 'https://img19.iblimg.com/mp-175/mp/goods/926151062_500x500.jpg');
+INSERT INTO `bl_goods_swipe` VALUES (12, 6, 'https://img18.iblimg.com/mp-175/mp/goods/718666915_500x500.jpg');
+INSERT INTO `bl_goods_swipe` VALUES (13, 6, 'https://img19.iblimg.com/mp-175/mp/goods/429334419_500x500.jpg');
+INSERT INTO `bl_goods_swipe` VALUES (14, 7, 'https://img18.iblimg.com/mp-175/mp/goods/1646109447_500x500.jpg');
+INSERT INTO `bl_goods_swipe` VALUES (15, 7, 'https://img20.iblimg.com/mp-175/mp/goods/645061397_500x500.jpg');
 
 -- ----------------------------
 -- Table structure for bl_order_goods
@@ -397,6 +426,7 @@ INSERT INTO `bl_order_goods` VALUES (128, 9, 3, 92, 115.00, 'Blackmores 澳佳�
 INSERT INTO `bl_order_goods` VALUES (129, 10, 3, 93, 194.00, 'Kao 花王 Curel 珂润 润浸保湿面霜 40g 日本原装进口', 'https://Img.iblimg.com/photo-42/3030/1842548886_200x200.jpg');
 INSERT INTO `bl_order_goods` VALUES (130, 1, 1, 94, 495.00, 'Kiehls 科颜氏 高保湿面霜 125ml', 'https://img16.iblimg.com/mp-175/mp/goods/1150495629_200x200.jpg');
 INSERT INTO `bl_order_goods` VALUES (131, 1, 1, 95, 495.00, 'Kiehls 科颜氏 高保湿面霜 125ml', 'https://img16.iblimg.com/mp-175/mp/goods/1150495629_200x200.jpg');
+INSERT INTO `bl_order_goods` VALUES (132, 1, 1, 96, 1315.00, 'SISLEY 希思黎 全能乳液 125ml', 'uploads\\20200224\\1582539996511.png');
 
 -- ----------------------------
 -- Table structure for bl_orders
@@ -417,7 +447,7 @@ CREATE TABLE `bl_orders`  (
   `total_price` decimal(10, 2) UNSIGNED NOT NULL COMMENT '商品的总价',
   `post_order_sn` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '快递单号',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 96 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 97 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bl_orders
@@ -430,6 +460,7 @@ INSERT INTO `bl_orders` VALUES (92, 9, 3, 1574652911, '15746529112989641039', 'm
 INSERT INTO `bl_orders` VALUES (93, 9, 2, 1574653027, '1574653027009904440', 'msj', '17553041262', '浙江省', '衢州市', '江山市', '杭州市西湖区 黄龙万科中心', 582.00, NULL);
 INSERT INTO `bl_orders` VALUES (94, 9, 6, 1574653051, '15746530511759974721', 'msj', '17553041262', '浙江省', '衢州市', '江山市', '杭州市西湖区 黄龙万科中心', 495.00, NULL);
 INSERT INTO `bl_orders` VALUES (95, 9, 2, 1574674872, '15746748722912639921', 'msj', '17553041262', '浙江省', '衢州市', '江山市', '杭州市西湖区 黄龙万科中心', 495.00, NULL);
+INSERT INTO `bl_orders` VALUES (96, 11, 7, 1582696349, '15826963490158327311', 'www', '17553041211', '河南省', '开封市', '兰考县', '杭州市西湖区 黄龙万科中心', 1315.00, NULL);
 
 -- ----------------------------
 -- Table structure for bl_root
@@ -1372,7 +1403,7 @@ CREATE TABLE `bl_users`  (
   `certificates_number` int(11) UNSIGNED NULL DEFAULT NULL COMMENT '证件号码',
   `integral` int(255) UNSIGNED NULL DEFAULT 0 COMMENT '积分',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bl_users
@@ -1387,5 +1418,6 @@ INSERT INTO `bl_users` VALUES (7, '17553140323', '2a4c9da9d08b6b420bd725398b08db
 INSERT INTO `bl_users` VALUES (8, '17553041222', '2a4c9da9d08b6b420bd725398b08dbbe', 1574640694, 'uploads\\20200221\\75.jpg', '时间Giu', 0, '1947-01-26', '百联进口,生鲜食品', NULL, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `bl_users` VALUES (9, '17553041266', '2a4c9da9d08b6b420bd725398b08dbbe', 1574652610, 'uploads\\20200221\\09.jpg', 'msj', 2, '1947-11-01', '百联进口,生鲜食品', NULL, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `bl_users` VALUES (10, '17553041111', '2a4c9da9d08b6b420bd725398b08dbbe', 1578531601, 'uploads\\20200221\\19.jpg', '阿什顿', 1, '2020-01-09', '食品粮油', NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `bl_users` VALUES (11, '17553041211', '96597773c8e79ab3fb26fb82b1c68163', 1582696118, '70.jpg', '17553041211', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 
 SET FOREIGN_KEY_CHECKS = 1;
