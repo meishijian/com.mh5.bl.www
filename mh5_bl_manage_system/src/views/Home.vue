@@ -94,7 +94,7 @@
               </el-menu-item>
             </el-menu-item-group>
           </el-submenu>
-          <el-submenu index="7">
+          <el-submenu index="7" v-if="login === 'root'">
             <template slot="title">
               <i class="el-icon-question"></i>
               <span>数据管理</span>

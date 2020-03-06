@@ -280,7 +280,8 @@ router.post("/goods_list", (req, res) => {
 })
 
 // 回显数据
-router.get("/goods_get/:id(\\d+)", (req, res) => {
+router.get("/goods_get/:id(\\d+)", (req, res) => { 
+    
     // 获取分类ID
     let id = req.params.id;
     // 分类ID 没有传时

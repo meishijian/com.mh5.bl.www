@@ -303,7 +303,7 @@ export default {
       this.imageDataUrl =
         res.data.data.image.indexOf("https://img") != -1
           ? res.data.data.image
-          : `${image}/${res.data.data.image}`;
+          : `${image}${res.data.data.image}`;
       this.catIds = res.data.data.cat_id;
       this.addForm.cat_id =
         res.data.data.cat_id[res.data.data.cat_id.length - 1];
@@ -312,7 +312,7 @@ export default {
         this.detailsDataUrl[i] =
           this.addForm.goods_details[i].indexOf("https://img") != -1
             ? this.addForm.goods_details[i]
-            : `${image}/${this.addForm.goods_details[i]}`;
+            : `${image}${this.addForm.goods_details[i]}`;
       }
 
       // 商品 轮播
@@ -320,7 +320,7 @@ export default {
         this.swipeDataUrl[i] =
           this.addForm.goods_swipe[i].indexOf("https://img") != -1
             ? this.addForm.goods_swipe[i]
-            : `${image}/${this.addForm.goods_swipe[i]}`;
+            : `${image}${this.addForm.goods_swipe[i]}`;
       }
     });
   },

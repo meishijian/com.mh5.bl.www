@@ -32,41 +32,50 @@ export default {
     // 指定图表的配置项和数据 需要被合并的数据
     // 指定图表的配置项和数据
     var option = {
-      xAxis: {
-        type: "value"
+      title: {
+        text: "数据销量--加载"
       },
-      yAxis: {
-        type: "value"
+      legend: {
+        data: ["销量"]
       },
-      dataZoom: [
-        {
-          // 这个dataZoom组件，默认控制x轴。
-          type: "slider", // 这个 dataZoom 组件是 slider 型 dataZoom 组件
-          start: 10, // 左边在 10% 的位置。
-          end: 60 // 右边在 60% 的位置。
+      visualMap: {
+        show: false,
+        min: 80,
+        max: 600,
+        inRange: {
+          colorLightness: [0, 1]
         }
-      ],
+      },
       series: [
         {
-          type: "scatter", // 这是个『散点图』
-          itemStyle: {
-            opacity: 0.8
-          },
-          symbolSize: function(val) {
-            return val[2] * 40;
-          },
+          name: "访问来源",
+          type: "pie",
+          radius: "85%",
           data: [
-            ["14.616", "7.241", "0.896"],
-            ["3.958", "5.701", "0.955"],
-            ["2.768", "8.971", "0.669"],
-            ["9.051", "9.710", "0.171"],
-            ["14.046", "4.182", "0.536"],
-            ["12.295", "1.429", "0.962"],
-            ["4.417", "8.167", "0.113"],
-            ["0.492", "4.771", "0.785"],
-            ["7.632", "2.605", "0.645"],
-            ["14.242", "5.042", "0.368"]
-          ]
+            { value: 235, name: "衬衫" },
+            { value: 274, name: "羊毛衫" },
+            { value: 310, name: "袜子" },
+            { value: 335, name: "高跟鞋" },
+            { value: 400, name: "化妆品" }
+          ],
+          roseType: "angle",
+          label: {
+            normal: {
+              textStyle: {
+                color: "rgba(3, 116, 116, 0.9)"
+              }
+            }
+          },
+          labelLine: {
+            normal: {
+              lineStyle: {
+                color: "rgba(78, 141, 141, 0.9)"
+              }
+            }
+          },
+          itemStyle: {
+            normal: {}
+          }
         }
       ]
     };
@@ -80,6 +89,7 @@ export default {
 .reports {
   .el-breadcrumb {
     margin-bottom: 15px;
+    color: rgb(78, 141, 141);
   }
 }
 </style>

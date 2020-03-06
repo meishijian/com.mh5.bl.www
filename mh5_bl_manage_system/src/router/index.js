@@ -17,6 +17,12 @@ const routes = [
     children: [
       // 分类目录
       {
+        path: "/",
+        component: () =>
+          import("../components/WelGame.vue")
+      },
+      // 分类目录
+      {
         path: "/class",
         component: () =>
           import("../components/Class.vue")
