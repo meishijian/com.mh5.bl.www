@@ -301,7 +301,7 @@ export default {
       // 头像
       fileList: [
         {
-          url: "http://m.chenmsj.com:59885/api/v1/public/image/70.jpg",
+          url: "",
           isImage: true
         }
       ],
@@ -359,7 +359,8 @@ export default {
         }
         this.integral = res.data.data.integral;
         this.nickname = res.data.data.nickname;
-        this.fileList[0].image = res.data.data.face;
+        // this.fileList[0].image = res.data.data.face;
+        this.fileList[0].url = res.data.data.face; 
       });
     },
     // 订单管理 显示

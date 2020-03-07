@@ -11,7 +11,7 @@
  Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 28/02/2020 17:44:01
+ Date: 06/03/2020 21:31:42
 */
 
 SET NAMES utf8mb4;
@@ -317,7 +317,7 @@ CREATE TABLE `bl_goods`  (
   `volume` int(255) UNSIGNED NULL DEFAULT NULL COMMENT '销量',
   `brand_id` int(11) UNSIGNED NOT NULL COMMENT '商品店铺ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bl_goods
@@ -339,7 +339,7 @@ CREATE TABLE `bl_goods_details`  (
   `goods_id` int(11) UNSIGNED NOT NULL COMMENT '连接 商品id',
   `goods_details_pic` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '详情图片',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bl_goods_details
@@ -379,7 +379,7 @@ CREATE TABLE `bl_goods_swipe`  (
   `goods_id` int(11) UNSIGNED NOT NULL COMMENT '连接 商品id',
   `goods_swipe_pic` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '轮播图片',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bl_goods_swipe

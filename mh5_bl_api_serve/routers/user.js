@@ -18,7 +18,7 @@ const jsonwebtoken = require('jsonwebtoken');
 // 保存 图片路径 地址  
 const picAddress = "../public/image/";
 //  访问 服务器中的图片 路径  前端使用的图片路径是 服务器的路径图片地址
-const fileBaseUrl = "http://m.chenmsj.com:59885/api/v1/public/image/";
+// const fileBaseUrl = "http://m.chenmsj.com:59885/api/v1/public/image/";
 // git@github.com:meishijian/com.mh5.bl.www.git
 
 // 所有的用户信息
@@ -110,7 +110,7 @@ router.get("/users", (req, res) => {
                     "code": 400,
                     "error": error
                 })
-                result[0].face = fileBaseUrl + result[0].face;
+                result[0].face = `http://${config.server.ip}:${config.server.port}/${result[0].face}`;
 
                 res.json({
                     "code": 200,
@@ -234,7 +234,7 @@ router.post("/user_pic_upload", multer().single("pic"), (req, res) => {
                 // 写入成功
                 res.json({
                     "code": 200,
-                    "url": fileBaseUrl + face
+                    "url": `http://${config.server.ip}:${config.server.port}/` + face
                 })
             })
         } catch (err) {
@@ -282,7 +282,7 @@ router.get("/user_display_all", (req, res) => {
                     "code": 400,
                     "error": error
                 })
-                result[0].face = fileBaseUrl + result[0].face;
+                result[0].face = `http://${config.server.ip}:${config.server.port}/` + result[0].face;
                 if (result[0].sex == null) {
                     result[0].sex = ''
                 } else if (result[0].sex == 0) {

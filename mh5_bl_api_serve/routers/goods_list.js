@@ -7,7 +7,7 @@ const jsonwebtoken = require("jsonwebtoken");
 const config = require('../config');
 // 导入 二、db数据库文件
 const db = require('../db');
-const fileBaseUrl = "http://m.chenmsj.com:59885/api/v1/public/image/";
+// const fileBaseUrl = "http://m.chenmsj.com:59885/api/v1/public/image/";
 
 // 前台商品
 router.get("/goods_list", (req, res) => {
