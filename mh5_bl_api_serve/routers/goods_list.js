@@ -1035,7 +1035,7 @@ router.get("/cart_goods", (req, res) => {
         });
         result.forEach(e => {
             // 商品 封面
-            e.image = `http://${config.server.ip}:${config.server.port}/${e.image}`;
+            e.image =  e.image.indexOf("https://img") != -1 ? e.image : `http://${config.server.ip}:${config.server.port}/${e.image}`;
             // 服务类型
             if (e.service === 0) {
                 e.service = "百股自营"

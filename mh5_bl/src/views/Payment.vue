@@ -48,7 +48,7 @@
     <van-overlay :show="show" @click="show = false">
       <div class="wrapper" @click.stop>
         <div class="block">
-          <img class="img" src="http://m.chenmsj.com:59885/api/v1/public/image/weixin.jpg" alt />
+          <img class="img" :src="image + '/weixin.jpg'" alt />
           <van-nav-bar
             left-text="未支付"
             right-text="已支付"
@@ -61,9 +61,11 @@
   </div>
 </template>
 <script>
+import { image } from "../config.js";
 export default {
   data() {
     return {
+      image: image,
       totalPrices: localStorage.getItem("totalPrices"),
       show: false,
       orderId: this.$route.query.orderId
