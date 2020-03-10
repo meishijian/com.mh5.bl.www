@@ -54,7 +54,7 @@
 
     <!--三级 弹出框 -->
     <el-dialog
-      :title="add_each === 0 ? '添加轮播图' : '编辑轮播图'"
+      :title="add_each == 0 ? '添加轮播图' : '编辑轮播图'"
       :visible.sync="threeVisible"
       width="35%"
       @close="threeAddCatClose"
