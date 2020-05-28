@@ -37,7 +37,7 @@ module.exports = {
     },
     // 上线的服务器
     online_server: {
-        ip: '39.98.244.141'
+        ip: 'bl.chenmsj.com'
     }
 }
 
