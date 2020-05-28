@@ -61,7 +61,7 @@ router.get("/goods_list", (req, res) => {
             // });
             // console.log(result);
             result.forEach(e => {
-                e.image = e.image.indexOf("https://img") != -1 ? e.image : `http://${config.server.ip}:${config.server.port}/${e.image}`;
+                e.image = e.image.indexOf("https://img") != -1 ? e.image : `http://${config.online_server.ip}:${config.server.port}/${e.image}`;
                 // 服务类型
                 if (e.service === 0) {
                     e.service = "百股自营"
@@ -122,14 +122,14 @@ router.get("/goods_get", (req, res) => {
                 // 商品 轮播
                 e.goods_swipe_pic = e.goods_swipe_pic.split(",");
                 // 商品 封面
-                e.image = e.image.indexOf("https://img") != -1 ? e.image : `http://${config.server.ip}:${config.server.port}/${e.image}`;
+                e.image = e.image.indexOf("https://img") != -1 ? e.image : `http://${config.online_server.ip}:${config.server.port}/${e.image}`;
                 // 商品 详情
                 for (const i in e.goods_details_pic) {
-                    e.goods_details_pic[i] = e.goods_details_pic[i].indexOf("https://img") != -1 ? e.goods_details_pic[i] : `http://${config.server.ip}:${config.server.port}/${e.goods_details_pic[i]}`;
+                    e.goods_details_pic[i] = e.goods_details_pic[i].indexOf("https://img") != -1 ? e.goods_details_pic[i] : `http://${config.online_server.ip}:${config.server.port}/${e.goods_details_pic[i]}`;
                 }
                 // 商品 轮播
                 for (const i in e.goods_swipe_pic) {
-                    e.goods_swipe_pic[i] = e.goods_swipe_pic[i].indexOf("https://img") != -1 ? e.goods_swipe_pic[i] : `http://${config.server.ip}:${config.server.port}/${e.goods_swipe_pic[i]}`;
+                    e.goods_swipe_pic[i] = e.goods_swipe_pic[i].indexOf("https://img") != -1 ? e.goods_swipe_pic[i] : `http://${config.online_server.ip}:${config.server.port}/${e.goods_swipe_pic[i]}`;
                 }
                 // 服务类型
                 if (e.service === 0) {
@@ -311,14 +311,14 @@ router.get("/goods_get/:id(\\d+)", (req, res) => {
             // 商品 轮播
             e.goods_swipe = e.goods_swipe.split(",");
             // 商品 封面
-            // e.image = e.image.indexOf("https://img") != -1 ? e.image : `http://${config.server.ip}:${config.server.port}/${e.image}`;
+            // e.image = e.image.indexOf("https://img") != -1 ? e.image : `http://${config.online_server.ip}:${config.server.port}/${e.image}`;
             // 商品 详情
             // for (const i in e.goods_details_pic) {
-            //     e.goods_details_pic[i] = `http://${config.server.ip}:${config.server.port}/${e.goods_details_pic[i]}`;
+            //     e.goods_details_pic[i] = `http://${config.online_server.ip}:${config.server.port}/${e.goods_details_pic[i]}`;
             // }
             // // 商品 轮播
             // for (const i in e.goods_swipe_pic) {
-            //     e.goods_swipe_pic[i] = `http://${config.server.ip}:${config.server.port}/${e.goods_swipe_pic[i]}`;
+            //     e.goods_swipe_pic[i] = `http://${config.online_server.ip}:${config.server.port}/${e.goods_swipe_pic[i]}`;
             // }
             // 服务类型
             if (e.service === 0) {
@@ -574,7 +574,7 @@ router.get("/goods_search", (req, res) => {
         // console.log(mysql);
         db.query(mysql, (error, result) => {
             result.forEach(e => {
-                e.image = e.image.indexOf("https://img") != -1 ? e.image : `http://${config.server.ip}:${config.server.port}/${e.image}`;
+                e.image = e.image.indexOf("https://img") != -1 ? e.image : `http://${config.online_server.ip}:${config.server.port}/${e.image}`;
                 // 服务类型
                 if (e.service === 0) {
                     e.service = "百股自营"
@@ -633,7 +633,7 @@ router.post("/goods_sort", (req, res) => {
         // });
         // console.log(result);
         result.forEach(e => {
-            e.image = e.image.indexOf("https://img") != -1 ? e.image : `http://${config.server.ip}:${config.server.port}/${e.image}`;
+            e.image = e.image.indexOf("https://img") != -1 ? e.image : `http://${config.online_server.ip}:${config.server.port}/${e.image}`;
             // 服务类型
             if (e.service === 0) {
                 e.service = "百股自营"
@@ -718,7 +718,7 @@ router.get("/goods_hot_shop", (req, res) => {
             })
             data.forEach(e => {
                 // 商品 封面
-                e.image = e.image.indexOf("https://img") != -1 ? e.image : `http://${config.server.ip}:${config.server.port}/${e.image}`;
+                e.image = e.image.indexOf("https://img") != -1 ? e.image : `http://${config.online_server.ip}:${config.server.port}/${e.image}`;
             });
             res.json({
                 "code": 200,
@@ -993,16 +993,16 @@ router.get('/goods_details', (req, res) => {
             // 商品 轮播
             e.goods_swipe_pic = e.goods_swipe_pic.split(",");
             // 商品 封面
-            e.image = e.image.indexOf("https://img") != -1 ? e.image : `http://${config.server.ip}:${config.server.port}/${e.image}`;
+            e.image = e.image.indexOf("https://img") != -1 ? e.image : `http://${config.online_server.ip}:${config.server.port}/${e.image}`;
             // 店铺 封面
-            e.bra_image = e.bra_image.indexOf("http://img") != -1 ? e.bra_image : `http://${config.server.ip}:${config.server.port}/${e.bra_image}`;
+            e.bra_image = e.bra_image.indexOf("http://img") != -1 ? e.bra_image : `http://${config.online_server.ip}:${config.server.port}/${e.bra_image}`;
             // 商品 详情
             for (const i in e.goods_details_pic) {
-                e.goods_details_pic[i] = e.goods_details_pic[i].indexOf("https://img") != -1 ? e.goods_details_pic[i] : `http://${config.server.ip}:${config.server.port}/${e.goods_details_pic[i]}`;
+                e.goods_details_pic[i] = e.goods_details_pic[i].indexOf("https://img") != -1 ? e.goods_details_pic[i] : `http://${config.online_server.ip}:${config.server.port}/${e.goods_details_pic[i]}`;
             }
             // 商品 轮播
             for (const i in e.goods_swipe_pic) {
-                e.goods_swipe_pic[i] = e.goods_swipe_pic[i].indexOf("https://img") != -1 ? e.goods_swipe_pic[i] : `http://${config.server.ip}:${config.server.port}/${e.goods_swipe_pic[i]}`;
+                e.goods_swipe_pic[i] = e.goods_swipe_pic[i].indexOf("https://img") != -1 ? e.goods_swipe_pic[i] : `http://${config.online_server.ip}:${config.server.port}/${e.goods_swipe_pic[i]}`;
             }
             // 服务类型
             if (e.service === 0) {
@@ -1035,7 +1035,7 @@ router.get("/cart_goods", (req, res) => {
         });
         result.forEach(e => {
             // 商品 封面
-            e.image =  e.image.indexOf("https://img") != -1 ? e.image : `http://${config.server.ip}:${config.server.port}/${e.image}`;
+            e.image =  e.image.indexOf("https://img") != -1 ? e.image : `http://${config.online_server.ip}:${config.server.port}/${e.image}`;
             // 服务类型
             if (e.service === 0) {
                 e.service = "百股自营"
@@ -1247,7 +1247,7 @@ router.get("/order_list", (req, res) => {
                                 item.order_sn = result[i].order_sn;
                                 item.total_price = result[i].total_price;
                                 item.addtime = result[i].addtime;
-                                item.goods_image = `http://${config.server.ip}:${config.server.port}/${result1[i].goods_image}`;
+                                item.goods_image = `http://${config.online_server.ip}:${config.server.port}/${result1[i].goods_image}`;
                                 strData.push(item)
                             }
                         });
@@ -1490,7 +1490,7 @@ router.get("/goods_list_brand", (req, res) => {
             })
             result.forEach(e => {
                 // 店铺图标
-                e.bra_image = e.bra_image.indexOf("http://img") != -1 ? e.bra_image : `http://${config.server.ip}:${config.server.port}/${e.bra_image}`;
+                e.bra_image = e.bra_image.indexOf("http://img") != -1 ? e.bra_image : `http://${config.online_server.ip}:${config.server.port}/${e.bra_image}`;
             });
             res.json({
                 "code": 200,
@@ -1520,7 +1520,7 @@ router.get("/goods_list_brand/:id(\\d+)", (req, res) => {
         if (error) return res.json(error);
         result.forEach(e => {
             // 店铺图标
-            e.bra_image = e.bra_image.indexOf("http://img") != -1 ? e.bra_image : `http://${config.server.ip}:${config.server.port}/${e.bra_image}`;
+            e.bra_image = e.bra_image.indexOf("http://img") != -1 ? e.bra_image : `http://${config.online_server.ip}:${config.server.port}/${e.bra_image}`;
         });
         res.json({
             "code": 200,

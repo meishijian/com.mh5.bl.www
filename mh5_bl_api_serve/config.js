@@ -2,9 +2,13 @@ module.exports = {
     // 启动服务器时使用的端口 和 IP
     server: {
         // 启动服务器端口号
-        port: 59885,
+        // port: 3336,
+        port: 45567,
         // IP
-        ip: '127.0.0.1'
+        ip: '0.0.0.0'
+        // port: 59885,
+        // ip: '39.96.36.108'
+        // ip: '127.0.0.1'
     },
     // 令牌
     jwt: {
@@ -30,6 +34,10 @@ module.exports = {
     md5: {
         // 加密秘钥
         key: 'eGHJKLKJhbnFBfbnkjBJkhjvbnBnlHNjkhjBvbjjhvBNbnBNkjvhjBNLjkvbnklkhCJHBKKvhbJHGCgvjghCGCVCJhkghgVJBHGJchvhJHGJJHcvhjhGJHVHVHbjjhvhg'
+    },
+    // 上线的服务器
+    online_server: {
+        ip: '39.98.244.141'
     }
 }
 

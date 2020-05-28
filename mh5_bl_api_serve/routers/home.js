@@ -38,7 +38,7 @@ router.get("/main_ad_images", (req, res) => {
                 "error": error
             })
             result.forEach(e => {
-                e.image = e.image.indexOf("https://img") != -1 ? e.image : `http://${config.server.ip}:${config.server.port}/${e.image}`;
+                e.image = e.image.indexOf("https://img") != -1 ? e.image : `http://${config.online_server.ip}:${config.server.port}/${e.image}`;
             });
             res.json({
                 "code": 200,
@@ -107,7 +107,7 @@ router.get('/main_ad_images/:id(\\d+)', (req, res) => {
         console.log(result);
 
         result.forEach(e => {
-            e.image = e.image.indexOf("https://img") != -1 ? e.image : `http://${config.server.ip}:${config.server.port}/${e.image}`;
+            e.image = e.image.indexOf("https://img") != -1 ? e.image : `http://${config.online_server.ip}:${config.server.port}/${e.image}`;
         });
         // 成功时
         res.json({
@@ -222,7 +222,7 @@ router.get("/main_small_images", (req, res) => {
             }
         });
         data.forEach(e => {
-            e.image = e.image.indexOf("https://img") != -1 ? e.image : `http://${config.server.ip}:${config.server.port}/${e.image}`;
+            e.image = e.image.indexOf("https://img") != -1 ? e.image : `http://${config.online_server.ip}:${config.server.port}/${e.image}`;
         });
         res.json({
             "code": 200,
@@ -253,7 +253,7 @@ router.get("/main_goods_ranking", (req, res) => {
 
             data.forEach(e => {
                 // 店铺图标
-                e.sort_image = e.sort_image.indexOf("https://") != -1 ? e.sort_image : `http://${config.server.ip}:${config.server.port}/${e.sort_image}`;
+                e.sort_image = e.sort_image.indexOf("https://") != -1 ? e.sort_image : `http://${config.online_server.ip}:${config.server.port}/${e.sort_image}`;
             });
             res.json({
                 "code": 200,
@@ -305,7 +305,7 @@ router.get("/main_brand_ranking", (req, res) => {
             })
             data.forEach(e => {
                 // 店铺图标
-                e.bra_image = e.bra_image.indexOf("http://img") != -1 ? e.bra_image : `http://${config.server.ip}:${config.server.port}/${e.bra_image}`;
+                e.bra_image = e.bra_image.indexOf("http://img") != -1 ? e.bra_image : `http://${config.online_server.ip}:${config.server.port}/${e.bra_image}`;
             });
             res.json({
                 "code": 200,
@@ -339,7 +339,7 @@ router.get("/guess", (req, res) => {
             })
             data.forEach(e => {
                 // 商品 封面
-                e.image = e.image.indexOf("https://img") != -1 ? e.image : `http://${config.server.ip}:${config.server.port}/${e.image}`;
+                e.image = e.image.indexOf("https://img") != -1 ? e.image : `http://${config.online_server.ip}:${config.server.port}/${e.image}`;
             });
 
             res.json({

@@ -109,7 +109,7 @@ router.get("/goods_classify", (req, res) => {
                                     data.push({
                                         id: element1.id,
                                         cla_name: element1.sort_name,
-                                        sort_image: element1.sort_image.indexOf("https://") != -1 ? element1.sort_image : `http://${config.server.ip}:${config.server.port}/${element1.sort_image}`,
+                                        sort_image: element1.sort_image.indexOf("https://") != -1 ? element1.sort_image : `http://${config.online_server.ip}:${config.server.port}/${element1.sort_image}`,
                                         part: "2"
                                     });
                                 }

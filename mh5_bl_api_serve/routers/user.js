@@ -56,7 +56,7 @@ router.get("/users_list", (req, res) => {
             })
             result.forEach(e => {
                 // 店铺图标
-                e.face = e.face.indexOf("http://img") != -1 ? e.face : `http://${config.server.ip}:${config.server.port}/${e.face}`;
+                e.face = e.face.indexOf("http://img") != -1 ? e.face : `http://${config.online_server.ip}:${config.server.port}/${e.face}`;
                 if (e.sex === 0) {
                     e.sex = "保密"
                 } else if (e.sex === 1) {
@@ -110,7 +110,7 @@ router.get("/users", (req, res) => {
                     "code": 400,
                     "error": error
                 })
-                result[0].face = `http://${config.server.ip}:${config.server.port}/${result[0].face}`;
+                result[0].face = `http://${config.online_server.ip}:${config.server.port}/${result[0].face}`;
 
                 res.json({
                     "code": 200,
@@ -234,7 +234,7 @@ router.post("/user_pic_upload", multer().single("pic"), (req, res) => {
                 // 写入成功
                 res.json({
                     "code": 200,
-                    "url": `http://${config.server.ip}:${config.server.port}/` + face
+                    "url": `http://${config.online_server.ip}:${config.server.port}/` + face
                 })
             })
         } catch (err) {
@@ -282,7 +282,7 @@ router.get("/user_display_all", (req, res) => {
                     "code": 400,
                     "error": error
                 })
-                result[0].face = `http://${config.server.ip}:${config.server.port}/` + result[0].face;
+                result[0].face = `http://${config.online_server.ip}:${config.server.port}/` + result[0].face;
                 if (result[0].sex == null) {
                     result[0].sex = ''
                 } else if (result[0].sex == 0) {
