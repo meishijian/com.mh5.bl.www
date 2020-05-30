@@ -2,8 +2,8 @@ module.exports = {
     // 启动服务器时使用的端口 和 IP
     server: {
         // 启动服务器端口号
-        // port: 3336,
-        port: 45567,
+        port: 3336,
+        // port: 45567,
         // IP
         ip: '0.0.0.0'
         // port: 59885,
@@ -37,7 +37,8 @@ module.exports = {
     },
     // 上线的服务器
     online_server: {
-        ip: 'bl.chenmsj.com'
+        // ip: 'bl.chenmsj.com'
+        ip: '39.96.36.108'
     }
 }
 
