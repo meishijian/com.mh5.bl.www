@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : mysql
+ Source Server         : MSJ
  Source Server Type    : MySQL
  Source Server Version : 80015
  Source Host           : localhost:3306
@@ -11,7 +11,7 @@
  Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 06/03/2020 21:31:42
+ Date: 30/05/2020 11:22:16
 */
 
 SET NAMES utf8mb4;
@@ -73,7 +73,7 @@ CREATE TABLE `bl_brand`  (
   `password` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '店铺 md5 密码 固定长度\r\n',
   `regtime` int(10) UNSIGNED NOT NULL COMMENT '注册用户的时间戳',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 52 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 51 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bl_brand
@@ -136,7 +136,7 @@ CREATE TABLE `bl_categories`  (
   `class_id` int(10) UNSIGNED NOT NULL COMMENT '连接 分类表',
   `cat_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '标题',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 139 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 138 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bl_categories
@@ -277,7 +277,7 @@ CREATE TABLE `bl_classify`  (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '商品大标题表',
   `cla_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '商品大标题名称',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bl_classify
@@ -317,16 +317,16 @@ CREATE TABLE `bl_goods`  (
   `volume` int(255) UNSIGNED NULL DEFAULT NULL COMMENT '销量',
   `brand_id` int(11) UNSIGNED NOT NULL COMMENT '商品店铺ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bl_goods
 -- ----------------------------
-INSERT INTO `bl_goods` VALUES (1, 1, 'SISLEY 希思黎 全能乳液 125ml', 1315.00, 'uploads\\20200224\\1582539996511.png', 9974, 0, NULL, 1);
-INSERT INTO `bl_goods` VALUES (2, 1, 'Kiehls 科颜氏 高保湿面霜 125ml', 450.00, 'uploads\\20200224\\1582540137480.png', 12232, 1, NULL, 5);
+INSERT INTO `bl_goods` VALUES (1, 1, 'SISLEY 希思黎 全能乳液 125ml', 1315.00, 'uploads\\20200224\\1582539996511.png', 9973, 0, NULL, 1);
+INSERT INTO `bl_goods` VALUES (2, 1, 'Kiehls 科颜氏 高保湿面霜 125ml', 450.00, 'uploads\\20200224\\1582540137480.png', 12231, 1, NULL, 5);
 INSERT INTO `bl_goods` VALUES (3, 1, '奥尔滨 Albion 清新活润渗透乳（保湿型） 200g 奥比虹 日本进口', 360.00, 'uploads\\20200225\\1582631110526.png', 999, 1, NULL, 6);
 INSERT INTO `bl_goods` VALUES (4, 1, 'SK-II 大红瓶面霜 第六代肌源赋活修护精华霜 80g', 1310.00, 'https://img16.iblimg.com/mp-175/mp/goods/355652988_200x200.jpg', 5555, 0, NULL, 2);
-INSERT INTO `bl_goods` VALUES (5, 1, '【百联专柜直送】CPB 肌肤之钥金致乳霜 n 50mL', 6000.00, 'https://img18.iblimg.com/mp-175/mp/goods/1802314773_200x200.jpg', 4444, 0, NULL, 2);
+INSERT INTO `bl_goods` VALUES (5, 1, '【百联专柜直送】CPB 肌肤之钥金致乳霜 n 50mL', 6000.00, 'https://img18.iblimg.com/mp-175/mp/goods/1802314773_200x200.jpg', 4443, 0, NULL, 2);
 INSERT INTO `bl_goods` VALUES (6, 1, '得罗夫 精纯胶原立颜凝霜 50ml', 790.00, 'https://img19.iblimg.com/mp-175/mp/goods/926151062_200x200.jpg', 7785, 1, NULL, 2);
 INSERT INTO `bl_goods` VALUES (7, 1, 'POLA 宝丽 RX面霜 乳霜 50g', 1104.00, 'https://img18.iblimg.com/mp-175/mp/goods/1646109447_200x200.jpg', 8585, 0, NULL, 1);
 
@@ -339,7 +339,7 @@ CREATE TABLE `bl_goods_details`  (
   `goods_id` int(11) UNSIGNED NOT NULL COMMENT '连接 商品id',
   `goods_details_pic` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '详情图片',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bl_goods_details
@@ -379,7 +379,7 @@ CREATE TABLE `bl_goods_swipe`  (
   `goods_id` int(11) UNSIGNED NOT NULL COMMENT '连接 商品id',
   `goods_swipe_pic` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '轮播图片',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bl_goods_swipe
@@ -413,7 +413,7 @@ CREATE TABLE `bl_order_goods`  (
   `goods_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '商品的名称',
   `goods_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '商品的图片',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 132 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 135 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bl_order_goods
@@ -427,6 +427,9 @@ INSERT INTO `bl_order_goods` VALUES (129, 10, 3, 93, 194.00, 'Kao 花王 Curel �
 INSERT INTO `bl_order_goods` VALUES (130, 1, 1, 94, 495.00, 'Kiehls 科颜氏 高保湿面霜 125ml', 'https://img16.iblimg.com/mp-175/mp/goods/1150495629_200x200.jpg');
 INSERT INTO `bl_order_goods` VALUES (131, 1, 1, 95, 495.00, 'Kiehls 科颜氏 高保湿面霜 125ml', 'https://img16.iblimg.com/mp-175/mp/goods/1150495629_200x200.jpg');
 INSERT INTO `bl_order_goods` VALUES (132, 1, 1, 96, 1315.00, 'SISLEY 希思黎 全能乳液 125ml', 'uploads\\20200224\\1582539996511.png');
+INSERT INTO `bl_order_goods` VALUES (133, 1, 1, 97, 1315.00, 'SISLEY 希思黎 全能乳液 125ml', 'uploads\\20200224\\1582539996511.png');
+INSERT INTO `bl_order_goods` VALUES (134, 2, 1, 98, 450.00, 'Kiehls 科颜氏 高保湿面霜 125ml', 'uploads\\20200224\\1582540137480.png');
+INSERT INTO `bl_order_goods` VALUES (135, 5, 1, 99, 6000.00, '【百联专柜直送】CPB 肌肤之钥金致乳霜 n 50mL', 'https://img18.iblimg.com/mp-175/mp/goods/1802314773_200x200.jpg');
 
 -- ----------------------------
 -- Table structure for bl_orders
@@ -447,7 +450,7 @@ CREATE TABLE `bl_orders`  (
   `total_price` decimal(10, 2) UNSIGNED NOT NULL COMMENT '商品的总价',
   `post_order_sn` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '快递单号',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 97 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 99 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bl_orders
@@ -461,6 +464,9 @@ INSERT INTO `bl_orders` VALUES (93, 9, 2, 1574653027, '1574653027009904440', 'ms
 INSERT INTO `bl_orders` VALUES (94, 9, 6, 1574653051, '15746530511759974721', 'msj', '17553041262', '浙江省', '衢州市', '江山市', '杭州市西湖区 黄龙万科中心', 495.00, NULL);
 INSERT INTO `bl_orders` VALUES (95, 9, 2, 1574674872, '15746748722912639921', 'msj', '17553041262', '浙江省', '衢州市', '江山市', '杭州市西湖区 黄龙万科中心', 495.00, NULL);
 INSERT INTO `bl_orders` VALUES (96, 11, 7, 1582696349, '15826963490158327311', 'www', '17553041211', '河南省', '开封市', '兰考县', '杭州市西湖区 黄龙万科中心', 1315.00, NULL);
+INSERT INTO `bl_orders` VALUES (97, 1, 5, 1583641363, '1583641363241356078', '张三', '17553041262', '江苏', '宿迁', '沭阳', '传智', 1315.00, NULL);
+INSERT INTO `bl_orders` VALUES (98, 1, 7, 1583641671, '15836416718357511358', '张三', '17553041262', '江苏', '宿迁', '沭阳', '传智', 450.00, NULL);
+INSERT INTO `bl_orders` VALUES (99, 1, 0, 1583648647, '15836486475156764898', '没时间', '17553011262', '北京', '南京', '扣款', '123', 6000.00, NULL);
 
 -- ----------------------------
 -- Table structure for bl_root
@@ -471,7 +477,7 @@ CREATE TABLE `bl_root`  (
   `mobile` char(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户名 手机号\r\n',
   `password` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'md5 密码 固定长度\r\n',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bl_root
@@ -488,7 +494,7 @@ CREATE TABLE `bl_sort`  (
   `sort_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '分类名称',
   `sort_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '分类图片',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 881 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 880 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bl_sort
@@ -1368,7 +1374,7 @@ CREATE TABLE `bl_swipe_images`  (
   `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '轮播图_image路径',
   `link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '轮播图_链接',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bl_swipe_images
@@ -1403,7 +1409,7 @@ CREATE TABLE `bl_users`  (
   `certificates_number` int(11) UNSIGNED NULL DEFAULT NULL COMMENT '证件号码',
   `integral` int(255) UNSIGNED NULL DEFAULT 0 COMMENT '积分',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bl_users
