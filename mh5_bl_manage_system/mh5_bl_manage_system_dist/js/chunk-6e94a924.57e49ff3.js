@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-6e94a924"],{"8d32":function(n,e,t){"use strict";var a=t("e693"),c=t.n(a);c.a},b65f:function(n,e,t){"use strict";t.r(e);var a=function(){var n=this,e=n.$createElement,t=n._self._c||e;return t("div",{staticClass:"welgame"},[n._v("欢迎来到玦舜商城后台系统")])},c=[],s=(t("8d32"),t("2877")),u={},i=Object(s["a"])(u,a,c,!1,null,null,null);e["default"]=i.exports},e693:function(n,e,t){}}]);
-//# sourceMappingURL=chunk-6e94a924.57e49ff3.js.map

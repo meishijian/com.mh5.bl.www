@@ -231,7 +231,7 @@ export default {
             "/main_ad_images",
             this.threeForm
           );
-          console.log(res);
+          // console.log(res);
           // 错误时
           if (res.code !== 200) return this.$message.error(res.error);
           // 成功时

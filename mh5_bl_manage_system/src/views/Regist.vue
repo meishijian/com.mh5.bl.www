@@ -129,7 +129,7 @@ export default {
           return this.$message.error("店铺图片不能为空!");
         // 请求
         this.$http.post("/regist_brand", this.loginForm).then(res => {
-          console.log(res);
+          // console.log(res);
           if (res.data.code == 400) {
             return this.$message.error(res.data.error);
           }
